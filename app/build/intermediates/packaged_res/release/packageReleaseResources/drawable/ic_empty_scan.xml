@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Muted version of the launcher mark, shown on the main screen empty state. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M32,12 L58,12 L70,24 L70,80 Q70,84 66,84 L32,84 Q28,84 28,80 L28,16 Q28,12 32,12 Z" />
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M58,12 L70,24 L58,24 Z" />
+
+    <path
+        android:pathData="M34,36 H58"
+        android:strokeColor="#90A4AE"
+        android:strokeLineCap="round"
+        android:strokeWidth="3" />
+    <path
+        android:pathData="M34,48 H62"
+        android:strokeColor="#90A4AE"
+        android:strokeLineCap="round"
+        android:strokeWidth="3" />
+    <path
+        android:pathData="M34,60 H52"
+        android:strokeColor="#90A4AE"
+        android:strokeLineCap="round"
+        android:strokeWidth="3" />
+    <path
+        android:pathData="M34,70 H46"
+        android:strokeColor="#90A4AE"
+        android:strokeLineCap="round"
+        android:strokeWidth="3" />
+
+    <path
+        android:fillColor="#1F4FC3F7"
+        android:pathData="M12,44 H84 V52 H12 Z" />
+    <path
+        android:fillColor="#664FC3F7"
+        android:pathData="M12,47 H84 V49 H12 Z" />
+
+    <path
+        android:pathData="M30,8 H20 V18"
+        android:strokeColor="#4FC3F7"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="3" />
+    <path
+        android:pathData="M66,8 H76 V18"
+        android:strokeColor="#4FC3F7"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="3" />
+    <path
+        android:pathData="M76,78 V88 H66"
+        android:strokeColor="#4FC3F7"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="3" />
+    <path
+        android:pathData="M20,78 V88 H30"
+        android:strokeColor="#4FC3F7"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="3" />
+</vector>

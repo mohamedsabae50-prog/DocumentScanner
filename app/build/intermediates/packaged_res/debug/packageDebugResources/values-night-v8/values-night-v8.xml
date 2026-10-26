@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="app_background">#0E1116</color>
+    <color name="app_surface">#161B22</color>
+    <style name="Theme.DocScanner" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorOnPrimary">@color/brand_on_primary</item>
+        <item name="colorSecondary">@color/brand_secondary</item>
+        <item name="colorOnSecondary">@color/brand_on_secondary</item>
+
+        <item name="android:colorBackground">@color/app_background</item>
+        <item name="colorSurface">@color/app_surface</item>
+        <item name="android:windowBackground">@color/app_background</item>
+
+        <item name="android:statusBarColor">@color/app_background</item>
+        <item name="android:navigationBarColor">@color/app_surface</item>
+        <item name="android:windowLightStatusBar" ns1:targetApi="m">false</item>
+    </style>
+</resources>

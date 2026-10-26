@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorSurface"
+        app:title="@string/app_name"
+        app:titleTextColor="?android:attr/textColorPrimary"
+        tools:subtitle="3 pages" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pageList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingVertical="8dp"
+            android:scrollbars="none"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_page" />
+
+        <LinearLayout
+            android:id="@+id/emptyState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="40dp">
+
+            <ImageView
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:alpha="0.85"
+                android:contentDescription="@string/empty_state_icon"
+                android:src="@drawable/ic_empty_scan" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:gravity="center"
+                android:text="@string/empty_state"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                android:textColor="?android:attr/textColorSecondary" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurface"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/takePhoto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:backgroundTint="#1E3A3A"
+                android:text="@string/take_photo"
+                android:textColor="#64FFDA"
+                app:icon="@drawable/ic_camera"
+                app:iconGravity="textStart"
+                app:strokeColor="#4DB6AC"
+                app:strokeWidth="1dp" />
+
+            <Button
+                android:id="@+id/pickImage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:backgroundTint="#1E3A3A"
+                android:text="@string/pick_image"
+                android:textColor="#64FFDA"
+                app:strokeColor="#4DB6AC"
+                app:strokeWidth="1dp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/exportPdf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/export_pdf"
+            android:backgroundTint="#00E676"
+            android:textColor="#00251A"
+            android:textStyle="bold"
+            app:icon="@drawable/ic_pdf"
+            app:iconGravity="textStart" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/busyOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CC000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_sheet"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true" />
+
+            <TextView
+                android:id="@+id/busyLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="@string/working"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

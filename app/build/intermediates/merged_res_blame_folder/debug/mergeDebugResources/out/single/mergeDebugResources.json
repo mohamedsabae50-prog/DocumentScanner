@@ -1,0 +1,74 @@
+[
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/layout_activity_main.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/drawable_bg_sheet.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/drawable/bg_sheet.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/layout_activity_edit.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/layout/activity_edit.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/drawable_ic_delete.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/drawable/ic_delete.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/mipmap-anydpi/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/mipmap-anydpi/ic_launcher.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/drawable_bg_badge.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/drawable/bg_badge.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/layout_item_page.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/layout/item_page.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/drawable_ic_pdf.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/drawable/ic_pdf.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/drawable_ic_camera.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/drawable/ic_camera.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/drawable_ic_rotate_right.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/drawable/ic_rotate_right.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/drawable_bg_thumb.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/drawable/bg_thumb.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/xml_file_paths.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/xml/file_paths.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/drawable_ic_crop_free.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/drawable/ic_crop_free.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-debug-31:/drawable_ic_rotate_left.xml.flat",
+        "source": "com.nahla.docscanner.app-main-33:/drawable/ic_rotate_left.xml"
+    }
+]

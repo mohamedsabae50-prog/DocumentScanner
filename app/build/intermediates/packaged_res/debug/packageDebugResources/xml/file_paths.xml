@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Working copies of captured / picked images and finished PDFs. -->
+    <cache-path
+        name="scan_cache"
+        path="/" />
+    <!-- Legacy (< API 29) export target, so the saved PDF can be opened by an
+         external viewer without leaking a file:// uri. -->
+    <external-path
+        name="downloads"
+        path="Download/" />
+</paths>

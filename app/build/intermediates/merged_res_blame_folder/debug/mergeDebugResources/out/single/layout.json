@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.nahla.docscanner.app-mergeDebugResources-30:/layout/item_page.xml",
+        "source": "com.nahla.docscanner.app-main-33:/layout/item_page.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-mergeDebugResources-30:/layout/activity_main.xml",
+        "source": "com.nahla.docscanner.app-main-33:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-mergeDebugResources-30:/layout/activity_edit.xml",
+        "source": "com.nahla.docscanner.app-main-33:/layout/activity_edit.xml"
+    }
+]

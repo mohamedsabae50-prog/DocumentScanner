@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="app_background">#F4F6F8</color>
+    <color name="app_surface">#FFFFFF</color>
+    <color name="brand_on_primary">#FFFFFF</color>
+    <color name="brand_on_secondary">#201A00</color>
+    <color name="brand_primary">#10656D</color>
+    <color name="brand_secondary">#F2A20C</color>
+    <color name="ic_launcher_background">#10656D</color>
+    <color name="photo_backdrop">#101418</color>
+    <plurals name="page_count">
+        <item quantity="one">%d page</item>
+        <item quantity="other">%d pages</item>
+    </plurals>
+    <string name="add_page">Add page</string>
+    <string name="app_name">Doc Scanner</string>
+    <string name="cancel">Cancel</string>
+    <string name="crop_overlay_description">Drag the four corners to match the document edges</string>
+    <string name="delete">Delete</string>
+    <string name="delete_page">Remove page</string>
+    <string name="delete_page_message">This page and its source photo will be deleted.</string>
+    <string name="done">Done</string>
+    <string name="empty_state">No pages yet.\nAdd a photo of a document to start scanning.</string>
+    <string name="error_crop">Could not crop this image. Try framing a slightly larger area.</string>
+    <string name="error_export">Export failed: %1$s</string>
+    <string name="error_generic">Something went wrong. Please try again.</string>
+    <string name="error_no_camera">No camera app found.</string>
+    <string name="error_no_gallery">No gallery app found.</string>
+    <string name="error_no_viewer">No app can open PDF files.</string>
+    <string name="error_permission">Storage permission is required to save the PDF.</string>
+    <string name="export_done">PDF saved</string>
+    <string name="export_done_message">%1$s (%2$d KB)\nSaved to Downloads/%3$s</string>
+    <string name="export_pdf">Export PDF</string>
+    <string name="exporting">Exporting… %1$d / %2$d</string>
+    <string name="filter_grayscale">Grayscale</string>
+    <string name="filter_grayscale_short">Gray</string>
+    <string name="filter_label">Filter</string>
+    <string name="filter_mono">Magic B&amp;W</string>
+    <string name="filter_mono_short">B&amp;W</string>
+    <string name="filter_original">Original</string>
+    <string name="filter_preview">Filter preview</string>
+    <string name="importing">Importing image…</string>
+    <string name="loading">Loading image…</string>
+    <string name="no_pages">Add at least one page first.</string>
+    <string name="open">Open</string>
+    <string name="page_thumbnail">Page thumbnail, tap to edit</string>
+    <string name="photo_preview">Captured document</string>
+    <string name="pick_image">Choose from gallery</string>
+    <string name="reset_crop">Reset crop</string>
+    <string name="rotate_left">Rotate left</string>
+    <string name="rotate_right">Rotate right</string>
+    <string name="saving">Saving page…</string>
+    <string name="take_photo">Take photo</string>
+    <string name="working">Working…</string>
+    <style name="Theme.DocScanner" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorOnPrimary">@color/brand_on_primary</item>
+        <item name="colorSecondary">@color/brand_secondary</item>
+        <item name="colorOnSecondary">@color/brand_on_secondary</item>
+
+        <item name="android:colorBackground">@color/app_background</item>
+        <item name="colorSurface">@color/app_surface</item>
+        <item name="android:windowBackground">@color/app_background</item>
+
+        <item name="android:statusBarColor">@color/app_background</item>
+        <item name="android:navigationBarColor">@color/app_surface</item>
+        <item name="android:windowLightStatusBar" ns1:targetApi="m">true</item>
+    </style>
+</resources>

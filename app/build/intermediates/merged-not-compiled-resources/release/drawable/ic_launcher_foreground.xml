@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Adaptive-icon foreground, 108x108 with all content inside the 72x72 visible box:
+  a white page with a folded corner and text lines, a cyan scan beam across the
+  middle, and four crop brackets framing the page.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Page -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M42,30 L60,30 L70,40 L70,74 Q70,78 66,78 L42,78 Q38,78 38,74 L38,34 Q38,30 42,30 Z" />
+
+    <!-- Folded corner -->
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M60,30 L70,40 L60,40 Z" />
+
+    <!-- Text lines -->
+    <path
+        android:pathData="M44,46 H62"
+        android:strokeColor="#1B6FA8"
+        android:strokeLineCap="round"
+        android:strokeWidth="3" />
+    <path
+        android:pathData="M44,56 H66"
+        android:strokeColor="#1B6FA8"
+        android:strokeLineCap="round"
+        android:strokeWidth="3" />
+    <path
+        android:pathData="M44,66 H58"
+        android:strokeColor="#1B6FA8"
+        android:strokeLineCap="round"
+        android:strokeWidth="3" />
+
+    <!-- Scan beam glow, then the beam itself -->
+    <path
+        android:fillColor="#3022D3EE"
+        android:pathData="M26,52 H82 V56 H26 Z" />
+    <path
+        android:fillColor="#22E5E5"
+        android:pathData="M26,53.4 H82 V54.6 H26 Z" />
+
+    <!-- Crop brackets -->
+    <path
+        android:pathData="M41,25 H33 V33"
+        android:strokeColor="#22D3EE"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="3.5" />
+    <path
+        android:pathData="M67,25 H75 V33"
+        android:strokeColor="#22D3EE"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="3.5" />
+    <path
+        android:pathData="M75,75 V83 H67"
+        android:strokeColor="#22D3EE"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="3.5" />
+    <path
+        android:pathData="M33,75 V83 H41"
+        android:strokeColor="#22D3EE"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="3.5" />
+</vector>

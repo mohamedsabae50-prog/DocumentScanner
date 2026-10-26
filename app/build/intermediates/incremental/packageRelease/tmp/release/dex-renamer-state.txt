@@ -1,0 +1,4 @@
+#Mon Oct 26 21:02:22 EEST 2026
+base.0=D\:\\nahla\\DocumentScanner\\app\\build\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

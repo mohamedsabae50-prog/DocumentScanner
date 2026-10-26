@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.nahla.docscanner.app-mergeDebugResources-29:/values-w600dp-land-v13/values-w600dp-land-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\user\\.gradle\\caches\\9.1.0\\transforms\\4cf52671af41cb4958cccde2c772305e\\workspace\\transformed\\material-1.12.0\\res\\values-w600dp-land-v13\\values-w600dp-land-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "54",
+                        "endOffsets": "105"
+                    }
+                }
+            ]
+        }
+    ]
+}

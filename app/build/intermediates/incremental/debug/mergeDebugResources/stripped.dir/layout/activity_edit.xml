@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/photo_backdrop"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/photo_preview"
+            android:scaleType="fitCenter" />
+
+        <com.nahla.docscanner.CropOverlayView
+            android:id="@+id/cropOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <FrameLayout
+            android:id="@+id/busyOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#66000000"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_sheet"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true" />
+
+                <TextView
+                    android:id="@+id/busyLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/working"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </FrameLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurface"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/modeGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:checkedButton="@id/modeMono"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <Button
+                    android:id="@+id/modeOriginal"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="4dp"
+                    android:text="@string/filter_original"
+                    android:textSize="11sp" />
+
+                <Button
+                    android:id="@+id/modeGray"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="4dp"
+                    android:text="@string/filter_grayscale_short"
+                    android:textSize="11sp" />
+
+                <Button
+                    android:id="@+id/modeMono"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="4dp"
+                    android:text="@string/filter_mono"
+                    android:textSize="11sp" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <com.nahla.docscanner.FilterImageView
+                android:id="@+id/preview"
+                android:layout_width="52dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_thumb"
+                android:contentDescription="@string/filter_preview"
+                android:padding="2dp"
+                android:scaleType="fitCenter"
+                tools:src="@drawable/ic_pdf" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/rotateLeft"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/rotate_left"
+                android:insetLeft="0dp"
+                android:insetRight="0dp"
+                android:minWidth="0dp"
+                android:paddingHorizontal="6dp"
+                app:icon="@drawable/ic_rotate_left"
+                app:iconGravity="textStart"
+                app:iconPadding="2dp" />
+
+            <Button
+                android:id="@+id/rotateRight"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/rotate_right"
+                android:insetLeft="0dp"
+                android:insetRight="0dp"
+                android:minWidth="0dp"
+                android:paddingHorizontal="6dp"
+                app:icon="@drawable/ic_rotate_right"
+                app:iconGravity="textStart"
+                app:iconPadding="2dp" />
+
+            <Button
+                android:id="@+id/resetCrop"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@string/reset_crop"
+                android:insetLeft="0dp"
+                android:insetRight="0dp"
+                android:minWidth="0dp"
+                android:paddingHorizontal="6dp"
+                app:icon="@drawable/ic_crop_free"
+                app:iconGravity="textStart"
+                app:iconPadding="2dp" />
+
+            <Button
+                android:id="@+id/cancel"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:insetLeft="0dp"
+                android:insetRight="0dp"
+                android:minWidth="0dp"
+                android:paddingHorizontal="6dp"
+                android:text="@string/cancel"
+                android:textSize="11sp" />
+
+            <Button
+                android:id="@+id/done"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:insetLeft="0dp"
+                android:insetRight="0dp"
+                android:minWidth="0dp"
+                android:paddingHorizontal="6dp"
+                android:text="@string/done"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

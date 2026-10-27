@@ -10,6 +10,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import kotlin.math.abs
+import kotlin.math.atan2
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
@@ -38,7 +39,6 @@ object ImageProcessor {
     const val THUMB_EDGE = 256
 
     private const val MIN_OUTPUT_EDGE = 320
-    private const val MIN_DEGENERATE_EDGE = 24
 
     // ------------------------------------------------------------------ decoding
 
@@ -151,39 +151,88 @@ object ImageProcessor {
      * 0..1 relative to the source bitmap. Uses the framework's own
      * `Matrix.setPolyToPoly`, a native perspective transform - no OpenCV, no JNI.
      *
-     * Falls back to an axis-aligned bounding-box crop whenever the quad is
-     * degenerate, so a bad drag can never produce a garbage or black page.
+     * Falls back to an axis-aligned bounding-box crop only for a degenerate quad.
      */
     fun crop(src: Bitmap, quad: FloatArray): Bitmap {
         require(quad.size == 8) { "quad must hold 8 floats" }
 
         val w = src.width.toFloat()
         val h = src.height.toFloat()
-        val points = FloatArray(8) { i -> quad[i] * if (i % 2 == 0) w else h }
-
-        val outWidth = outputEdge(distance(points, 0, 2), distance(points, 6, 4), src.width)
-        val outHeight = outputEdge(distance(points, 0, 6), distance(points, 2, 4), src.height)
-
-        if (outWidth > MIN_DEGENERATE_EDGE && outHeight > MIN_DEGENERATE_EDGE &&
-            polygonArea(points) >= src.width * src.height * 0.02f
+        val points = canonicalCornerOrder(FloatArray(8) { i ->
+            quad[i] * if (i % 2 == 0) w else h
+        })
+        if (polygonArea(points) < src.width * src.height * 0.01f ||
+            !isStrictlyConvex(points)
         ) {
-            val inset = 1f
-            val dst = floatArrayOf(
-                inset, inset,
-                outWidth - 1f - inset, inset,
-                outWidth - 1f - inset, outHeight - 1f - inset,
-                inset, outHeight - 1f - inset
-            )
-            val matrix = Matrix()
-            if (matrix.setPolyToPoly(points, 0, dst, 0, 4) &&
-                mapsInto(matrix, points, outWidth, outHeight)
-            ) {
-                val out = Bitmap.createBitmap(outWidth, outHeight, Bitmap.Config.ARGB_8888)
-                Canvas(out).drawBitmap(src, matrix, warpPaint())
-                return out
-            }
+            return cropAxisAligned(src, points)
         }
-        return cropAxisAligned(src, points)
+
+        val insetPoints = insetTowardCentroid(points, 0.005f)
+        val outWidth = outputEdge(
+            distance(insetPoints, 0, 2), distance(insetPoints, 6, 4), src.width
+        )
+        val outHeight = outputEdge(
+            distance(insetPoints, 0, 6), distance(insetPoints, 2, 4), src.height
+        )
+        val dst = floatArrayOf(
+            1f, 1f,
+            outWidth - 2f, 1f,
+            outWidth - 2f, outHeight - 2f,
+            1f, outHeight - 2f
+        )
+        val matrix = Matrix()
+        check(matrix.setPolyToPoly(insetPoints, 0, dst, 0, 4) &&
+            mapsInto(matrix, insetPoints, dst, outWidth, outHeight)
+        ) { "Could not map a valid crop quadrilateral" }
+        val out = Bitmap.createBitmap(outWidth, outHeight, Bitmap.Config.ARGB_8888)
+        Canvas(out).drawBitmap(src, matrix, warpPaint())
+        return out
+    }
+
+    private fun canonicalCornerOrder(points: FloatArray): FloatArray {
+        val centerX = (0 until 4).sumOf { points[it * 2].toDouble() }.toFloat() / 4f
+        val centerY = (0 until 4).sumOf { points[it * 2 + 1].toDouble() }.toFloat() / 4f
+        val ordered = (0 until 4).map { index ->
+            floatArrayOf(points[index * 2], points[index * 2 + 1])
+        }.sortedBy { point ->
+            atan2(point[1] - centerY, point[0] - centerX)
+        }
+        val first = ordered.indices.minByOrNull { index ->
+            ordered[index][0] + ordered[index][1]
+        } ?: 0
+        val rotated = (0 until 4).map { ordered[(first + it) % 4] }
+        val reverse = signedPolygonArea(rotated) < 0f
+        val result = FloatArray(8)
+        for (index in 0 until 4) {
+            val point = if (reverse && index > 0) rotated[4 - index] else rotated[index]
+            result[index * 2] = point[0]
+            result[index * 2 + 1] = point[1]
+        }
+        return result
+    }
+
+    private fun insetTowardCentroid(points: FloatArray, fraction: Float): FloatArray {
+        val centerX = (0 until 4).sumOf { points[it * 2].toDouble() }.toFloat() / 4f
+        val centerY = (0 until 4).sumOf { points[it * 2 + 1].toDouble() }.toFloat() / 4f
+        return FloatArray(8) { index ->
+            val center = if (index % 2 == 0) centerX else centerY
+            points[index] + (center - points[index]) * fraction
+        }
+    }
+
+    private fun isStrictlyConvex(points: FloatArray): Boolean {
+        var sign = 0f
+        for (index in 0 until 4) {
+            val a = index * 2
+            val b = ((index + 1) % 4) * 2
+            val c = ((index + 2) % 4) * 2
+            val cross = (points[b] - points[a]) * (points[c + 1] - points[b + 1]) -
+                (points[b + 1] - points[a + 1]) * (points[c] - points[b])
+            if (!cross.isFinite() || abs(cross) < 0.001f) return false
+            if (sign != 0f && cross * sign < 0f) return false
+            sign = cross
+        }
+        return true
     }
 
     /** Rotates a normalised quad the same way [rotate] rotates its bitmap. */
@@ -215,7 +264,13 @@ object ImageProcessor {
     }
 
     /** Verifies the perspective matrix really lands the quad on the output canvas. */
-    private fun mapsInto(matrix: Matrix, src: FloatArray, outWidth: Int, outHeight: Int): Boolean {
+    private fun mapsInto(
+        matrix: Matrix,
+        src: FloatArray,
+        dst: FloatArray,
+        outWidth: Int,
+        outHeight: Int
+    ): Boolean {
         val mapped = FloatArray(8)
         matrix.mapPoints(mapped, src)
         val toleranceX = outWidth * 0.05f + 2f
@@ -224,8 +279,9 @@ object ImageProcessor {
             val x = mapped[i * 2]
             val y = mapped[i * 2 + 1]
             if (!x.isFinite() || !y.isFinite()) return false
-            if (abs(x) > toleranceX || abs(x - (outWidth - 1)) > toleranceX) return false
-            if (abs(y) > toleranceY || abs(y - (outHeight - 1)) > toleranceY) return false
+            if (abs(x - dst[i * 2]) > toleranceX ||
+                abs(y - dst[i * 2 + 1]) > toleranceY
+            ) return false
         }
         return true
     }
@@ -252,12 +308,25 @@ object ImageProcessor {
     }
 
     private fun polygonArea(p: FloatArray): Float {
+        return abs(signedPolygonArea(p))
+    }
+
+    private fun signedPolygonArea(p: List<FloatArray>): Float {
+        var area = 0f
+        for (i in 0 until 4) {
+            val j = (i + 1) % 4
+            area += p[i][0] * p[j][1] - p[j][0] * p[i][1]
+        }
+        return area / 2f
+    }
+
+    private fun signedPolygonArea(p: FloatArray): Float {
         var area = 0f
         for (i in 0 until 4) {
             val j = (i + 1) % 4
             area += p[i * 2] * p[j * 2 + 1] - p[j * 2] * p[i * 2 + 1]
         }
-        return abs(area) / 2f
+        return area / 2f
     }
 
     // -------------------------------------------------------------------- output

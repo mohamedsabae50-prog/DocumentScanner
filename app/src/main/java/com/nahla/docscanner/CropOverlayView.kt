@@ -114,8 +114,16 @@ class CropOverlayView @JvmOverloads constructor(
      */
     fun setImageRect(rect: RectF, resetQuad: Boolean) {
         val changed = rect != imageRect
-        imageRect = rect
-        if (resetQuad || changed) resetToFull()
+        if (resetQuad || imageRect.isEmpty) {
+            imageRect = RectF(rect)
+            resetToFull()
+            return
+        }
+        if (changed) {
+            val previousPoints = normalizedPoints()
+            imageRect = RectF(rect)
+            setNormalizedPoints(previousPoints)
+        }
     }
 
     fun resetToFull() {

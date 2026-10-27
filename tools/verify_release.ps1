@@ -62,7 +62,10 @@ foreach ($entry in @(
 Assert-Contains $storeSource '(?s)fun clearScanPages\(context: Context\).*?name\.startsWith\(DIR_PREFIX\)' "cleanup targets scan session folders only"
 Assert-Contains $signatureSource 'BACKGROUND_TILE_SIZE = 96' "paper estimation uses broad regional tiles"
 Assert-Contains $signatureSource 'sampleCount \* 0\.8f' "paper level uses an 80th percentile"
-Assert-Contains $signatureSource '\(r \* 0\.75f\)' "original ink RGB is darkened"
+Assert-Contains $signatureSource '0\.55f \* 255f' "original ink RGB is darkened"
+Assert-Contains $signatureSource '0xFF002FA7' "blue ink uses deep vivid blue"
+Assert-Contains $signatureSource '0xFF050505' "black ink uses jet black"
+Assert-Contains $signatureSource 'alphaValues\[ny \* width \+ nx\] \* 0\.85f' "signature strokes receive alpha dilation"
 Assert-Contains $signatureSource 'SignatureInkMode\.NATURAL' "natural crop mode exists"
 Assert-Contains $editSource 'Color\.rgb\(248,\s*249,\s*250\)' "signature preview uses warm paper"
 

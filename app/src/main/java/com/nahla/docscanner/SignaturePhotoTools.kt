@@ -16,6 +16,7 @@ import java.io.File
 import java.io.IOException
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.pow
 import kotlin.math.roundToInt
 
 enum class SignatureInkMode {
@@ -242,48 +243,38 @@ object SignatureExtractionEngine {
         val threshold = (0.018f + (adjustment.coerceIn(0, 100) - 50) * 0.00045f)
             .coerceIn(0.003f, 0.08f)
             .let { candidate -> if (darkest > 0f && candidate >= darkest) darkest * 0.45f else candidate }
-        val ramp = 0.07f
-        val output = IntArray(count)
+        val alphaValues = FloatArray(count)
         for (index in pixels.indices) {
-            val x = index % width
-            val y = index / width
-            if (x < width * 0.08f || x >= width * 0.92f ||
-                y < height * 0.08f || y >= height * 0.92f
-            ) {
-                output[index] = Color.TRANSPARENT
-                continue
+            if (darkness[index] > threshold) {
+                alphaValues[index] = (
+                    ((darkness[index] - threshold) / (1f - threshold) * 2.8f)
+                        .coerceIn(0f, 1f).pow(0.45f)
+                    )
             }
-            val alpha = ((darkness[index] - threshold) / ramp).coerceIn(0f, 1f)
-            if (alpha <= 0f) {
-                output[index] = Color.TRANSPARENT
-                continue
-            }
-            val original = pixels[index]
-            val color = when (mode) {
-                SignatureInkMode.BLUE -> 0xFF0D47A1.toInt()
-                SignatureInkMode.BLACK -> 0xFF111111.toInt()
-                SignatureInkMode.ORIGINAL -> darkenOriginalInk(original)
-                SignatureInkMode.NATURAL -> original
-            }
-            output[index] = (alpha * 255f).roundToInt().coerceIn(0, 255) shl 24 or (color and 0x00ffffff)
         }
-        if (output.none { it ushr 24 > 8 }) {
-            val fallbackThreshold = (darkest * 0.55f).coerceAtLeast(0f)
-            for (index in output.indices) {
-                val x = index % width
-                val y = index / width
-                if (x < width * 0.08f || x >= width * 0.92f ||
-                    y < height * 0.08f || y >= height * 0.92f
-                ) continue
-                if (darkness[index] >= fallbackThreshold) {
-                    val color = when (mode) {
-                        SignatureInkMode.BLUE -> 0xFF0D47A1.toInt()
-                        SignatureInkMode.BLACK -> 0xFF111111.toInt()
-                        SignatureInkMode.ORIGINAL -> darkenOriginalInk(pixels[index])
-                        SignatureInkMode.NATURAL -> pixels[index]
+        val output = IntArray(count)
+        for (y in 0 until height) {
+            for (x in 0 until width) {
+                val index = y * width + x
+                var alpha = alphaValues[index]
+                for (dy in -1..1) {
+                    for (dx in -1..1) {
+                        val nx = x + dx
+                        val ny = y + dy
+                        if (nx in 0 until width && ny in 0 until height) {
+                            alpha = max(alpha, alphaValues[ny * width + nx] * 0.85f)
+                        }
                     }
-                    output[index] = (72 shl 24) or (color and 0x00ffffff)
                 }
+                if (alpha <= 0f) continue
+                val color = when (mode) {
+                    SignatureInkMode.BLUE -> 0xFF002FA7.toInt()
+                    SignatureInkMode.BLACK -> 0xFF050505.toInt()
+                    SignatureInkMode.ORIGINAL -> darkenOriginalInk(pixels[index])
+                    SignatureInkMode.NATURAL -> pixels[index]
+                }
+                output[index] = (alpha * 255f).roundToInt().coerceIn(0, 255) shl 24 or
+                    (color and 0x00ffffff)
             }
         }
         return Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888).apply {
@@ -297,74 +288,17 @@ object SignatureExtractionEngine {
         try {
             val pixels = IntArray(extracted.width * extracted.height)
             extracted.getPixels(pixels, 0, extracted.width, 0, 0, extracted.width, extracted.height)
-            val cellSize = 4
-            val gridWidth = (extracted.width + cellSize - 1) / cellSize
-            val gridHeight = (extracted.height + cellSize - 1) / cellSize
-            val inkCells = BooleanArray(gridWidth * gridHeight)
-            for (y in extracted.height * 8 / 100 until extracted.height * 92 / 100) {
-                for (x in extracted.width * 8 / 100 until extracted.width * 92 / 100) {
-                    if (pixels[y * extracted.width + x] ushr 24 > 24) {
-                        inkCells[(y / cellSize) * gridWidth + x / cellSize] = true
-                    }
-                }
-            }
-            val expanded = BooleanArray(inkCells.size)
-            for (cell in inkCells.indices) {
-                if (!inkCells[cell]) continue
-                val cx = cell % gridWidth
-                val cy = cell / gridWidth
-                for (dy in -2..2) {
-                    for (dx in -2..2) {
-                        val x = cx + dx
-                        val y = cy + dy
-                        if (x in 0 until gridWidth && y in 0 until gridHeight) {
-                            expanded[y * gridWidth + x] = true
-                        }
-                    }
-                }
-            }
-            val labels = IntArray(expanded.size) { -1 }
-            val queue = IntArray(expanded.size)
-            var largestLabel = -1
-            var largestCount = 0
-            var label = 0
-            for (cell in expanded.indices) {
-                if (!expanded[cell] || labels[cell] >= 0) continue
-                var head = 0
-                var tail = 0
-                queue[tail++] = cell
-                labels[cell] = label
-                while (head < tail) {
-                    val current = queue[head++]
-                    val x = current % gridWidth
-                    val y = current / gridWidth
-                    for (dy in -1..1) {
-                        for (dx in -1..1) {
-                            val nx = x + dx
-                            val ny = y + dy
-                            if (nx !in 0 until gridWidth || ny !in 0 until gridHeight) continue
-                            val next = ny * gridWidth + nx
-                            if (expanded[next] && labels[next] < 0) {
-                                labels[next] = label
-                                queue[tail++] = next
-                            }
-                        }
-                    }
-                }
-                if (tail > largestCount) {
-                    largestCount = tail
-                    largestLabel = label
-                }
-                label++
-            }
             var left = extracted.width
             var top = extracted.height
             var right = -1
             var bottom = -1
-            for (y in 0 until extracted.height) {
-                for (x in 0 until extracted.width) {
-                    val cell = (y / cellSize) * gridWidth + x / cellSize
-                    if (largestLabel >= 0 && inkCells[cell] && labels[cell] == largestLabel) {
+            val centralLeft = extracted.width * 15 / 200
+            val centralTop = extracted.height * 15 / 200
+            val centralRight = extracted.width * 185 / 200
+            val centralBottom = extracted.height * 185 / 200
+            for (y in centralTop until centralBottom) {
+                for (x in centralLeft until centralRight) {
+                    if (pixels[y * extracted.width + x] ushr 24 > 24) {
                         left = min(left, x)
                         top = min(top, y)
                         right = max(right, x)
@@ -434,8 +368,11 @@ object SignatureExtractionEngine {
         val r = (color shr 16) and 0xff
         val g = (color shr 8) and 0xff
         val b = color and 0xff
-        return ((r * 0.75f).roundToInt() shl 16) or
-            ((g * 0.75f).roundToInt() shl 8) or (b * 0.75f).roundToInt()
+        fun darken(channel: Int): Int {
+            val contrasted = (((channel / 255f - 0.5f) * 1.25f) + 0.5f).coerceIn(0f, 1f)
+            return (contrasted * 0.55f * 255f).roundToInt()
+        }
+        return (darken(r) shl 16) or (darken(g) shl 8) or darken(b)
     }
 
     private fun estimateBackground(

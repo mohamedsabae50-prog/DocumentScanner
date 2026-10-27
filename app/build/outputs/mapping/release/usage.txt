@@ -18936,7 +18936,6 @@ com.nahla.docscanner.DocumentEdgeDetector:
     private static final int WORKING_EDGE
 com.nahla.docscanner.ImageProcessor:
     public static final int MAX_EDGE
-    private static final int MIN_DEGENERATE_EDGE
     private static final int MIN_OUTPUT_EDGE
     public static final int PAGE_EDGE
     public static final int THUMB_EDGE
@@ -32358,6 +32357,7 @@ com.nahla.docscanner.SignaturePlacement:
     public static float getRotationDegrees()
     public static float getWidth()
 com.nahla.docscanner.databinding.ActivityEditBinding:
+    public final android.widget.FrameLayout rootView
     public static android.widget.FrameLayout getRoot()
 com.nahla.docscanner.databinding.ActivityMainBinding:
     public final android.widget.LinearLayout rootView

@@ -85,6 +85,9 @@ class EditActivity : AppCompatActivity() {
         savedInstanceState?.getFloatArray(STATE_QUAD)?.let { pendingQuad = it }
 
         binding.cropOverlay.onCropChanged = { userAdjusted = true }
+        binding.photo.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            applyImageRect()
+        }
 
         binding.rotate90.setOnClickListener { rotate(90) }
         binding.next.setOnClickListener { enterEditorStage() }
@@ -99,7 +102,7 @@ class EditActivity : AppCompatActivity() {
     override fun onConfigurationChanged(newConfig: android.content.res.Configuration) {
         super.onConfigurationChanged(newConfig)
         // Same bitmap, new fit-center rect: re-map the quad instead of re-decoding.
-        binding.root.post { applyImageRect() }
+        binding.photo.post { applyImageRect() }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -181,34 +184,40 @@ class EditActivity : AppCompatActivity() {
                 pageShapes.addAll(decodedShapes)
                 binding.photo.setImageBitmap(full)
                 binding.cropOverlay.sourceBitmap = full
-                binding.root.post { applyImageRect() }
+                binding.photo.post { applyImageRect() }
                 detectDocument(full)
             }
         }
     }
 
     private fun applyImageRect(reset: Boolean = false) {
-        val drawable = binding.photo.drawable ?: return
-        val viewWidth = binding.photo.width.toFloat()
-        val viewHeight = binding.photo.height.toFloat()
-        val imageWidth = drawable.intrinsicWidth.toFloat()
-        val imageHeight = drawable.intrinsicHeight.toFloat()
-        if (viewWidth <= 0f || viewHeight <= 0f || imageWidth <= 0f || imageHeight <= 0f) return
+        binding.photo.post {
+            val drawable = binding.photo.drawable ?: return@post
+            val drawableWidth = drawable.intrinsicWidth
+            val drawableHeight = drawable.intrinsicHeight
+            if (drawableWidth <= 0 || drawableHeight <= 0) return@post
 
-        val scale = min(viewWidth / imageWidth, viewHeight / imageHeight)
-        val width = imageWidth * scale
-        val height = imageHeight * scale
-        val left = (viewWidth - width) / 2f
-        val top = (viewHeight - height) / 2f
+            val displayedRect = RectF(0f, 0f, drawableWidth.toFloat(), drawableHeight.toFloat())
+            binding.photo.imageMatrix.mapRect(displayedRect)
+            displayedRect.offset(
+                binding.photo.paddingLeft.toFloat(),
+                binding.photo.paddingTop.toFloat()
+            )
+            val contentRect = RectF(
+                binding.photo.paddingLeft.toFloat(),
+                binding.photo.paddingTop.toFloat(),
+                (binding.photo.width - binding.photo.paddingRight).toFloat(),
+                (binding.photo.height - binding.photo.paddingBottom).toFloat()
+            )
+            if (!contentRect.contains(displayedRect)) return@post
+            if (displayedRect.isEmpty) return@post
 
-        val pending = pendingQuad
-        binding.cropOverlay.setImageRect(
-            RectF(left, top, left + width, top + height),
-            resetQuad = reset || pending == null
-        )
-        if (pending != null) {
-            binding.cropOverlay.setNormalizedPoints(pending)
-            pendingQuad = null
+            val pending = pendingQuad
+            binding.cropOverlay.setImageRect(displayedRect, resetQuad = reset)
+            if (pending != null) {
+                binding.cropOverlay.setNormalizedPoints(pending)
+                pendingQuad = null
+            }
         }
     }
 
@@ -231,7 +240,7 @@ class EditActivity : AppCompatActivity() {
                 autoQuad = detected
                 if (!userAdjusted && detected != null) {
                     pendingQuad = detected
-                    binding.root.post { applyImageRect() }
+                    binding.photo.post { applyImageRect() }
                 }
             }
         }
@@ -265,7 +274,7 @@ class EditActivity : AppCompatActivity() {
                 binding.photo.setImageBitmap(newFull)
                 binding.cropOverlay.sourceBitmap = newFull
                 pendingQuad = nextQuad
-                binding.root.post { applyImageRect() }
+                binding.photo.post { applyImageRect() }
             }
         }
     }

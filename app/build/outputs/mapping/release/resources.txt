@@ -29,7 +29,7 @@ Marking id:month_title:2131230979 reachable: referenced from in_memory_r8_base_c
 Marking id:tag_accessibility_heading:2131231133 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking id:month_grid:2131230974 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking style:Widget_Material3_SideSheet:2131755978 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:side_sheet_accessibility_pane_title:2131689696 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:side_sheet_accessibility_pane_title:2131689695 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:design_navigation_menu_item:2131427371 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:design_navigation_icon_size:2131099767 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking id:design_menu_item_text:2131230857 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -201,6 +201,10 @@ Marking attr:alpha:2130903084 reachable: referenced from in_memory_r8_base_class
 Marking attr:lStar:2130903619 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking style:Widget_MaterialComponents_CompoundButton_RadioButton:2131756054 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:textAppearanceLineHeightEnabled:2130904066 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking layout:item_page:2131427376 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:delete:2131230852 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:pageNumber:2131231040 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:thumb:2131231161 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:mtrl_picker_toggle_to_year_selection:2131689651 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:mtrl_picker_toggle_to_day_selection:2131689649 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:dropDownListViewStyle:2130903419 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -353,20 +357,20 @@ Marking id:textinput_helper_text:2131231157 reachable: referenced from in_memory
 Marking id:textinput_placeholder:2131231158 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:error_signature_camera:2131689544 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:error_no_camera:2131689538 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:shapes_title:2131689695 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:shape_stroke:2131689694 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:shape_rectangle:2131689693 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:shape_filled:2131689691 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:shape_oval:2131689692 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:shapes_title:2131689694 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:shape_stroke:2131689692 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:shape_black_outline:2131689690 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:shape_whiteout:2131689693 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:shape_oval:2131689691 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:shape_arrow:2131689689 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_title:2131689719 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:signature_title:2131689713 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:scan_signature_photo:2131689683 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:draw_signature:2131689529 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_saved_choice:2131689716 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_library_empty:2131689709 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:signature_saved_choice:2131689711 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:signature_library_empty:2131689704 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:delete:2131689526 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_error:2131689705 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:working:2131689722 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:signature_error:2131689701 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:working:2131689716 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:error_crop:2131689534 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:editor_stage:2131689530 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:loading_signature_photo:2131689560 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -396,23 +400,18 @@ Marking string:new_signature_arabic:2131689663 reachable: referenced from in_mem
 Marking string:cancel:2131689517 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:crop_signature_photo:2131689524 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:continue_signature:2131689522 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_extraction_preview:2131689706 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_color_blue:2131689701 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_color_black:2131689700 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_ink_original:2131689708 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_ink_natural:2131689707 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_threshold:2131689718 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:signature_extraction_preview:2131689702 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:signature_ink_boldness:2131689703 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:manual_crop:2131689577 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_done_save:2131689703 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_saved:2131689715 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_preview_loading:2131689714 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:signature_done_save:2131689699 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:signature_preview_loading:2131689709 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:error_signature_extraction:2131689545 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_color_red:2131689702 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_pad_title:2131689710 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_clear:2131689699 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_empty:2131689704 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_take_photo:2131689717 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking string:signature_pick_gallery:2131689712 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:signature_saved:2131689710 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:signature_pad_title:2131689705 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:signature_clear:2131689698 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:signature_empty:2131689700 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:signature_take_photo:2131689712 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking string:signature_pick_gallery:2131689707 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking id:fragment_container_view_tag:2131230906 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking style:Widget_MaterialComponents_TimePicker_Clock:2131756121 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:material_clock_hand_stroke_width:2131100201 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -437,10 +436,6 @@ Marking id:transition_current_scene:2131231174 reachable: referenced from in_mem
 Marking attr:colorPrimary:2130903292 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:colorPrimaryVariant:2130903299 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:isMaterialTheme:2130903585 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking layout:item_page:2131427376 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:delete:2131230852 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:pageNumber:2131231040 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:thumb:2131231161 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:mtrl_calendar_vertical:2131427411 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:mtrl_calendar_horizontal:2131427406 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:mtrl_calendar_navigation_height:2131100300 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -562,7 +557,6 @@ sig_raw_import.tmp
 placement
 removeItemAt
 setNextSelectedPositionInt
-BLUE
 displayName
 bottomRight
 emoji2.text.DefaultEmojiConfig
@@ -589,7 +583,6 @@ RESULT_PARSE_EXCEPTION
 g
 CameraOwnerName
 STATE_
-Red
 r
 androidx.lifecycle.BundlableSavedStat...
 GridLayoutManager
@@ -636,6 +629,7 @@ mUnthemedEntries
 State
 CheckBox
 maxLines
+ISO_8859_1
 layoutDescription
 GONE
 child
@@ -669,7 +663,6 @@ label
 GPSImgDirection
 android:support:fragments
 ACTION_DRAG_DROP
-White
 external_primary
 android.view.View$AttachInfo
 GPSDifferential
@@ -679,7 +672,6 @@ setExclusiveCheckable
 indeterminate
 UNDEFINED
 GPSTimeStamp
-ORIGINAL
 ACTION_CONTEXT_CLICK
 signatures
 POSITIVE_BUTTON_CONTENT_DESCRIPTION_KEY
@@ -746,10 +738,10 @@ mMainThread
 UTC
 ExposureProgram
 android.intent.action.TIME_SET
+body
 checkedIconEnabled
 ConstraintLayout
 points
-mode
 scaleX
 Copyright
 scaleY
@@ -817,6 +809,7 @@ android.view.ViewRootImpl
 singleLine
 GPSImgDirectionRef
 input
+dictionary
 InteroperabilityIndex
 FocalPlaneYResolution
 SupportMenuInflater
@@ -825,7 +818,6 @@ anim
 succeeded
 GPSDestDistanceRef
 getHorizontallyScrolling
-Highlight
 PathParser
 Spinner
 androidx.savedstate.Restarter
@@ -919,7 +911,6 @@ short
 startY
 startX
 window
-Green
 ApertureValue
 tileMode
 ACCESSIBILITY_CLICKABLE_SPAN_ID
@@ -1024,8 +1015,8 @@ DeviceSettingDescription
 getModule
 mResourcesImpl
 gradientRadius
-Black
 GPSDestBearing
+US_ASCII
 path
 ViewHolder
 RecommendedExposureIndex
@@ -1036,7 +1027,6 @@ bitmap
 androidx.lifecycle.LifecycleDispatche...
 kotlin.reflect.jvm.internal.Reflectio...
 getSuppressed
-BLACK
 ACTION_UNKNOWN
 android:target_req_state
 addObserver
@@ -1073,7 +1063,6 @@ set
 ISOSpeedRatings
 ISO
 ACTION_IME_ENTER
-Blue
 Nahla_Scan_
 computeFitSystemWindows
 DETACH
@@ -1226,7 +1215,6 @@ ACTION_SCROLL_RIGHT
 addFontFromBuffer
 ViewUtils
 asyncTraceEnd
-NATURAL
 CustomRendered
 ACTION_SCROLL_LEFT
 inParcel
@@ -1438,8 +1426,8 @@ InteroperabilityIFDPointer
 android.permission.ACCESS_COARSE_LOCA...
 GPSVersionID
 MultiAutoCompleteTextView
-pageFile
 TOGGLE_BUTTON_TAG
+pageFile
 POSITIVE_BUTTON_CONTENT_DESCRIPTION_R...
 android.permission.POST_NOTIFICATIONS
 NewSubfileType
@@ -1893,7 +1881,7 @@ Marking attr:waveOffset:2130904184 used because it matches string pool constant 
 Marking attr:wavePeriod:2130904185 used because it matches string pool constant wa
 Marking attr:waveShape:2130904186 used because it matches string pool constant wa
 Marking attr:waveVariesBy:2130904187 used because it matches string pool constant wa
-Marking string:shapes_title:2131689695 used because it matches string pool constant shapes
+Marking string:shapes_title:2131689694 used because it matches string pool constant shapes
 Marking style:TextAppearance_AppCompat:2131755411 used because it matches string pool constant TextAppearance
 Marking style:TextAppearance_AppCompat_Body1:2131755412 used because it matches string pool constant TextAppearance
 Marking style:TextAppearance_AppCompat_Body2:2131755413 used because it matches string pool constant TextAppearance
@@ -2083,27 +2071,22 @@ Marking attr:layout_scrollInterpolator:2130903691 used because it matches string
 Marking id:layout:2131230937 used because it matches string pool constant layout
 Marking string:scan_signature_photo:2131689683 used because it matches string pool constant scan_
 Marking id:none:2131231015 used because it matches string pool constant none
-Marking string:signature_clear:2131689699 used because it matches string pool constant signature
-Marking string:signature_color_black:2131689700 used because it matches string pool constant signature
-Marking string:signature_color_blue:2131689701 used because it matches string pool constant signature
-Marking string:signature_color_red:2131689702 used because it matches string pool constant signature
-Marking string:signature_done_save:2131689703 used because it matches string pool constant signature
-Marking string:signature_empty:2131689704 used because it matches string pool constant signature
-Marking string:signature_error:2131689705 used because it matches string pool constant signature
-Marking string:signature_extraction_preview:2131689706 used because it matches string pool constant signature
-Marking string:signature_ink_natural:2131689707 used because it matches string pool constant signature
-Marking string:signature_ink_original:2131689708 used because it matches string pool constant signature
-Marking string:signature_library_empty:2131689709 used because it matches string pool constant signature
-Marking string:signature_pad_title:2131689710 used because it matches string pool constant signature
-Marking string:signature_page_current:2131689711 used because it matches string pool constant signature
-Marking string:signature_pick_gallery:2131689712 used because it matches string pool constant signature
-Marking string:signature_placement_hint:2131689713 used because it matches string pool constant signature
-Marking string:signature_preview_loading:2131689714 used because it matches string pool constant signature
-Marking string:signature_saved:2131689715 used because it matches string pool constant signature
-Marking string:signature_saved_choice:2131689716 used because it matches string pool constant signature
-Marking string:signature_take_photo:2131689717 used because it matches string pool constant signature
-Marking string:signature_threshold:2131689718 used because it matches string pool constant signature
-Marking string:signature_title:2131689719 used because it matches string pool constant signature
+Marking string:signature_clear:2131689698 used because it matches string pool constant signature
+Marking string:signature_done_save:2131689699 used because it matches string pool constant signature
+Marking string:signature_empty:2131689700 used because it matches string pool constant signature
+Marking string:signature_error:2131689701 used because it matches string pool constant signature
+Marking string:signature_extraction_preview:2131689702 used because it matches string pool constant signature
+Marking string:signature_ink_boldness:2131689703 used because it matches string pool constant signature
+Marking string:signature_library_empty:2131689704 used because it matches string pool constant signature
+Marking string:signature_pad_title:2131689705 used because it matches string pool constant signature
+Marking string:signature_page_current:2131689706 used because it matches string pool constant signature
+Marking string:signature_pick_gallery:2131689707 used because it matches string pool constant signature
+Marking string:signature_placement_hint:2131689708 used because it matches string pool constant signature
+Marking string:signature_preview_loading:2131689709 used because it matches string pool constant signature
+Marking string:signature_saved:2131689710 used because it matches string pool constant signature
+Marking string:signature_saved_choice:2131689711 used because it matches string pool constant signature
+Marking string:signature_take_photo:2131689712 used because it matches string pool constant signature
+Marking string:signature_title:2131689713 used because it matches string pool constant signature
 Marking attr:floatingActionButtonLargePrimaryStyle:2130903487 used because it matches string pool constant float
 Marking attr:floatingActionButtonLargeSecondaryStyle:2130903488 used because it matches string pool constant float
 Marking attr:floatingActionButtonLargeStyle:2130903489 used because it matches string pool constant float
@@ -7965,25 +7948,20 @@ Marking id:fragment_container_view_tag:2131230906 used because it matches string
 @com.nahla.docscanner:string/searchview_navigation_content_description : reachable=false
 @com.nahla.docscanner:string/send_pdf : reachable=true
 @com.nahla.docscanner:string/shape_arrow : reachable=true
-@com.nahla.docscanner:string/shape_color : reachable=false
-@com.nahla.docscanner:string/shape_filled : reachable=true
+@com.nahla.docscanner:string/shape_black_outline : reachable=true
 @com.nahla.docscanner:string/shape_oval : reachable=true
-@com.nahla.docscanner:string/shape_rectangle : reachable=true
 @com.nahla.docscanner:string/shape_stroke : reachable=true
+@com.nahla.docscanner:string/shape_whiteout : reachable=true
 @com.nahla.docscanner:string/shapes_title : reachable=true
 @com.nahla.docscanner:string/side_sheet_accessibility_pane_title : reachable=true
 @com.nahla.docscanner:string/side_sheet_behavior : reachable=false
 @com.nahla.docscanner:string/sign_document : reachable=false
 @com.nahla.docscanner:string/signature_clear : reachable=true
-@com.nahla.docscanner:string/signature_color_black : reachable=true
-@com.nahla.docscanner:string/signature_color_blue : reachable=true
-@com.nahla.docscanner:string/signature_color_red : reachable=true
 @com.nahla.docscanner:string/signature_done_save : reachable=true
 @com.nahla.docscanner:string/signature_empty : reachable=true
 @com.nahla.docscanner:string/signature_error : reachable=true
 @com.nahla.docscanner:string/signature_extraction_preview : reachable=true
-@com.nahla.docscanner:string/signature_ink_natural : reachable=true
-@com.nahla.docscanner:string/signature_ink_original : reachable=true
+@com.nahla.docscanner:string/signature_ink_boldness : reachable=true
 @com.nahla.docscanner:string/signature_library_empty : reachable=true
 @com.nahla.docscanner:string/signature_pad_title : reachable=true
 @com.nahla.docscanner:string/signature_page_current : reachable=true
@@ -7993,7 +7971,6 @@ Marking id:fragment_container_view_tag:2131230906 used because it matches string
 @com.nahla.docscanner:string/signature_saved : reachable=true
 @com.nahla.docscanner:string/signature_saved_choice : reachable=true
 @com.nahla.docscanner:string/signature_take_photo : reachable=true
-@com.nahla.docscanner:string/signature_threshold : reachable=true
 @com.nahla.docscanner:string/signature_title : reachable=true
 @com.nahla.docscanner:string/status_bar_notification_info_overflow : reachable=false
 @com.nahla.docscanner:string/take_photo : reachable=false
@@ -17651,34 +17628,29 @@ The root reachable resources are:
  string:scan_signature_photo:2131689683
  string:send_pdf:2131689688
  string:shape_arrow:2131689689
- string:shape_filled:2131689691
- string:shape_oval:2131689692
- string:shape_rectangle:2131689693
- string:shape_stroke:2131689694
- string:shapes_title:2131689695
- string:side_sheet_accessibility_pane_title:2131689696
- string:signature_clear:2131689699
- string:signature_color_black:2131689700
- string:signature_color_blue:2131689701
- string:signature_color_red:2131689702
- string:signature_done_save:2131689703
- string:signature_empty:2131689704
- string:signature_error:2131689705
- string:signature_extraction_preview:2131689706
- string:signature_ink_natural:2131689707
- string:signature_ink_original:2131689708
- string:signature_library_empty:2131689709
- string:signature_pad_title:2131689710
- string:signature_page_current:2131689711
- string:signature_pick_gallery:2131689712
- string:signature_placement_hint:2131689713
- string:signature_preview_loading:2131689714
- string:signature_saved:2131689715
- string:signature_saved_choice:2131689716
- string:signature_take_photo:2131689717
- string:signature_threshold:2131689718
- string:signature_title:2131689719
- string:working:2131689722
+ string:shape_black_outline:2131689690
+ string:shape_oval:2131689691
+ string:shape_stroke:2131689692
+ string:shape_whiteout:2131689693
+ string:shapes_title:2131689694
+ string:side_sheet_accessibility_pane_title:2131689695
+ string:signature_clear:2131689698
+ string:signature_done_save:2131689699
+ string:signature_empty:2131689700
+ string:signature_error:2131689701
+ string:signature_extraction_preview:2131689702
+ string:signature_ink_boldness:2131689703
+ string:signature_library_empty:2131689704
+ string:signature_pad_title:2131689705
+ string:signature_page_current:2131689706
+ string:signature_pick_gallery:2131689707
+ string:signature_placement_hint:2131689708
+ string:signature_preview_loading:2131689709
+ string:signature_saved:2131689710
+ string:signature_saved_choice:2131689711
+ string:signature_take_photo:2131689712
+ string:signature_title:2131689713
+ string:working:2131689716
  style:Animation_AppCompat_Tooltip:2131755012
  style:MaterialAlertDialog_MaterialComponents:2131755308
  style:TextAppearance_AppCompat:2131755411
@@ -18772,9 +18744,8 @@ Unused resources are:
  string:searchbar_scrolling_view_behavior:2131689685
  string:searchview_clear_text_content_description:2131689686
  string:searchview_navigation_content_description:2131689687
- string:shape_color:2131689690
- string:side_sheet_behavior:2131689697
- string:status_bar_notification_info_overflow:2131689720
+ string:side_sheet_behavior:2131689696
+ string:status_bar_notification_info_overflow:2131689714
  style:Animation_Material3_SideSheetDialog_Left:2131755016
  style:Animation_Material3_SideSheetDialog_Right:2131755017
  style:Base_TextAppearance_AppCompat_Light_Widget_PopupMenu_Large:2131755043

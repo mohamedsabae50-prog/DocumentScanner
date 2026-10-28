@@ -23,15 +23,11 @@ data class ShapePlacement(
     var width: Float = 0.3f,
     var height: Float = 0.12f,
     var rotationDegrees: Float = 0f,
-    var color: Int = BLUE,
+    var color: Int = Color.BLACK,
     var strokeWidth: Float = 3f
 ) {
     companion object {
-        const val BLUE = 0xFF0D47A1.toInt()
-        const val RED = 0xFFD32F2F.toInt()
-        const val BLACK = 0xFF111111.toInt()
-        const val GREEN = 0xFF2E7D32.toInt()
-        const val YELLOW = 0x80FFEB3B.toInt()
+        const val BLACK = Color.BLACK
         const val WHITE = Color.WHITE
     }
 }
@@ -50,7 +46,8 @@ class PageAnnotationView(
 ) : View(context) {
 
     private val pageRect = RectF()
-    private val scratchRect = RectF()
+    private val startRect = RectF()
+    private val previewBitmap = createPreviewBitmap()
     private val bitmapPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
     private val shapePaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG).apply {
         style = Paint.Style.STROKE
@@ -106,21 +103,41 @@ class PageAnnotationView(
     private var dragging = false
     private var rotating = false
     private var resizing = false
+    private var pinching = false
+    private var pinchStartDistance = 1f
+
+    init {
+        setLayerType(View.LAYER_TYPE_HARDWARE, null)
+    }
 
     val signatureLayers: List<SignatureLayer> get() = signatures.toList()
     val shapeLayers: List<ShapeLayer> get() = shapes.map { it.copy(placement = it.placement.copy()) }
 
     fun addSignature(bitmap: Bitmap) {
-        val layer = SignatureLayer(bitmap)
+        val layer = SignatureLayer(
+            bitmap,
+            SignaturePlacement(centerX = 0.5f, centerY = 0.5f, width = 0.38f)
+        )
         signatures.add(layer)
         selected = Selection(true, signatures.lastIndex)
         invalidate()
     }
 
-    fun addShape(type: PageShapeType, color: Int, strokeWidth: Float) {
-        shapes.add(ShapeLayer(type, ShapePlacement(color = color, strokeWidth = strokeWidth)))
+    fun addShape(type: PageShapeType, strokeWidth: Float) {
+        shapes.add(ShapeLayer(type, ShapePlacement(
+            centerX = 0.5f,
+            centerY = 0.5f,
+            width = 0.38f,
+            height = 0.18f,
+            color = if (type == PageShapeType.FILLED_BOX) Color.WHITE else Color.BLACK,
+            strokeWidth = strokeWidth
+        )))
         selected = Selection(false, shapes.lastIndex)
         invalidate()
+    }
+
+    fun releasePreview() {
+        if (!previewBitmap.isRecycled) previewBitmap.recycle()
     }
 
     fun drawAnnotations(canvas: Canvas, target: Bitmap) {
@@ -163,7 +180,7 @@ class PageAnnotationView(
         super.onDraw(canvas)
         if (width <= 0 || height <= 0) return
         pageRect.set(fitRect())
-        canvas.drawBitmap(page, null, pageRect, bitmapPaint)
+        canvas.drawBitmap(previewBitmap, null, pageRect, bitmapPaint)
 
         signatures.forEachIndexed { index, layer ->
             val rect = signatureRect(layer)
@@ -190,7 +207,7 @@ class PageAnnotationView(
 
     private fun drawShape(canvas: Canvas, type: PageShapeType, rect: RectF,
                           placement: ShapePlacement, paint: Paint) {
-        paint.color = placement.color
+        paint.color = if (type == PageShapeType.FILLED_BOX) Color.WHITE else Color.BLACK
         when (type) {
             PageShapeType.RECTANGLE -> {
                 paint.style = Paint.Style.STROKE
@@ -296,6 +313,7 @@ class PageAnnotationView(
                 pageRect.set(fitRect())
                 downX = event.x
                 downY = event.y
+                parent?.requestDisallowInterceptTouchEvent(true)
                 val hit = (shapes.indices.reversed().map { Selection(false, it) } +
                     signatures.indices.reversed().map { Selection(true, it) })
                     .firstOrNull { contains(it, downX, downY) }
@@ -304,7 +322,8 @@ class PageAnnotationView(
                 val local = localPoint(downX, downY, rect, selectedRotation())
                 downLocalX = local.first
                 downLocalY = local.second
-                if (hypot(local.first - rect.left, local.second - rect.top) <= dp(22f)) {
+                startRect.set(rect)
+                if (hypot(local.first - rect.left, local.second - rect.top) <= dp(36f)) {
                     deleteSelected()
                     return true
                 }
@@ -314,21 +333,42 @@ class PageAnnotationView(
                 startHeight = rect.height()
                 startRotation = selectedRotation()
                 startAngle = angle(downX, downY, rect.centerX(), rect.centerY())
-                rotating = hypot(downX - rect.centerX(), downY - (rect.top - dp(20f))) <= dp(16f)
+                rotating = hypot(downX - rect.centerX(), downY - (rect.top - dp(20f))) <= dp(36f)
                 activeHandle = if (rotating) -1 else nearestHandle(rect, local.first, local.second)
                 resizing = activeHandle >= 0
                 dragging = !rotating && !resizing && contains(selected!!, downX, downY)
                 invalidate()
                 return true
             }
+            MotionEvent.ACTION_POINTER_DOWN -> {
+                parent?.requestDisallowInterceptTouchEvent(true)
+                val rect = selectedRect() ?: return true
+                if (event.pointerCount >= 2) {
+                    pinching = true
+                    dragging = false
+                    resizing = false
+                    rotating = false
+                    startCenterX = rect.centerX()
+                    startCenterY = rect.centerY()
+                    startWidth = rect.width()
+                    startHeight = rect.height()
+                    startRotation = selectedRotation()
+                    pinchStartDistance = pointerDistance(event).coerceAtLeast(1f)
+                }
+                return true
+            }
             MotionEvent.ACTION_MOVE -> {
                 val rect = selectedRect() ?: return true
-                val local = localPoint(event.x, event.y, rect, startRotation)
-                if (rotating) {
+                if (pinching && event.pointerCount >= 2) {
+                    val scale = pointerDistance(event) / pinchStartDistance
+                    updateSelected(startCenterX, startCenterY,
+                        startWidth * scale, startHeight * scale, startRotation)
+                } else if (rotating) {
                     val delta = angle(event.x, event.y, startCenterX, startCenterY) - startAngle
                     updateSelected(startCenterX, startCenterY, startWidth, startHeight,
                         startRotation + delta)
                 } else if (resizing) {
+                    val local = localPoint(event.x, event.y, startRect, startRotation)
                     val dx = local.first - downLocalX
                     val dy = local.second - downLocalY
                     if (selected?.signature == true) {
@@ -360,11 +400,17 @@ class PageAnnotationView(
                 invalidate()
                 return true
             }
+            MotionEvent.ACTION_POINTER_UP -> {
+                if (event.pointerCount <= 2) pinching = false
+                return true
+            }
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 dragging = false
                 resizing = false
                 rotating = false
+                pinching = false
                 activeHandle = -1
+                parent?.requestDisallowInterceptTouchEvent(false)
                 performClick()
                 return true
             }
@@ -406,8 +452,8 @@ class PageAnnotationView(
         val point = localPoint(x, y, rect, if (item.signature) {
             signatures[item.index].placement.rotationDegrees
         } else shapes[item.index].placement.rotationDegrees)
-        return RectF(rect.left - dp(12f), rect.top - dp(12f),
-            rect.right + dp(12f), rect.bottom + dp(12f)).contains(point.first, point.second)
+        return RectF(rect.left - dp(20f), rect.top - dp(20f),
+            rect.right + dp(20f), rect.bottom + dp(20f)).contains(point.first, point.second)
     }
 
     private fun localPoint(x: Float, y: Float, rect: RectF, rotation: Float): Pair<Float, Float> {
@@ -420,7 +466,7 @@ class PageAnnotationView(
 
     private fun nearestHandle(rect: RectF, x: Float, y: Float): Int {
         val points = handles(rect)
-        val targetRadius = dp(20f)
+        val targetRadius = dp(36f)
         return points.indices.minByOrNull { hypot(points[it].first - x, points[it].second - y) }
             ?.takeIf { hypot(points[it].first - x, points[it].second - y) <= targetRadius } ?: -1
     }
@@ -436,6 +482,20 @@ class PageAnnotationView(
         val top = (height - fittedHeight) / 2f
         return RectF(left, top, left + fittedWidth, top + fittedHeight)
     }
+
+    private fun createPreviewBitmap(): Bitmap {
+        val maxWidth = min(1080, resources.displayMetrics.widthPixels.coerceAtLeast(1))
+        val scale = min(1f, maxWidth.toFloat() / page.width)
+        val previewWidth = (page.width * scale).toInt().coerceAtLeast(1)
+        val previewHeight = (page.height * scale).toInt().coerceAtLeast(1)
+        return Bitmap.createBitmap(previewWidth, previewHeight, Bitmap.Config.ARGB_8888).also {
+            Canvas(it).drawBitmap(page, null, RectF(0f, 0f, previewWidth.toFloat(),
+                previewHeight.toFloat()), bitmapPaint)
+        }
+    }
+
+    private fun pointerDistance(event: MotionEvent): Float =
+        hypot(event.getX(0) - event.getX(1), event.getY(0) - event.getY(1))
 
     private fun dp(value: Float): Float = value * resources.displayMetrics.density
 

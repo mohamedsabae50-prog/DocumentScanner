@@ -297,15 +297,15 @@ class SignaturePlacementView(
 
 class SignaturePadView(context: Context) : View(context) {
 
-    private data class Stroke(val path: Path, val color: Int)
+    private data class Stroke(val path: Path)
 
     private val strokes = mutableListOf<Stroke>()
     private var activePath: Path? = null
     private var lastX = 0f
     private var lastY = 0f
-    private var currentColor = BLUE
     private val strokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
+        color = Color.BLACK
         strokeCap = Paint.Cap.ROUND
         strokeJoin = Paint.Join.ROUND
         strokeWidth = resources.displayMetrics.density * 3.2f
@@ -314,11 +314,6 @@ class SignaturePadView(context: Context) : View(context) {
     init {
         setLayerType(LAYER_TYPE_SOFTWARE, null)
         setBackgroundColor(Color.WHITE)
-    }
-
-    fun selectColor(color: Int) {
-        currentColor = color
-        invalidate()
     }
 
     fun clear() {
@@ -376,7 +371,7 @@ class SignaturePadView(context: Context) : View(context) {
                 lastX = event.x
                 lastY = event.y
                 activePath = Path().apply { moveTo(lastX, lastY) }
-                strokes.add(Stroke(activePath!!, currentColor))
+                strokes.add(Stroke(activePath!!))
                 invalidate()
                 return true
             }
@@ -412,14 +407,8 @@ class SignaturePadView(context: Context) : View(context) {
 
     private fun drawStrokes(canvas: Canvas) {
         for (stroke in strokes) {
-            strokePaint.color = stroke.color
+            strokePaint.color = Color.BLACK
             canvas.drawPath(stroke.path, strokePaint)
         }
-    }
-
-    companion object {
-        const val BLUE = 0xFF0D47A1.toInt()
-        const val BLACK = 0xFF111111.toInt()
-        const val RED = 0xFFB71C1C.toInt()
     }
 }

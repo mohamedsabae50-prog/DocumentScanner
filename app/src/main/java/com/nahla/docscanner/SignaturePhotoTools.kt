@@ -16,12 +16,7 @@ import java.io.File
 import java.io.IOException
 import kotlin.math.max
 import kotlin.math.min
-import kotlin.math.pow
 import kotlin.math.roundToInt
-
-enum class SignatureInkMode {
-    ORIGINAL, BLUE, BLACK, NATURAL
-}
 
 class SignatureCropView(
     context: Context,
@@ -156,8 +151,7 @@ class SignatureCropView(
 
 object SignatureExtractionEngine {
 
-    private const val BACKGROUND_TILE_SIZE = 96
-    private const val HISTOGRAM_BINS = 256
+    private const val THRESHOLD_HISTOGRAM_BINS = 1024
 
     fun decode(context: Context, uri: Uri): Bitmap {
         val rawFile = File(context.cacheDir, "sig_raw_import.tmp")
@@ -210,71 +204,202 @@ object SignatureExtractionEngine {
         return rotated
     }
 
-    fun extract(source: Bitmap, mode: SignatureInkMode, adjustment: Int): Bitmap {
-        if (mode == SignatureInkMode.NATURAL) {
-            return source.copy(Bitmap.Config.ARGB_8888, false)
-                ?: throw IllegalStateException("Could not copy natural signature crop")
-        }
+    fun extract(source: Bitmap, inkBoldness: Int): Bitmap {
         val width = source.width
         val height = source.height
         val count = width * height
+        val integralWidth = width + 1
         val pixels = IntArray(count)
         source.getPixels(pixels, 0, width, 0, 0, width, height)
-        val luma = FloatArray(count) { index ->
+        val originalLuma = FloatArray(count) { index ->
             val color = pixels[index]
             0.299f * ((color shr 16) and 0xff) +
                 0.587f * ((color shr 8) and 0xff) +
                 0.114f * (color and 0xff)
         }
-        val gridWidth = max(1, (width + BACKGROUND_TILE_SIZE - 1) / BACKGROUND_TILE_SIZE)
-        val gridHeight = max(1, (height + BACKGROUND_TILE_SIZE - 1) / BACKGROUND_TILE_SIZE)
-        val background = estimateBackground(luma, width, height, gridWidth, gridHeight)
+        val luma = FloatArray(count)
+        for (y in 0 until height) {
+            for (x in 0 until width) {
+                var sum = 0f
+                for (dy in -1..1) {
+                    val sy = (y + dy).coerceIn(0, height - 1)
+                    val wy = if (dy == 0) 2f else 1f
+                    for (dx in -1..1) {
+                        val sx = (x + dx).coerceIn(0, width - 1)
+                        val wx = if (dx == 0) 2f else 1f
+                        sum += originalLuma[sy * width + sx] * wx * wy
+                    }
+                }
+                luma[y * width + x] = sum / 16f
+            }
+        }
+
+        val integral = DoubleArray((width + 1) * (height + 1))
+        for (y in 0 until height) {
+            var rowSum = 0.0
+            for (x in 0 until width) {
+                rowSum += luma[y * width + x]
+                integral[(y + 1) * integralWidth + x + 1] =
+                    integral[y * integralWidth + x + 1] + rowSum
+            }
+        }
+
+        val radius = (max(width, height) / 16).coerceAtLeast(1)
         val darkness = FloatArray(count)
+        val histogram = IntArray(THRESHOLD_HISTOGRAM_BINS)
+        var sampleCount = 0
+        val frameX = width * 6 / 100
+        val frameY = height * 6 / 100
         for (y in 0 until height) {
             for (x in 0 until width) {
                 val index = y * width + x
-                val paperLevel = sampleGrid(background, gridWidth, gridHeight, x, y, width, height)
-                    .coerceAtLeast(1f)
-                val value = ((paperLevel - luma[index]) / paperLevel).coerceIn(0f, 1f)
-                darkness[index] = value
+                val left = (x - radius).coerceAtLeast(0)
+                val top = (y - radius).coerceAtLeast(0)
+                val right = (x + radius + 1).coerceAtMost(width)
+                val bottom = (y + radius + 1).coerceAtMost(height)
+                val sum = integral[bottom * integralWidth + right] -
+                    integral[top * integralWidth + right] -
+                    integral[bottom * integralWidth + left] +
+                    integral[top * integralWidth + left]
+                val area = (right - left) * (bottom - top)
+                val mean = (sum / area).toFloat()
+                val relativeDarkness = ((mean - luma[index]) / max(mean, 35f))
+                    .coerceIn(0f, 1f)
+                darkness[index] = relativeDarkness
+                if (x >= frameX && x < width - frameX &&
+                    y >= frameY && y < height - frameY
+                ) {
+                    val bin = (relativeDarkness * (THRESHOLD_HISTOGRAM_BINS - 1))
+                        .toInt().coerceIn(0, THRESHOLD_HISTOGRAM_BINS - 1)
+                    histogram[bin]++
+                    sampleCount++
+                }
             }
         }
-        val darkest = darkness.maxOrNull() ?: 0f
-        val threshold = (0.018f + (adjustment.coerceIn(0, 100) - 50) * 0.00045f)
-            .coerceIn(0.003f, 0.08f)
-            .let { candidate -> if (darkest > 0f && candidate >= darkest) darkest * 0.45f else candidate }
-        val alphaValues = FloatArray(count)
-        for (index in pixels.indices) {
-            if (darkness[index] > threshold) {
-                alphaValues[index] = (
-                    ((darkness[index] - threshold) / (1f - threshold) * 2.8f)
-                        .coerceIn(0f, 1f).pow(0.45f)
-                    )
+        val percentileTarget = (sampleCount * 0.88f).roundToInt().coerceAtLeast(1)
+        var cumulative = 0
+        var baselineBin = 0
+        for (bin in histogram.indices) {
+            cumulative += histogram[bin]
+            if (cumulative >= percentileTarget) {
+                baselineBin = bin
+                break
             }
         }
+        val baselineThreshold = baselineBin.toFloat() / (THRESHOLD_HISTOGRAM_BINS - 1)
+        val boldnessFactor = 1.45f - inkBoldness.coerceIn(0, 100) / 100f * 1.1f
+        val threshold = (baselineThreshold * boldnessFactor).coerceIn(0.008f, 0.22f)
+        val edgeRamp = max(threshold * 2.2f, 0.025f)
+        val alpha = FloatArray(count)
+        for (y in 0 until height) {
+            for (x in 0 until width) {
+                val index = y * width + x
+                if (x < frameX || x >= width - frameX ||
+                    y < frameY || y >= height - frameY
+                ) continue
+                val amount = ((darkness[index] - threshold) / edgeRamp).coerceIn(0f, 1f)
+                alpha[index] = amount * amount * (3f - 2f * amount)
+            }
+        }
+
+        val inkMask = BooleanArray(count) { alpha[it] >= 0.08f }
+        val dilated = BooleanArray(count)
+        for (y in 1 until height - 1) {
+            for (x in 1 until width - 1) {
+                val index = y * width + x
+                for (dy in -1..1) {
+                    for (dx in -1..1) {
+                        if (inkMask[(y + dy) * width + x + dx]) dilated[index] = true
+                    }
+                }
+            }
+        }
+        val closed = BooleanArray(count)
+        for (y in 1 until height - 1) {
+            for (x in 1 until width - 1) {
+                var filled = true
+                for (dy in -1..1) {
+                    for (dx in -1..1) {
+                        if (!dilated[(y + dy) * width + x + dx]) filled = false
+                    }
+                }
+                closed[y * width + x] = filled
+            }
+        }
+
+        val visited = BooleanArray(count)
+        val queue = IntArray(count)
+        val majorInk = BooleanArray(count)
+        val minorInk = BooleanArray(count)
+        var majorLeft = width
+        var majorTop = height
+        var majorRight = -1
+        var majorBottom = -1
+        for (start in closed.indices) {
+            if (!closed[start] || visited[start]) continue
+            var head = 0
+            var tail = 0
+            queue[tail++] = start
+            visited[start] = true
+            var left = width
+            var top = height
+            var right = -1
+            var bottom = -1
+            while (head < tail) {
+                val current = queue[head++]
+                val x = current % width
+                val y = current / width
+                left = min(left, x)
+                top = min(top, y)
+                right = max(right, x)
+                bottom = max(bottom, y)
+                for (dy in -1..1) {
+                    for (dx in -1..1) {
+                        val nx = x + dx
+                        val ny = y + dy
+                        if (nx !in 0 until width || ny !in 0 until height) continue
+                        val next = ny * width + nx
+                        if (closed[next] && !visited[next]) {
+                            visited[next] = true
+                            queue[tail++] = next
+                        }
+                    }
+                }
+            }
+            val component = if (tail >= 3) majorInk else minorInk
+            for (i in 0 until tail) component[queue[i]] = true
+            if (tail >= 3) {
+                majorLeft = min(majorLeft, left)
+                majorTop = min(majorTop, top)
+                majorRight = max(majorRight, right)
+                majorBottom = max(majorBottom, bottom)
+            }
+        }
+
         val output = IntArray(count)
-        for (y in 0 until height) {
-            for (x in 0 until width) {
-                val index = y * width + x
-                var alpha = alphaValues[index]
+        val keepPadding = max(6, max(width, height) / 50)
+        val hasMajorInk = majorRight >= majorLeft && majorBottom >= majorTop
+        for (index in output.indices) {
+            val x = index % width
+            val y = index / width
+            val preserveSmall = !hasMajorInk ||
+                (x in majorLeft - keepPadding..majorRight + keepPadding &&
+                    y in majorTop - keepPadding..majorBottom + keepPadding)
+            if (!majorInk[index] && !(minorInk[index] && preserveSmall)) continue
+            var opacity = alpha[index]
+            if (opacity <= 0f) {
                 for (dy in -1..1) {
                     for (dx in -1..1) {
                         val nx = x + dx
                         val ny = y + dy
                         if (nx in 0 until width && ny in 0 until height) {
-                            alpha = max(alpha, alphaValues[ny * width + nx] * 0.85f)
+                            opacity = max(opacity, alpha[ny * width + nx] * 0.75f)
                         }
                     }
                 }
-                if (alpha <= 0f) continue
-                val color = when (mode) {
-                    SignatureInkMode.BLUE -> 0xFF002FA7.toInt()
-                    SignatureInkMode.BLACK -> 0xFF050505.toInt()
-                    SignatureInkMode.ORIGINAL -> darkenOriginalInk(pixels[index])
-                    SignatureInkMode.NATURAL -> pixels[index]
-                }
-                output[index] = (alpha * 255f).roundToInt().coerceIn(0, 255) shl 24 or
-                    (color and 0x00ffffff)
+            }
+            if (opacity > 0f) {
+                output[index] = (opacity * 255f).roundToInt().coerceIn(1, 255) shl 24
             }
         }
         return Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888).apply {
@@ -284,7 +409,7 @@ object SignatureExtractionEngine {
 
     /** Finds ink in the central photo area and returns a padded raw-paper region for preview. */
     fun autoCrop(source: Bitmap): Bitmap {
-        val extracted = extract(source, SignatureInkMode.ORIGINAL, 50)
+        val extracted = extract(source, 50)
         try {
             val pixels = IntArray(extracted.width * extracted.height)
             extracted.getPixels(pixels, 0, extracted.width, 0, 0, extracted.width, extracted.height)
@@ -292,12 +417,8 @@ object SignatureExtractionEngine {
             var top = extracted.height
             var right = -1
             var bottom = -1
-            val centralLeft = extracted.width * 15 / 200
-            val centralTop = extracted.height * 15 / 200
-            val centralRight = extracted.width * 185 / 200
-            val centralBottom = extracted.height * 185 / 200
-            for (y in centralTop until centralBottom) {
-                for (x in centralLeft until centralRight) {
+            for (y in 0 until extracted.height) {
+                for (x in 0 until extracted.width) {
                     if (pixels[y * extracted.width + x] ushr 24 > 24) {
                         left = min(left, x)
                         top = min(top, y)
@@ -310,7 +431,7 @@ object SignatureExtractionEngine {
                 return source.copy(Bitmap.Config.ARGB_8888, false)
                     ?: throw IllegalStateException("Could not copy signature photo")
             }
-            val padding = 12
+            val padding = max(8, max(source.width, source.height) / 100)
             left = (left - padding).coerceAtLeast(0)
             top = (top - padding).coerceAtLeast(0)
             right = (right + padding + 1).coerceAtMost(source.width)
@@ -362,105 +483,6 @@ object SignatureExtractionEngine {
         } else {
             trimmed
         }
-    }
-
-    private fun darkenOriginalInk(color: Int): Int {
-        val r = (color shr 16) and 0xff
-        val g = (color shr 8) and 0xff
-        val b = color and 0xff
-        fun darken(channel: Int): Int {
-            val contrasted = (((channel / 255f - 0.5f) * 1.25f) + 0.5f).coerceIn(0f, 1f)
-            return (contrasted * 0.55f * 255f).roundToInt()
-        }
-        return (darken(r) shl 16) or (darken(g) shl 8) or darken(b)
-    }
-
-    private fun estimateBackground(
-        luma: FloatArray,
-        width: Int,
-        height: Int,
-        gridWidth: Int,
-        gridHeight: Int
-    ): FloatArray {
-        val grid = FloatArray(gridWidth * gridHeight)
-        for (gy in 0 until gridHeight) {
-            val top = gy * BACKGROUND_TILE_SIZE
-            val bottom = min(height, top + BACKGROUND_TILE_SIZE)
-            for (gx in 0 until gridWidth) {
-                val left = gx * BACKGROUND_TILE_SIZE
-                val right = min(width, left + BACKGROUND_TILE_SIZE)
-                val histogram = IntArray(HISTOGRAM_BINS)
-                var sampleCount = 0
-                for (y in top until bottom) {
-                    for (x in left until right) {
-                        histogram[luma[y * width + x].roundToInt().coerceIn(0, 255)]++
-                        sampleCount++
-                    }
-                }
-                val percentileTarget = (sampleCount * 0.8f).roundToInt().coerceAtLeast(1)
-                var cumulative = 0
-                var percentile = 255
-                for (value in histogram.indices) {
-                    cumulative += histogram[value]
-                    if (cumulative >= percentileTarget) {
-                        percentile = value
-                        break
-                    }
-                }
-                grid[gy * gridWidth + gx] = percentile.toFloat()
-            }
-        }
-        return boxBlur(grid, gridWidth, gridHeight, 2)
-    }
-
-    private fun boxBlur(values: FloatArray, width: Int, height: Int, radius: Int): FloatArray {
-        val horizontal = FloatArray(values.size)
-        val blurred = FloatArray(values.size)
-        for (y in 0 until height) {
-            for (x in 0 until width) {
-                var sum = 0f
-                var count = 0
-                for (offset in -radius..radius) {
-                    sum += values[y * width + (x + offset).coerceIn(0, width - 1)]
-                    count++
-                }
-                horizontal[y * width + x] = sum / count
-            }
-        }
-        for (y in 0 until height) {
-            for (x in 0 until width) {
-                var sum = 0f
-                var count = 0
-                for (offset in -radius..radius) {
-                    sum += horizontal[(y + offset).coerceIn(0, height - 1) * width + x]
-                    count++
-                }
-                blurred[y * width + x] = sum / count
-            }
-        }
-        return blurred
-    }
-
-    private fun sampleGrid(
-        grid: FloatArray,
-        gridWidth: Int,
-        gridHeight: Int,
-        x: Int,
-        y: Int,
-        width: Int,
-        height: Int
-    ): Float {
-        val gx = x.toFloat() * (gridWidth - 1) / max(1, width - 1)
-        val gy = y.toFloat() * (gridHeight - 1) / max(1, height - 1)
-        val x0 = gx.toInt().coerceIn(0, gridWidth - 1)
-        val y0 = gy.toInt().coerceIn(0, gridHeight - 1)
-        val x1 = min(x0 + 1, gridWidth - 1)
-        val y1 = min(y0 + 1, gridHeight - 1)
-        val top = grid[y0 * gridWidth + x0] +
-            (grid[y0 * gridWidth + x1] - grid[y0 * gridWidth + x0]) * (gx - x0)
-        val bottom = grid[y1 * gridWidth + x0] +
-            (grid[y1 * gridWidth + x1] - grid[y1 * gridWidth + x0]) * (gx - x0)
-        return top + (bottom - top) * (gy - y0)
     }
 
 }

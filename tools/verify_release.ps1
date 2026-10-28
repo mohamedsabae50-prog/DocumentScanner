@@ -24,6 +24,8 @@ $mainSource = Get-Content -LiteralPath (Join-Path $project "app\src\main\java\co
 $storeSource = Get-Content -LiteralPath (Join-Path $project "app\src\main\java\com\nahla\docscanner\ScanStore.kt") -Raw
 $signatureSource = Get-Content -LiteralPath (Join-Path $project "app\src\main\java\com\nahla\docscanner\SignaturePhotoTools.kt") -Raw
 $editSource = Get-Content -LiteralPath (Join-Path $project "app\src\main\java\com\nahla\docscanner\EditActivity.kt") -Raw
+$annotationSource = Get-Content -LiteralPath (Join-Path $project "app\src\main\java\com\nahla\docscanner\PageAnnotationView.kt") -Raw
+$stringsSource = Get-Content -LiteralPath (Join-Path $project "app\src\main\res\values\strings.xml") -Raw
 $pathsXml = [xml](Get-Content -LiteralPath (Join-Path $project "app\src\main\res\xml\file_paths.xml") -Raw)
 
 function Assert-Contains([string]$Text, [string]$Pattern, [string]$Message) {
@@ -39,6 +41,12 @@ Assert-Contains $pdfSource 'Downloads\.getContentUri\(MediaStore\.VOLUME_EXTERNA
 Assert-Contains $pdfSource 'runCatching\s*\{\s*saveWithMediaStore' "MediaStore has a fallback path"
 Assert-Contains $pdfSource 'ClipData\.newRawUri' "share intents set a raw URI ClipData"
 Assert-Contains $pdfSource 'Intent\.EXTRA_STREAM' "share intents attach the PDF stream"
+Assert-Contains $pdfSource 'MAX_JPEG_EDGE = 1650' "PDF pages are capped at 1650 pixels"
+Assert-Contains $pdfSource 'JPEG_QUALITY = 80' "PDF page JPEG quality is 80"
+Assert-Contains $pdfSource 'Bitmap\.Config\.RGB_565' "PDF images use RGB_565 downscaling"
+Assert-Contains $pdfSource '/Filter /DCTDecode' "JPEG data is embedded as a DCTDecode image stream"
+Assert-Contains $pdfSource '/MediaBox \[0 0 \$widthPt \$heightPt\]' "PDF pages use full-bleed image dimensions"
+Assert-Contains $pdfSource '%PDF-1\.4' "native PDF 1.4 writer is used"
 
 Assert-Contains $mainSource 'PdfGenerator\.export\(this,\s*snapshot\.map\s*\{\s*it\.pageFile\s*\},\s*fileName\)' "MainActivity uses the complete export path"
 Assert-Contains $mainSource '(?s)result = PdfGenerator\.export\(this,.*?if\s*\(result\?\.downloadError\s*==\s*null\)\s*\{\s*try\s*\{\s*ScanStore\.clearScanPages\(this\)' "page files clear only after successful publication"
@@ -60,14 +68,19 @@ foreach ($entry in @(
 }
 
 Assert-Contains $storeSource '(?s)fun clearScanPages\(context: Context\).*?name\.startsWith\(DIR_PREFIX\)' "cleanup targets scan session folders only"
-Assert-Contains $signatureSource 'BACKGROUND_TILE_SIZE = 96' "paper estimation uses broad regional tiles"
-Assert-Contains $signatureSource 'sampleCount \* 0\.8f' "paper level uses an 80th percentile"
-Assert-Contains $signatureSource '0\.55f \* 255f' "original ink RGB is darkened"
-Assert-Contains $signatureSource '0xFF002FA7' "blue ink uses deep vivid blue"
-Assert-Contains $signatureSource '0xFF050505' "black ink uses jet black"
-Assert-Contains $signatureSource 'alphaValues\[ny \* width \+ nx\] \* 0\.85f' "signature strokes receive alpha dilation"
-Assert-Contains $signatureSource 'SignatureInkMode\.NATURAL' "natural crop mode exists"
-Assert-Contains $editSource 'Color\.rgb\(248,\s*249,\s*250\)' "signature preview uses warm paper"
+Assert-Contains $signatureSource 'DoubleArray\(\(width \+ 1\) \* \(height \+ 1\)\)' "signature extraction uses an integral image"
+Assert-Contains $signatureSource 'sampleCount \* 0\.88f' "adaptive threshold uses the 88th percentile"
+Assert-Contains $signatureSource 'max\(mean,\s*35f\)' "adaptive darkness uses a luminance floor"
+Assert-Contains $signatureSource 'val closed = BooleanArray\(count\)' "signature ink receives a morphological closing pass"
+Assert-Contains $signatureSource 'output\[index\] = \(opacity \* 255f\).*shl 24' "signature ink is rendered as black with soft alpha"
+Assert-Contains $editSource 'SignatureExtractionEngine\.extract\(cropped,\s*adjustment\)' "signature preview uses the boldness-only extractor"
+Assert-Contains $editSource 'blackenSignature\(signature\)' "placed signatures are normalized to black"
+Assert-Contains $stringsSource 'Ink Boldness / سُمك الحبر' "signature preview exposes the localized ink-boldness slider"
+Assert-Contains $annotationSource 'min\(1080,\s*resources\.displayMetrics\.widthPixels' "annotation preview is display-sized"
+Assert-Contains $annotationSource 'View\.LAYER_TYPE_HARDWARE' "annotation preview enables hardware acceleration"
+Assert-Contains $annotationSource 'dp\(36f\)' "annotation touch handles have 36dp hit radii"
+Assert-Contains $annotationSource 'pointerDistance\(event\)' "annotations support pinch-to-scale"
+Assert-Contains $editSource 'PageShapeType\.FILLED_BOX to R\.string\.shape_whiteout' "shape choices include the whiteout eraser"
 
 $apk = Join-Path $project "app\build\outputs\apk\release\app-release.apk"
 if (!(Test-Path -LiteralPath $apk) -or (Get-Item -LiteralPath $apk).Length -le 0) {

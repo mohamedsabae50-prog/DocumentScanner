@@ -5,24 +5,25 @@ import android.content.Context
 import android.content.ClipData
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.RectF
-import android.graphics.pdf.PdfDocument
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import androidx.core.content.FileProvider
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import kotlin.math.min
+import java.io.OutputStream
+import java.nio.charset.StandardCharsets
+import java.util.Locale
 
 /**
- * A4 PDF writer built on the framework's `android.graphics.pdf.PdfDocument`.
- * No third-party PDF engine, so the APK stays small.
+ * Writes compact PDF 1.4 files with JPEG page images embedded as DCT streams.
  *
  * Memory model: pages are streamed one at a time. Each source JPEG is decoded,
  * drawn, and recycled before the next one is touched, so peak usage is a single
@@ -30,12 +31,10 @@ import kotlin.math.min
  */
 object PdfGenerator {
 
-    /** A4 in PostScript points at 72 dpi. */
-    const val PAGE_WIDTH = 595
-    const val PAGE_HEIGHT = 842
-
-    private const val MARGIN = 20f
     private const val MAX_PAGES = 60
+    private const val MAX_JPEG_EDGE = 1650
+    private const val JPEG_QUALITY = 80
+    private const val PDF_DPI = 200f
     private const val FOLDER_NAME = "DocScanner"
     private const val MIME_PDF = "application/pdf"
 
@@ -48,7 +47,7 @@ object PdfGenerator {
         val downloadError: String? = null
     )
 
-    /** Writes the natural-color [pages] into [target] as a multi-page PDF. */
+    /** Writes each page as a full-bleed JPEG XObject in a compact PDF 1.4 file. */
     fun build(
         pages: List<File>,
         target: File,
@@ -58,53 +57,128 @@ object PdfGenerator {
         require(pages.size <= MAX_PAGES) { "Too many pages (${pages.size})" }
 
         target.parentFile?.mkdirs()
-        val document = PdfDocument()
-        val bitmapPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
-        val borderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            style = Paint.Style.STROKE
-            strokeWidth = 1.2f
-            color = Color.parseColor("#1F000000")
-        }
-
-        try {
+        val objectCount = 2 + pages.size * 3
+        FileOutputStream(target).use { output ->
+            val writer = Pdf14Writer(output)
+            writer.writeHeader()
+            writer.writeObject(1, "<< /Type /Catalog /Pages 2 0 R >>")
+            val pageReferences = pages.indices.joinToString(" ") { "${3 + it * 3} 0 R" }
+            writer.writeObject(
+                2,
+                "<< /Type /Pages /Kids [$pageReferences] /Count ${pages.size} >>"
+            )
             pages.forEachIndexed { index, file ->
                 onProgress(index, pages.size)
-                val bitmap = ImageProcessor.decode(file, ImageProcessor.PAGE_EDGE)
+                val source = ImageProcessor.decode(file, ImageProcessor.PAGE_EDGE)
+                val jpeg: ByteArray
+                val pixelWidth: Int
+                val pixelHeight: Int
                 try {
-                    val info = PdfDocument.PageInfo
-                        .Builder(PAGE_WIDTH, PAGE_HEIGHT, index + 1)
-                        .create()
-                    val page = document.startPage(info)
-                    val canvas = page.canvas
-                    canvas.drawColor(Color.WHITE)
-
-                    val dest = fitRect(bitmap.width, bitmap.height)
-                    canvas.drawBitmap(bitmap, null, dest, bitmapPaint)
-                    canvas.drawRect(dest, borderPaint)
-
-                    document.finishPage(page)
+                    val scale = minOf(1f, MAX_JPEG_EDGE.toFloat() /
+                        maxOf(source.width, source.height))
+                    pixelWidth = (source.width * scale).toInt().coerceAtLeast(1)
+                    pixelHeight = (source.height * scale).toInt().coerceAtLeast(1)
+                    val reduced = Bitmap.createBitmap(
+                        pixelWidth, pixelHeight, Bitmap.Config.RGB_565
+                    )
+                    try {
+                        Canvas(reduced).apply {
+                            drawColor(Color.WHITE)
+                            drawBitmap(source, null,
+                                android.graphics.Rect(0, 0, pixelWidth, pixelHeight),
+                                Paint(Paint.FILTER_BITMAP_FLAG or Paint.DITHER_FLAG))
+                        }
+                        val bytes = ByteArrayOutputStream()
+                        if (!reduced.compress(Bitmap.CompressFormat.JPEG, JPEG_QUALITY, bytes)) {
+                            throw IOException("JPEG encoding failed for ${file.name}")
+                        }
+                        jpeg = bytes.toByteArray()
+                    } finally {
+                        reduced.recycle()
+                    }
                 } finally {
-                    bitmap.recycle()
+                    source.recycle()
                 }
+
+                val widthPt = pixelWidth * 72f / PDF_DPI
+                val heightPt = pixelHeight * 72f / PDF_DPI
+                val pageObject = 3 + index * 3
+                val contentObject = pageObject + 1
+                val imageObject = pageObject + 2
+                val content = "q $widthPt 0 0 $heightPt 0 0 cm /Im0 Do Q"
+                writer.writeObject(
+                    pageObject,
+                    "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 $widthPt $heightPt] " +
+                        "/Resources << /XObject << /Im0 $imageObject 0 R >> >> " +
+                        "/Contents $contentObject 0 R >>"
+                )
+                writer.writeStreamObject(
+                    contentObject,
+                    "<< /Length ${content.toByteArray(StandardCharsets.US_ASCII).size} >>",
+                    content.toByteArray(StandardCharsets.US_ASCII)
+                )
+                writer.writeStreamObject(
+                    imageObject,
+                    "<< /Type /XObject /Subtype /Image /Width $pixelWidth " +
+                        "/Height $pixelHeight /ColorSpace /DeviceRGB " +
+                        "/BitsPerComponent 8 /Filter /DCTDecode /Length ${jpeg.size} >>",
+                    jpeg
+                )
             }
             onProgress(pages.size, pages.size)
-
-            FileOutputStream(target).use { out -> document.writeTo(out) }
-        } finally {
-            document.close()
+            writer.writeCrossReference(objectCount)
         }
         return target.length()
     }
 
-    private fun fitRect(bitmapWidth: Int, bitmapHeight: Int): RectF {
-        val availableWidth = PAGE_WIDTH - MARGIN * 2
-        val availableHeight = PAGE_HEIGHT - MARGIN * 2
-        val scale = min(availableWidth / bitmapWidth, availableHeight / bitmapHeight)
-        val width = bitmapWidth * scale
-        val height = bitmapHeight * scale
-        val left = (PAGE_WIDTH - width) / 2f
-        val top = (PAGE_HEIGHT - height) / 2f
-        return RectF(left, top, left + width, top + height)
+    private class Pdf14Writer(private val output: OutputStream) {
+        private val offsets = mutableListOf(0L)
+        var offset = 0L
+            private set
+
+        fun writeHeader() {
+            write("%PDF-1.4\n%\u00e2\u00e3\u00cf\u00d3\n".toByteArray(StandardCharsets.ISO_8859_1))
+        }
+
+        fun writeObject(number: Int, body: String) {
+            beginObject(number)
+            write(body.toByteArray(StandardCharsets.US_ASCII))
+            write("\nendobj\n".toByteArray(StandardCharsets.US_ASCII))
+        }
+
+        fun writeStreamObject(number: Int, dictionary: String, data: ByteArray) {
+            beginObject(number)
+            write("$dictionary\nstream\n".toByteArray(StandardCharsets.US_ASCII))
+            write(data)
+            write("\nendstream\nendobj\n".toByteArray(StandardCharsets.US_ASCII))
+        }
+
+        fun writeCrossReference(objectCount: Int) {
+            val xrefOffset = offset
+            write("xref\n0 ${objectCount + 1}\n0000000000 65535 f \n"
+                .toByteArray(StandardCharsets.US_ASCII))
+            for (number in 1..objectCount) {
+                val objectOffset = offsets.getOrNull(number)
+                    ?: throw IOException("Missing PDF object offset for $number")
+                write(String.format(Locale.US, "%010d 00000 n \n", objectOffset)
+                    .toByteArray(StandardCharsets.US_ASCII))
+            }
+            write(("trailer\n<< /Size ${objectCount + 1} /Root 1 0 R >>\n" +
+                "startxref\n$xrefOffset\n%%EOF\n").toByteArray(StandardCharsets.US_ASCII))
+        }
+
+        private fun beginObject(number: Int) {
+            if (number != offsets.size) {
+                throw IOException("PDF objects must be written in order")
+            }
+            offsets.add(offset)
+            write("$number 0 obj\n".toByteArray(StandardCharsets.US_ASCII))
+        }
+
+        private fun write(bytes: ByteArray) {
+            output.write(bytes)
+            offset += bytes.size
+        }
     }
 
     /**

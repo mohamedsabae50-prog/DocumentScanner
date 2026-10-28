@@ -20,8 +20,6 @@ import android.widget.FrameLayout
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
@@ -135,7 +133,7 @@ class EditActivity : AppCompatActivity() {
                             signatureFile.absolutePath,
                             BitmapFactory.Options().apply { inPreferredConfig = Bitmap.Config.ARGB_8888 }
                         ) ?: throw IOException("Could not decode page signature")
-                        decodedSignatures.add(SignatureLayer(bitmap, placement))
+                        decodedSignatures.add(SignatureLayer(blackenSignature(bitmap), placement))
                     }
                 } else {
                     val signatureFile = ScanStore.pageSignatureFile(this, pageId)
@@ -144,10 +142,10 @@ class EditActivity : AppCompatActivity() {
                             signatureFile.absolutePath,
                             BitmapFactory.Options().apply { inPreferredConfig = Bitmap.Config.ARGB_8888 }
                         ) ?: throw IOException("Could not decode page signature")
-                        decodedSignatures.add(
-                            SignatureLayer(bitmap, ScanStore.readSignaturePlacement(this, pageId)
-                                ?: SignaturePlacement())
-                        )
+                        decodedSignatures.add(SignatureLayer(
+                            blackenSignature(bitmap),
+                            ScanStore.readSignaturePlacement(this, pageId) ?: SignaturePlacement()
+                        ))
                     }
                 }
                 decodedShapes.addAll(ScanStore.readPageShapes(this, pageId))
@@ -330,6 +328,7 @@ class EditActivity : AppCompatActivity() {
     private fun returnToCropStage() {
         if (!editorStage || busy) return
         editorStage = false
+        pageEditor?.releasePreview()
         binding.annotationContainer.removeAllViews()
         pageEditor = null
         pageBitmap?.let { if (!it.isRecycled) it.recycle() }
@@ -464,37 +463,6 @@ class EditActivity : AppCompatActivity() {
             textSize = 20f
             setTextColor(Color.rgb(25, 35, 40))
         })
-        val colors = listOf(
-            ShapePlacement.BLUE to "Blue",
-            ShapePlacement.RED to "Red",
-            ShapePlacement.BLACK to "Black",
-            ShapePlacement.GREEN to "Green",
-            ShapePlacement.YELLOW to "Highlight",
-            ShapePlacement.WHITE to "White"
-        )
-        var selectedColor = ShapePlacement.BLUE
-        val colorRow = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = android.view.Gravity.CENTER_VERTICAL
-        }
-        colors.forEach { (color, name) ->
-            val chip = MaterialButton(this).apply {
-                text = name
-                textSize = 9f
-                minWidth = 0
-                setPadding(dp(4), 0, dp(4), 0)
-                backgroundTintList = android.content.res.ColorStateList.valueOf(color)
-                setTextColor(if (color == ShapePlacement.YELLOW || color == ShapePlacement.WHITE)
-                    Color.BLACK else Color.WHITE)
-                setOnClickListener { selectedColor = color }
-            }
-            colorRow.addView(chip, LinearLayout.LayoutParams(0, dp(42), 1f).apply {
-                marginEnd = dp(3)
-            })
-        }
-        content.addView(colorRow, LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT, dp(48)
-        ).apply { topMargin = dp(12) })
         val stroke = SeekBar(this).apply {
             max = 13
             progress = 2
@@ -506,15 +474,15 @@ class EditActivity : AppCompatActivity() {
         })
         content.addView(stroke)
         val types = listOf(
-            PageShapeType.RECTANGLE to R.string.shape_rectangle,
-            PageShapeType.FILLED_BOX to R.string.shape_filled,
+            PageShapeType.RECTANGLE to R.string.shape_black_outline,
+            PageShapeType.FILLED_BOX to R.string.shape_whiteout,
             PageShapeType.OVAL to R.string.shape_oval,
             PageShapeType.ARROW to R.string.shape_arrow
         )
         types.forEach { (type, label) ->
             val button = brightButton(getString(label), true)
             button.setOnClickListener {
-                pageEditor?.addShape(type, selectedColor, (stroke.progress + 1).toFloat())
+                pageEditor?.addShape(type, (stroke.progress + 1).toFloat())
                 sheet.dismiss()
             }
             content.addView(button, LinearLayout.LayoutParams(
@@ -726,29 +694,13 @@ class EditActivity : AppCompatActivity() {
             setPadding(dp(8), dp(8), dp(8), dp(8))
             contentDescription = getString(R.string.signature_extraction_preview)
         }
-        val modes = RadioGroup(this).apply { orientation = RadioGroup.HORIZONTAL }
-        val modeButtons = listOf(
-            SignatureInkMode.BLUE to R.string.signature_color_blue,
-            SignatureInkMode.BLACK to R.string.signature_color_black,
-            SignatureInkMode.ORIGINAL to R.string.signature_ink_original,
-            SignatureInkMode.NATURAL to R.string.signature_ink_natural
-        )
-        modeButtons.forEachIndexed { index, (mode, label) ->
-            modes.addView(RadioButton(this).apply {
-                id = View.generateViewId()
-                text = getString(label)
-                textSize = 9f
-                tag = mode
-                isChecked = mode == SignatureInkMode.ORIGINAL
-            }, RadioGroup.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f))
-        }
         val threshold = SeekBar(this).apply {
             max = 100
             progress = 50
-            contentDescription = getString(R.string.signature_threshold)
+            contentDescription = getString(R.string.signature_ink_boldness)
         }
         val thresholdCaption = android.widget.TextView(this).apply {
-            text = getString(R.string.signature_threshold)
+            text = getString(R.string.signature_ink_boldness)
             textSize = 13f
         }
         val container = LinearLayout(this).apply {
@@ -757,11 +709,9 @@ class EditActivity : AppCompatActivity() {
             addView(preview, LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, dp(220)
             ))
-            addView(modes)
             addView(thresholdCaption)
             addView(threshold)
         }
-        var currentMode = SignatureInkMode.ORIGINAL
         var previewBitmap: Bitmap? = null
         var resultSignature: Bitmap? = null
         val previewGeneration = AtomicInteger()
@@ -780,14 +730,13 @@ class EditActivity : AppCompatActivity() {
         fun updatePreview(immediate: Boolean = false) {
             val request = previewGeneration.incrementAndGet()
             val adjustment = threshold.progress
-            val mode = currentMode
             previewRunnable?.let { main.removeCallbacks(it) }
             previewRunnable = Runnable {
                 io.execute {
                     if (previewGeneration.get() != request || dismissed) return@execute
                     var generated: Bitmap? = null
                     try {
-                        generated = SignatureExtractionEngine.extract(cropped, mode, adjustment)
+                        generated = SignatureExtractionEngine.extract(cropped, adjustment)
                     } catch (t: Throwable) {
                         Log.e(TAG, "signature extraction preview failed", t)
                     }
@@ -809,11 +758,6 @@ class EditActivity : AppCompatActivity() {
                 }
             }
             main.postDelayed(previewRunnable!!, if (immediate) 0L else 120L)
-        }
-        modes.setOnCheckedChangeListener { group, checkedId ->
-            currentMode = group.findViewById<RadioButton>(checkedId)?.tag as? SignatureInkMode
-                ?: SignatureInkMode.ORIGINAL
-            updatePreview()
         }
         threshold.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -885,23 +829,6 @@ class EditActivity : AppCompatActivity() {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(12), dp(8), dp(12), dp(4))
         }
-        val colorRow = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
-        val colors = listOf(
-            getString(R.string.signature_color_blue) to SignaturePadView.BLUE,
-            getString(R.string.signature_color_black) to SignaturePadView.BLACK,
-            getString(R.string.signature_color_red) to SignaturePadView.RED
-        )
-        colors.forEach { (label, color) ->
-            val button = Button(this).apply {
-                text = label
-                textSize = 11f
-                setTextColor(android.graphics.Color.WHITE)
-                backgroundTintList = android.content.res.ColorStateList.valueOf(color)
-                setOnClickListener { pad.selectColor(color) }
-            }
-            colorRow.addView(button, LinearLayout.LayoutParams(0, dp(48), 1f))
-        }
-        container.addView(colorRow)
         container.addView(
             pad,
             LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(190)).apply {
@@ -950,7 +877,22 @@ class EditActivity : AppCompatActivity() {
             signature.recycle()
             return
         }
-        editor.addSignature(signature)
+        editor.addSignature(blackenSignature(signature))
+    }
+
+    private fun blackenSignature(source: Bitmap): Bitmap {
+        try {
+            val pixels = IntArray(source.width * source.height)
+            source.getPixels(pixels, 0, source.width, 0, 0, source.width, source.height)
+            for (index in pixels.indices) {
+                pixels[index] = ((pixels[index] ushr 24) shl 24) or Color.BLACK
+            }
+            return Bitmap.createBitmap(source.width, source.height, Bitmap.Config.ARGB_8888).apply {
+                setPixels(pixels, 0, width, 0, 0, width, height)
+            }
+        } finally {
+            if (!source.isRecycled) source.recycle()
+        }
     }
 
     private fun dp(value: Int): Int =
@@ -978,29 +920,26 @@ class EditActivity : AppCompatActivity() {
         val page = pageBitmap ?: return
         val editor = pageEditor ?: return
         if (busy || !editorStage) return
-        val composited = try {
-            page.copy(Bitmap.Config.ARGB_8888, true).also { copy ->
-                editor.drawAnnotations(Canvas(copy), copy)
-            }
-        } catch (t: Throwable) {
-            Log.e(TAG, "could not render page annotations", t)
-            toast(getString(R.string.error_generic))
-            return
-        }
         val signatures = editor.signatureLayers
         val shapes = editor.shapeLayers
         setBusy(true, getString(R.string.saving))
         io.execute {
             var ok = false
+            var composited: Bitmap? = null
             try {
-                ImageProcessor.writePng(composited, ScanStore.pageFile(this@EditActivity, pageId))
+                composited = page.copy(Bitmap.Config.ARGB_8888, true)
+                    ?: throw IOException("Could not copy page for annotation")
+                val finalBitmap = composited
+                    ?: throw IllegalStateException("Page copy was not created")
+                editor.drawAnnotations(Canvas(finalBitmap), finalBitmap)
+                ImageProcessor.writePng(finalBitmap, ScanStore.pageFile(this@EditActivity, pageId))
                 ScanStore.writePageSignatures(this@EditActivity, pageId, signatures)
                 ScanStore.writePageShapes(this@EditActivity, pageId, shapes)
                 ok = true
             } catch (t: Throwable) {
-                Log.e(TAG, "save failed", t)
+                Log.e(TAG, "could not render or save page annotations", t)
             } finally {
-                composited.recycle()
+                composited?.recycle()
             }
             main.post {
                 setBusy(false)
@@ -1041,6 +980,7 @@ class EditActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         io.shutdownNow()
+        pageEditor?.releasePreview()
         recycleAll()
         pageBitmap?.let { if (!it.isRecycled) it.recycle() }
         pageBitmap = null

@@ -18958,13 +18958,15 @@ com.nahla.docscanner.PdfGenerator$DownloadResult:
 com.nahla.docscanner.PdfGenerator$ExportResult:
     public synthetic void <init>(android.net.Uri,java.io.File,android.net.Uri,java.lang.String,long,java.lang.String,int,kotlin.jvm.internal.DefaultConstructorMarker)
     public final java.io.File getFile()
+com.nahla.docscanner.PdfGenerator$Pdf14Writer:
+    public final long getOffset()
 com.nahla.docscanner.PdfGenerator:
     private static final java.lang.String FOLDER_NAME
-    private static final float MARGIN
+    private static final int JPEG_QUALITY
+    private static final int MAX_JPEG_EDGE
     private static final int MAX_PAGES
     private static final java.lang.String MIME_PDF
-    public static final int PAGE_HEIGHT
-    public static final int PAGE_WIDTH
+    private static final float PDF_DPI
     private final com.nahla.docscanner.PdfGenerator$ExportResult exportToDownloads(android.content.Context,java.io.File,java.lang.String)
     public final com.nahla.docscanner.PdfGenerator$ExportResult saveToDownloads(android.content.Context,java.io.File,java.lang.String)
 com.nahla.docscanner.R$color
@@ -18992,7 +18994,6 @@ com.nahla.docscanner.R$string:
     public static int pick_image
     public static int rotate_90
     public static int save_page
-    public static int shape_color
     public static int sign_document
     public static int signature_page_current
     public static int signature_placement_hint
@@ -19025,11 +19026,7 @@ com.nahla.docscanner.ShapeLayer:
     public final com.nahla.docscanner.ShapePlacement component2()
 com.nahla.docscanner.ShapePlacement:
     public static final int BLACK
-    public static final int BLUE
-    public static final int GREEN
-    public static final int RED
     public static final int WHITE
-    public static final int YELLOW
     public void <init>()
     public final float component1()
     public final float component2()
@@ -19041,24 +19038,17 @@ com.nahla.docscanner.ShapePlacement:
     public final void setColor(int)
     public final void setStrokeWidth(float)
 com.nahla.docscanner.SignatureExtractionEngine:
-    private static final int BACKGROUND_TILE_SIZE
-    private static final int HISTOGRAM_BINS
-com.nahla.docscanner.SignatureInkMode:
-    public static kotlin.enums.EnumEntries getEntries()
+    private static final int THRESHOLD_HISTOGRAM_BINS
 com.nahla.docscanner.SignatureLayer:
+    public synthetic void <init>(android.graphics.Bitmap,com.nahla.docscanner.SignaturePlacement,int,kotlin.jvm.internal.DefaultConstructorMarker)
     public final android.graphics.Bitmap component1()
     public final com.nahla.docscanner.SignaturePlacement component2()
     public final com.nahla.docscanner.SignatureLayer copy(android.graphics.Bitmap,com.nahla.docscanner.SignaturePlacement)
     public static synthetic com.nahla.docscanner.SignatureLayer copy$default(com.nahla.docscanner.SignatureLayer,android.graphics.Bitmap,com.nahla.docscanner.SignaturePlacement,int,java.lang.Object)
 com.nahla.docscanner.SignaturePadView$Stroke:
     public final android.graphics.Path component1()
-    public final int component2()
-    public final com.nahla.docscanner.SignaturePadView$Stroke copy(android.graphics.Path,int)
-    public static synthetic com.nahla.docscanner.SignaturePadView$Stroke copy$default(com.nahla.docscanner.SignaturePadView$Stroke,android.graphics.Path,int,int,java.lang.Object)
-com.nahla.docscanner.SignaturePadView:
-    public static final int BLACK
-    public static final int BLUE
-    public static final int RED
+    public final com.nahla.docscanner.SignaturePadView$Stroke copy(android.graphics.Path)
+    public static synthetic com.nahla.docscanner.SignaturePadView$Stroke copy$default(com.nahla.docscanner.SignaturePadView$Stroke,android.graphics.Path,int,java.lang.Object)
 com.nahla.docscanner.SignaturePlacement:
     public void <init>()
     public final float component1()
@@ -20131,6 +20121,7 @@ kotlin.collections.ArraysKt___ArraysKt:
     public static final int getLastIndex(byte[])
     public static final int getLastIndex(char[])
     public static final int getLastIndex(double[])
+    public static final int getLastIndex(float[])
     public static final int getLastIndex(int[])
     public static final int getLastIndex(long[])
     public static final int getLastIndex(short[])
@@ -20457,6 +20448,7 @@ kotlin.collections.ArraysKt___ArraysKt:
     public static final java.lang.Comparable maxOrNull(java.lang.Comparable[])
     public static final java.lang.Double maxOrNull(double[])
     public static final java.lang.Double maxOrNull(java.lang.Double[])
+    public static final java.lang.Float maxOrNull(float[])
     public static final java.lang.Float maxOrNull(java.lang.Float[])
     public static final java.lang.Integer maxOrNull(int[])
     public static final java.lang.Long maxOrNull(long[])
@@ -21333,7 +21325,6 @@ kotlin.collections.CollectionsKt__CollectionsKt:
     public static final java.util.List listOfNotNull(java.lang.Object)
     public static final varargs java.util.List listOfNotNull(java.lang.Object[])
     private static final java.util.List mutableListOf()
-    public static final varargs java.util.List mutableListOf(java.lang.Object[])
     private static final java.util.Collection orEmpty(java.util.Collection)
     private static final java.util.List orEmpty(java.util.List)
     private static final void rangeCheck$CollectionsKt__CollectionsKt(int,int,int)
@@ -22673,7 +22664,6 @@ kotlin.jvm.internal.ShortCompanionObject
 kotlin.jvm.internal.ShortSpreadBuilder
 kotlin.jvm.internal.SourceDebugExtension
 kotlin.jvm.internal.SpreadBuilder
-kotlin.jvm.internal.StringCompanionObject
 kotlin.jvm.internal.TypeIntrinsics:
     public void <init>()
     public static java.util.Collection asMutableCollection(java.lang.Object)
@@ -32262,10 +32252,11 @@ com.nahla.docscanner.PageAnnotationView$Selection:
     public static boolean getSignature()
 com.nahla.docscanner.PageAnnotationView$WhenMappings
 com.nahla.docscanner.PageAnnotationView:
-    public final android.graphics.RectF scratchRect
     public static void addShape()
     public static void addSignature()
     public static float angle(float,float,float,float)
+    public static float pointerDistance(android.view.MotionEvent)
+    public final void releasePreview()
 com.nahla.docscanner.PageShapeType:
     public static final synthetic kotlin.enums.EnumEntries $ENTRIES
 com.nahla.docscanner.PdfGenerator$DownloadResult:
@@ -32279,6 +32270,8 @@ com.nahla.docscanner.PdfGenerator$ExportResult:
     public static java.lang.String getDownloadError()
     public static android.net.Uri getShareUri()
     public static android.net.Uri getUri()
+com.nahla.docscanner.PdfGenerator$Pdf14Writer:
+    public static void writeHeader()
 com.nahla.docscanner.PdfGenerator:
     public static final com.nahla.docscanner.PdfGenerator INSTANCE
     static void <clinit>()
@@ -32331,25 +32324,17 @@ com.nahla.docscanner.ShapePlacement:
     public static void setHeight()
     public static void setRotationDegrees()
     public static void setWidth()
-com.nahla.docscanner.SignatureExtractionEngine$WhenMappings
 com.nahla.docscanner.SignatureExtractionEngine:
     public static final com.nahla.docscanner.SignatureExtractionEngine INSTANCE
     static void <clinit>()
-com.nahla.docscanner.SignatureInkMode:
-    public static final synthetic kotlin.enums.EnumEntries $ENTRIES
 com.nahla.docscanner.SignatureLayer:
     public static android.graphics.Bitmap getBitmap()
     public static com.nahla.docscanner.SignaturePlacement getPlacement()
     public static void setPlacement()
-com.nahla.docscanner.SignaturePadView$Companion
 com.nahla.docscanner.SignaturePadView$Stroke:
-    public static int getColor()
     public static android.graphics.Path getPath()
 com.nahla.docscanner.SignaturePadView:
-    public static final com.nahla.docscanner.SignaturePadView$Companion Companion
-    static void <clinit>()
     public static void clear()
-    public static void selectColor()
     public static android.graphics.Bitmap trimmedBitmap()
 com.nahla.docscanner.SignaturePlacement:
     public static float getCenterX()
@@ -32400,7 +32385,6 @@ kotlin.collections.AbstractList
 kotlin.collections.AbstractMutableList:
     public abstract int getSize()
 kotlin.collections.ArrayAsCollection:
-    public final boolean isVarargs
     public static int getSize()
 kotlin.collections.ArrayDeque$Companion
 kotlin.collections.ArrayDeque:
@@ -32419,7 +32403,9 @@ kotlin.collections.CollectionsKt:
 kotlin.collections.CollectionsKt__CollectionsJVMKt:
     public static java.util.List listOf(java.lang.Object)
 kotlin.collections.CollectionsKt__CollectionsKt:
+    public static final kotlin.collections.ArrayAsCollection asCollection(java.lang.Object[],boolean)
     public static java.util.List emptyList()
+    public static void throwIndexOverflow()
 kotlin.collections.CollectionsKt__MutableCollectionsJVMKt:
     public static void sortWith(java.util.ArrayList,java.util.Comparator)
 kotlin.collections.CollectionsKt___CollectionsKt
@@ -32563,6 +32549,7 @@ kotlin.jvm.internal.ReflectionFactory:
     public static kotlin.reflect.KDeclarationContainer getOrCreateKotlinPackage()
     public static java.lang.String renderLambdaToString()
     public static java.lang.String renderLambdaToString(kotlin.jvm.internal.FunctionBase)
+kotlin.jvm.internal.StringCompanionObject
 kotlin.jvm.internal.TypeIntrinsics
 kotlin.math.MathKt__MathJVMKt
 kotlin.random.AbstractPlatformRandom:

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>نهلة سكانر للكمبيوتر</title>
+<style>
+:root{font:14px "Segoe UI",Arial,sans-serif;color:#17302d;background:#edf3f1;--green:#087f68;--deep:#075c4f;--line:#d5e0dc;--panel:#fff}
+*{box-sizing:border-box}body{margin:0;height:100vh;display:flex;flex-direction:column;overflow:hidden}button,input,select{font:inherit}button{border:1px solid var(--line);border-radius:8px;background:#fff;padding:8px 11px;color:#17302d;cursor:pointer}button:hover{border-color:var(--green);background:#f1faf7}button.primary{background:var(--green);border-color:var(--green);color:white;font-weight:650}button.danger{color:#a12727}button:disabled{opacity:.48;cursor:default}.top{height:58px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:9px;padding:0 16px;flex-shrink:0}.brand{font-size:18px;font-weight:750;color:var(--deep);margin-right:auto}.brand small{display:block;color:#70817c;font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}.top select{max-width:180px;padding:8px;border:1px solid var(--line);border-radius:8px;background:white}.workspace{display:grid;grid-template-columns:230px minmax(0,1fr);flex:1;min-height:0}.sidebar{background:#f8fbfa;border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0}.side-head{padding:14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-weight:700}.page-list{padding:10px;overflow:auto;display:flex;flex-direction:column;gap:9px}.page-card{background:white;border:1px solid var(--line);border-radius:10px;padding:7px;cursor:pointer}.page-card.active{border:2px solid var(--green);padding:6px;box-shadow:0 2px 8px #087f681b}.page-card canvas{width:100%;height:124px;object-fit:contain;background:#e8eeec;border-radius:6px}.page-meta{display:flex;align-items:center;justify-content:space-between;font-size:12px;padding:6px 2px 0}.page-actions{display:flex;gap:4px}.page-actions button{padding:3px 7px;font-size:11px}.main{display:flex;flex-direction:column;min-width:0;min-height:0}.toolbar{background:white;border-bottom:1px solid var(--line);padding:9px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.toolbar .spacer{flex:1}.toolbar label{font-size:12px;color:#52645f}.toolbar select{padding:7px;border:1px solid var(--line);border-radius:7px}.board{position:relative;flex:1;min-height:0;display:grid;place-items:center;overflow:hidden;background-color:#e7eeeb;background-image:linear-gradient(45deg,#dce5e1 25%,transparent 25%),linear-gradient(-45deg,#dce5e1 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#dce5e1 75%),linear-gradient(-45deg,transparent 75%,#dce5e1 75%);background-size:22px 22px;background-position:0 0,0 11px,11px -11px,-11px 0}.board canvas{display:block;max-width:100%;max-height:100%;box-shadow:0 5px 25px #263b3540;touch-action:none}.empty{color:#657872;text-align:center;line-height:1.9;padding:30px}.bottom{background:#fff;border-top:1px solid var(--line);padding:9px 14px;display:flex;align-items:center;gap:10px;min-height:50px}.bottom .grow{flex:1}.sizebar{display:none;align-items:center;gap:7px}.sizebar.show{display:flex}.sizebar input{width:min(230px,25vw)}.filename{width:180px;padding:8px;border:1px solid var(--line);border-radius:7px}.status{font-size:12px;color:#60716b}.library{display:flex;gap:8px;align-items:center;max-width:40vw;overflow:auto}.sig-item{width:50px;height:40px;border:1px solid var(--line);border-radius:7px;display:grid;place-items:center;flex:none;cursor:pointer;background:repeating-conic-gradient(#f5f7f6 0 25%,#e9eeec 0 50%) 0/12px 12px}.sig-item img{max-width:44px;max-height:34px}.dialog{width:min(760px,92vw);border:0;border-radius:15px;padding:0;box-shadow:0 18px 70px #0005}.dialog::backdrop{background:#10231fa8}.dialog-head,.dialog-foot{padding:13px 17px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.dialog-foot{border:0;border-top:1px solid var(--line);justify-content:flex-end;gap:8px}.dialog-body{padding:16px;display:grid;gap:12px}.drawpad{width:100%;height:270px;border:1px solid var(--line);border-radius:9px;background:repeating-conic-gradient(#f6f8f7 0 25%,#edf1ef 0 50%) 0/20px 20px;touch-action:none}.help{font-size:12px;color:#667772}.hidden{display:none!important}@media(max-width:850px){.workspace{grid-template-columns:175px minmax(0,1fr)}.top{gap:5px;padding:0 8px}.brand{font-size:14px}.top button{padding:7px}.filename{width:130px}.library{max-width:28vw}}
+.brand{margin-inline-start:auto;margin-right:0;white-space:nowrap}.sidebar{border-right:0;border-inline-end:1px solid var(--line)}.language-toggle{background:#ffcf32;border:2px solid #e6a900;color:#26320a;font-weight:800;min-width:92px;box-shadow:0 2px 8px #9d7c2538}.language-toggle:hover{background:#ffdf72;border-color:#bc8b00}.library-wrap{display:flex;flex-direction:column;gap:3px;max-width:36vw;font-size:10px;color:#60716b}.library{max-width:100%}.sizebar{flex-wrap:wrap;justify-content:center}.sizebar label,.sizebar span{font-size:11px;white-space:nowrap}.sizebar input[type=range]{width:min(150px,14vw)}html[dir=rtl] .toolbar,html[dir=rtl] .bottom{direction:rtl}html[dir=ltr] .toolbar,html[dir=ltr] .bottom{direction:ltr}html[dir=rtl] .page-meta{direction:rtl}html[dir=rtl] .drawpad{direction:ltr}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand" id="brand">نهلة سكانر للكمبيوتر <small id="brandSubtitle">ماسح مستندات · يعمل دون إنترنت</small></div>
+  <button id="languageToggle" class="language-toggle" type="button" aria-label="Switch language">English</button>
+  <button id="openFiles">+ إضافة صور من الجهاز</button><input id="files" type="file" accept="image/jpeg,image/png,image/webp,image/bmp" multiple hidden>
+  <button id="signaturePhoto">+ استخراج إمضاء من صورة</button><button id="drawSignature">+ رسم إمضاء بالماوس</button>
+  <button id="saveSignature">حفظ الإمضاء</button>
+</header>
+<div class="workspace">
+  <aside class="sidebar"><div class="side-head"><span><span id="pagesLabel">الصفحات</span> <span id="pageCount">0</span></span><button id="addMore" aria-label="إضافة صور">＋</button></div><div class="page-list" id="pageList"></div></aside>
+  <main class="main">
+    <div class="toolbar">
+      <button id="autoCrop">تحديد تلقائي للحواف</button><button id="resetCrop">الصورة كاملة</button><button class="primary" id="applyCrop">تطبيق القص والتالي</button>
+      <button id="rotatePage">تدوير 90°</button>
+      <span class="spacer"></span><label for="shapeType" id="shapeLabel">نوع الشكل</label><select id="shapeType" title="نوع الشكل"><option value="outline">مربع تحديد أسود</option><option value="whiteout">مربع مسح أبيض (تغطية)</option><option value="oval">دائرة / بيضاوي</option><option value="arrow">سهم / خط</option></select>
+      <button id="addShape">+ إضافة شكل / مربع</button><button id="deleteSelected" class="danger hidden">حذف العنصر</button>
+    </div>
+    <div class="board" id="board"><div class="empty" id="empty">اسحب الصور وأفلتها هنا أو اضغط لإضافة صور من الجهاز.<br>الأنواع المدعومة: JPG وPNG وWEBP وBMP.</div><canvas id="canvas" class="hidden"></canvas></div>
+    <div class="bottom">
+      <span id="mode" class="status">أضف صوراً للبدء</span>
+      <div class="sizebar" id="sizeBar"><span id="sizeLabel">حجم العنصر</span><button id="sizeMinus" aria-label="تصغير">−</button><input id="size" type="range" min="3" max="95" value="38" aria-label="حجم العنصر"><button id="sizePlus" aria-label="تكبير">＋</button><label id="strokeLabel" for="strokeSize">سُمك الخط</label><input id="strokeSize" type="range" min="1" max="16" value="3" aria-label="سُمك الخط"><button id="lockSelected" class="primary" aria-label="قفل التعديل">✓ قفل التعديل (تم)</button></div>
+      <div class="library-wrap"><span id="libraryLabel">مكتبة الإمضاءات المحفوظة</span><div class="library" id="library"></div></div>
+      <input id="pdfName" class="filename" value="Nahla-Document" aria-label="اسم ملف الـ PDF" title="اسم ملف الـ PDF">
+      <button class="primary" id="exportPdf">حفظ كملف PDF</button><button id="clearPages">مسح الكل / ملف جديد</button>
+    </div>
+  </main>
+</div>
+<dialog class="dialog" id="drawDialog">
+  <div class="dialog-head"><strong id="drawTitle">رسم إمضاء بالماوس</strong><button id="closeDraw">إغلاق</button></div>
+  <div class="dialog-body"><canvas class="drawpad" id="drawPad" width="1000" height="360"></canvas><div class="help" id="drawHelp">ارسم الإمضاء بالماوس أو القلم أو لوحة اللمس. يُحفظ الإمضاء على هذا الجهاز فقط.</div></div>
+  <div class="dialog-foot"><button id="clearDraw">مسح</button><button class="primary" id="useDraw">استخدام الإمضاء</button></div>
+</dialog>
+<dialog class="dialog" id="boldDialog">
+  <div class="dialog-head"><strong id="boldTitle">استخراج الإمضاء من الصورة</strong><button id="closeBold">إغلاق</button></div>
+  <div class="dialog-body"><label><span id="boldLabel">سُمك الحبر</span> <input id="boldness" type="range" min="0" max="100" value="50" aria-label="سُمك الحبر"></label><canvas id="signaturePreview" style="max-width:100%;max-height:350px;justify-self:center"></canvas><div class="help" id="boldHelp">تُزال خلفية الورق والإضاءة غير المتساوية محلياً. النتيجة حبر أسود بخلفية شفافة.</div></div>
+  <div class="dialog-foot"><button id="cancelBold">إلغاء</button><button class="primary" id="useExtracted">استخدام الإمضاء</button></div>
+</dialog>
+<script>
+"use strict";
+const $=id=>document.getElementById(id),canvas=$("canvas"),ctx=canvas.getContext("2d"),pages=[];
+const translations={
+  ar:{
+    brand:"نهلة سكانر للكمبيوتر",subtitle:"ماسح مستندات · يعمل دون إنترنت",language:"English",languageTitle:"Switch to English",
+    import:"+ إضافة صور من الجهاز",scan:"+ استخراج إمضاء من صورة",draw:"+ رسم إمضاء بالماوس",saveSignature:"حفظ الإمضاء",
+    pages:"الصفحات",addPhotos:"إضافة صور",auto:"تحديد تلقائي للحواف",reset:"الصورة كاملة",apply:"تطبيق القص والتالي",editCrop:"تعديل القص",rotate:"تدوير 90°",
+    shapeLabel:"نوع الشكل",outline:"مربع تحديد أسود",whiteout:"مربع مسح أبيض (تغطية)",oval:"دائرة / بيضاوي",arrow:"سهم / خط",addShape:"+ إضافة شكل / مربع",
+    delete:"حذف العنصر",locked:"✓ قفل التعديل (تم)",size:"حجم العنصر",minus:"تصغير",plus:"تكبير",stroke:"سُمك الخط",boldness:"سُمك الحبر",
+    library:"مكتبة الإمضاءات المحفوظة",insert:"إدراج الإمضاء",pdfName:"اسم ملف الـ PDF",export:"حفظ كملف PDF",clear:"مسح الكل / ملف جديد",
+    empty:"اسحب الصور وأفلتها هنا أو اضغط لإضافة صور من الجهاز.<br>الأنواع المدعومة: JPG وPNG وWEBP وBMP.",
+    start:"أضف صوراً للبدء",cropStage:"الخطوة ١: قص وتعديل زاوية الورقة",editStage:"الخطوة ٢: إضافة الإمضاء والأشكال · اضغط خارج العنصر لقفل التعديل",
+    up:"تحريك الصفحة للأعلى",down:"تحريك الصفحة للأسفل",rotatePage:"تدوير الصفحة 90 درجة",deletePage:"حذف الصفحة",
+    drawTitle:"رسم إمضاء بالماوس",close:"إغلاق",drawHelp:"ارسم الإمضاء بالماوس أو القلم أو لوحة اللمس. يُحفظ الإمضاء على هذا الجهاز فقط.",
+    clearDraw:"مسح",useDraw:"استخدام الإمضاء",boldTitle:"استخراج الإمضاء من الصورة",boldHelp:"تُزال خلفية الورق والإضاءة غير المتساوية محلياً. النتيجة حبر أسود بخلفية شفافة.",
+    cancel:"إلغاء",useSignature:"استخدام الإمضاء",noInk:"لم يتم العثور على حبر. جرّب صورة أوضح أو عدّل سُمك الحبر.",
+    addCropFirst:"طبّق القص قبل إضافة الإمضاءات.",drawFirst:"ارسم الإمضاء قبل استخدامه.",selectSignature:"اختر إمضاءً أولاً.",
+    importFirst:"أضف صفحة واحدة على الأقل.",pdfSaved:"تم حفظ ملف PDF بنجاح.",confirmClear:"تم حفظ ملف PDF. هل تريد مسح الصفحات وبدء ملف جديد؟",
+    confirmNew:"هل تريد مسح جميع الصفحات وبدء ملف جديد؟",exportFailed:"تعذّر تصدير ملف PDF: ",importFailed:"تعذّر فتح الصورة: ",
+    insertStage:"طبّق القص أولاً لإضافة إمضاء.",saveSpace:"تعذّر حفظ مكتبة الإمضاءات. أزِل بعض الإمضاءات المحفوظة ثم حاول مجدداً.",
+    decodeImage:"تعذّر تحميل الصورة.",
+    storageRead:"تعذّرت قراءة مكتبة الإمضاءات المحفوظة.",pdfType:"ملف PDF"
+  },
+  en:{
+    brand:"Nahla Document Scanner Desktop",subtitle:"Document Scanner · Offline Desktop",language:"العربية",languageTitle:"Switch to Arabic",
+    import:"+ Import images",scan:"+ Extract signature from photo",draw:"+ Draw signature with mouse",saveSignature:"Save signature",
+    pages:"Pages",addPhotos:"Add images",auto:"Auto edge detection",reset:"Full image",apply:"Apply crop & continue",editCrop:"Edit crop",rotate:"Rotate 90°",
+    shapeLabel:"Shape",outline:"Black outline box",whiteout:"Whiteout box (cover)",oval:"Circle / oval",arrow:"Arrow / line",addShape:"+ Add shape / box",
+    delete:"Delete item",locked:"✓ Lock editing (Done)",size:"Item size",minus:"Decrease",plus:"Increase",stroke:"Line thickness",boldness:"Ink boldness",
+    library:"Saved signature library",insert:"Insert signature",pdfName:"PDF filename",export:"Save as PDF",clear:"Clear all / New file",
+    empty:"Drag and drop images here, or click to choose files.<br>Supported: JPG, PNG, WEBP and BMP.",
+    start:"Add images to get started",cropStage:"Stage 1: Crop and straighten the page",editStage:"Stage 2: Add signatures and shapes · click outside to lock",
+    up:"Move page up",down:"Move page down",rotatePage:"Rotate page 90 degrees",deletePage:"Delete page",
+    drawTitle:"Draw a signature",close:"Close",drawHelp:"Draw using your mouse, pen or touchpad. Signatures are stored only on this computer.",
+    clearDraw:"Clear",useDraw:"Use signature",boldTitle:"Extract signature from photo",boldHelp:"Paper and uneven lighting are removed locally. Result: black ink on a transparent background.",
+    cancel:"Cancel",useSignature:"Use signature",noInk:"No ink was detected. Try a clearer image or adjust ink boldness.",
+    addCropFirst:"Apply the crop before adding signatures.",drawFirst:"Draw a signature before using it.",selectSignature:"Select a signature first.",
+    importFirst:"Import at least one page.",pdfSaved:"PDF saved successfully.",confirmClear:"PDF saved. Clear the pages and start a new document?",
+    confirmNew:"Clear all pages and start a new document?",exportFailed:"PDF export failed: ",importFailed:"Could not open image: ",
+    insertStage:"Apply the crop before adding a signature.",saveSpace:"Could not save the signature library. Remove some saved signatures and try again.",
+    decodeImage:"Could not load the image.",
+    storageRead:"Could not read the saved signature library.",pdfType:"PDF document"
+  }
+};
+let language="ar",active=-1,mode="crop",selected=null,drag=null,quad=[],signatureDraft=null,defaultStroke=3;
+function tr(key){return translations[language][key]}
+function changeLanguage(next){
+  language=next==="en"?"en":"ar";
+  document.documentElement.lang=language;
+  document.documentElement.dir=language==="ar"?"rtl":"ltr";
+  document.title=tr("brand");
+  $("languageToggle").textContent=tr("language");
+  $("languageToggle").title=tr("languageTitle");
+  $("languageToggle").setAttribute("aria-label",tr("languageTitle"));
+  $("brand").childNodes[0].textContent=tr("brand");
+  $("brandSubtitle").textContent=tr("subtitle");
+  const labels={openFiles:"import",signaturePhoto:"scan",drawSignature:"draw",saveSignature:"saveSignature",pagesLabel:"pages",addMore:"addPhotos",autoCrop:"auto",resetCrop:"reset",rotatePage:"rotate",shapeLabel:"shapeLabel",addShape:"addShape",deleteSelected:"delete",sizeLabel:"size",sizeMinus:"minus",sizePlus:"plus",strokeLabel:"stroke",lockSelected:"locked",libraryLabel:"library",exportPdf:"export",clearPages:"clear",drawTitle:"drawTitle",closeDraw:"close",drawHelp:"drawHelp",clearDraw:"clearDraw",useDraw:"useDraw",boldTitle:"boldTitle",boldLabel:"boldness",boldHelp:"boldHelp",closeBold:"close",cancelBold:"cancel",useExtracted:"useSignature"};
+  for(const [id,key] of Object.entries(labels))$(id).textContent=tr(key);
+  $("shapeType").title=tr("shapeLabel");
+  [...$("shapeType").options].forEach((option,index)=>option.textContent=tr(["outline","whiteout","oval","arrow"][index]));
+  $("empty").innerHTML=tr("empty");
+  $("pdfName").setAttribute("aria-label",tr("pdfName"));
+  $("pdfName").title=tr("pdfName");
+  $("size").setAttribute("aria-label",tr("size"));
+  $("strokeSize").setAttribute("aria-label",tr("stroke"));
+  $("boldness").setAttribute("aria-label",tr("boldness"));
+  try{localStorage.setItem("nahlaLanguage",language)}catch(error){console.warn("Could not save language preference.",error)}
+  refresh();
+}
+try{language=localStorage.getItem("nahlaLanguage")==="en"?"en":"ar"}catch(error){console.warn("Could not read language preference.",error)}
+function current(){return pages[active]}
+function clamp(n,a,b){return Math.max(a,Math.min(b,n))}
+function dataUrl(blob){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(reader.error);reader.readAsDataURL(blob)})}
+function loadImage(src){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(Error(tr("decodeImage")));im.src=src})}
+function setStatus(text){$("mode").textContent=text}
+function pageSize(page){const w=page.cropCanvas?.width||page.image.width,h=page.cropCanvas?.height||page.image.height;return {w,h}}
+function initPage(image,src,name){const inset=.05;const item={image,src,name,cropCanvas:null,marks:[]};item.quad=[[inset,inset],[1-inset,inset],[1-inset,1-inset],[inset,1-inset]];pages.push(item);active=pages.length-1;mode="crop";selected=null;refresh()}
+async function importFiles(list){const files=[...list].filter(f=>/image\/(jpeg|png|webp|bmp)/i.test(f.type)||/\.(jpe?g|png|webp|bmp)$/i.test(f.name));for(const file of files){try{const src=await dataUrl(file),image=await loadImage(src);initPage(image,src,file.name)}catch(e){alert(`${tr("importFailed")}${file.name}: ${e.message}`)}}$("files").value=""}
+$("openFiles").onclick=$("addMore").onclick=()=> $("files").click();$("files").onchange=e=>importFiles(e.target.files);
+$("languageToggle").onclick=()=>changeLanguage(language==="ar"?"en":"ar");
+$("rotatePage").onclick=()=>{if(current())rotatePage(active)};
+$("lockSelected").onclick=()=>{selected=null;refresh()};
+$("strokeSize").oninput=()=>{defaultStroke=Number($("strokeSize").value);if(selected!==null&&current().marks[selected].type!=="signature"){current().marks[selected].stroke=defaultStroke;draw()}};
+function refresh(){const has=pages.length>0;$("empty").classList.toggle("hidden",has);canvas.classList.toggle("hidden",!has);$("pageCount").textContent=pages.length;$("applyCrop").textContent=mode==="crop"?tr("apply"):tr("editCrop");$("mode").textContent=mode==="crop"?tr("cropStage"):tr("editStage");$("sizeBar").classList.toggle("show",selected!==null);$("deleteSelected").classList.toggle("hidden",selected===null);$("deleteSelected").disabled=selected===null;$("autoCrop").disabled=!has||mode!=="crop";$("resetCrop").disabled=!has||mode!=="crop";$("rotatePage").disabled=!has;$("applyCrop").disabled=!has;$("addShape").disabled=!has||mode!=="edit";$("signaturePhoto").disabled=!has||mode!=="edit";$("drawSignature").disabled=!has||mode!=="edit";$("saveSignature").disabled=selected===null||current()?.marks[selected]?.type!=="signature";$("strokeSize").disabled=selected!==null&&current()?.marks[selected]?.type==="signature";draw();drawPages();drawLibrary()}
+function fitCanvas(){const page=current();if(!page)return;const board=$("board"),size=pageSize(page),scale=Math.min((board.clientWidth-48)/size.w,(board.clientHeight-42)/size.h,1);const dpr=Math.min(devicePixelRatio||1,2);canvas.style.width=`${Math.max(1,size.w*scale)}px`;canvas.style.height=`${Math.max(1,size.h*scale)}px`;canvas.width=Math.max(1,Math.round(size.w*scale*dpr));canvas.height=Math.max(1,Math.round(size.h*scale*dpr));ctx.setTransform(canvas.width/size.w,0,0,canvas.height/size.h,0,0)}
+function draw(){if(!current())return;fitCanvas();const p=current(),size=pageSize(p);ctx.clearRect(0,0,size.w,size.h);ctx.drawImage(mode==="crop"?p.image:p.cropCanvas,0,0,size.w,size.h);if(mode==="crop")drawCrop();else{p.marks.forEach((m,i)=>drawMark(m,i===selected));}}
+function drawCrop(){const p=current(),w=p.image.width,h=p.image.height;ctx.save();ctx.fillStyle="#07251b77";ctx.beginPath();p.quad.forEach((v,i)=>{const x=v[0]*w,y=v[1]*h;i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.closePath();ctx.rect(0,h,w,-h);ctx.fill("evenodd");ctx.strokeStyle="#17cf8c";ctx.lineWidth=Math.max(2,w/900);ctx.setLineDash([8,6]);ctx.beginPath();p.quad.forEach((v,i)=>{const x=v[0]*w,y=v[1]*h;i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.closePath();ctx.stroke();ctx.setLineDash([]);for(const [x,y] of p.quad){ctx.beginPath();ctx.arc(x*w,y*h,Math.max(8,w/70),0,Math.PI*2);ctx.fillStyle="#fff";ctx.fill();ctx.strokeStyle="#087f68";ctx.lineWidth=3;ctx.stroke()}ctx.restore()}
+function drawMark(m,isSelected){
+  const x=m.x*m.wPage,y=m.y*m.hPage,w=m.w*m.wPage,h=m.h*m.hPage;
+  ctx.save();ctx.translate(x,y);ctx.rotate((m.rotation||0)*Math.PI/180);
+  ctx.strokeStyle=m.color||"#000";ctx.fillStyle=m.type==="whiteout"?"#fff":"#000";ctx.lineWidth=Math.max(2,m.stroke||3);
+  if(m.type==="outline")ctx.strokeRect(-w/2,-h/2,w,h);
+  if(m.type==="whiteout")ctx.fillRect(-w/2,-h/2,w,h);
+  if(m.type==="oval"){ctx.beginPath();ctx.ellipse(0,0,w/2,h/2,0,0,Math.PI*2);ctx.stroke()}
+  if(m.type==="arrow"){ctx.beginPath();ctx.moveTo(-w/2,0);ctx.lineTo(w/2,0);ctx.lineTo(w/2-w*.18,-h*.25);ctx.moveTo(w/2,0);ctx.lineTo(w/2-w*.18,h*.25);ctx.stroke()}
+  if(m.type==="signature")ctx.drawImage(m.image,-w/2,-h/2,w,h);
+  if(isSelected){
+    ctx.setLineDash([8,5]);ctx.strokeStyle="#00a875";ctx.lineWidth=2;ctx.strokeRect(-w/2,-h/2,w,h);ctx.setLineDash([]);
+    ctx.fillStyle="#fff";ctx.strokeStyle="#087f68";
+    for(const [hx,hy] of [[-1,-1],[0,-1],[1,-1],[1,0],[1,1],[0,1],[-1,1],[-1,0]]){
+      ctx.beginPath();ctx.arc(hx*w/2,hy*h/2,7,0,Math.PI*2);ctx.fill();ctx.stroke()
+    }
+  }
+  ctx.restore()
+}
+function drawPages(){const host=$("pageList");host.replaceChildren();const number=new Intl.NumberFormat(language==="ar"?"ar":"en");pages.forEach((p,i)=>{const card=document.createElement("div");card.className="page-card"+(i===active?" active":"");const thumb=document.createElement("canvas");thumb.width=180;thumb.height=124;const tc=thumb.getContext("2d");tc.fillStyle="#eef2f0";tc.fillRect(0,0,180,124);const im=p.cropCanvas||p.image,scale=Math.min(170/im.width,116/im.height);tc.drawImage(im,(180-im.width*scale)/2,(124-im.height*scale)/2,im.width*scale,im.height*scale);const meta=document.createElement("div");meta.className="page-meta";const title=document.createElement("span");title.textContent=`${number.format(i+1)}. ${p.name.slice(0,16)}`;const actions=document.createElement("span");actions.className="page-actions";for(const [icon,key,fn] of [["↑","up",()=>movePage(i,-1)],["↓","down",()=>movePage(i,1)],["↻","rotatePage",()=>rotatePage(i)],["×","deletePage",()=>deletePage(i)]]){const b=document.createElement("button");b.textContent=icon;b.title=tr(key);b.setAttribute("aria-label",tr(key));b.onclick=e=>{e.stopPropagation();fn()};actions.append(b)}meta.append(title,actions);card.append(thumb,meta);card.onclick=()=>{active=i;mode=p.cropCanvas?"edit":"crop";selected=null;refresh()};host.append(card)})}
+function movePage(i,d){const j=i+d;if(j<0||j>=pages.length)return;[pages[i],pages[j]]=[pages[j],pages[i]];active=j;refresh()}
+function rotatePage(i){const p=pages[i],src=p.cropCanvas||p.image,out=document.createElement("canvas");out.width=src.height;out.height=src.width;const c=out.getContext("2d");c.translate(out.width/2,out.height/2);c.rotate(Math.PI/2);c.drawImage(src,-src.width/2,-src.height/2);if(p.cropCanvas)p.cropCanvas=out;else{p.image=out;p.quad=[[.05,.05],[.95,.05],[.95,.95],[.05,.95]]}active=i;refresh()}
+function deletePage(i){pages.splice(i,1);if(active===i)active=pages.length?Math.min(i,pages.length-1):-1;else if(active>i)active--;selected=null;mode=active>=0&&current().cropCanvas?"edit":"crop";refresh()}
+$("board").addEventListener("dragover",e=>{e.preventDefault()});$("board").addEventListener("drop",e=>{e.preventDefault();importFiles(e.dataTransfer.files)});
+function solve(a,b){const n=b.length;for(let i=0;i<n;i++){let max=i;for(let j=i+1;j<n;j++)if(Math.abs(a[j][i])>Math.abs(a[max][i]))max=j;[a[i],a[max]]=[a[max],a[i]];[b[i],b[max]]=[b[max],b[i]];const div=a[i][i]||1e-10;for(let k=i;k<n;k++)a[i][k]/=div;b[i]/=div;for(let j=0;j<n;j++)if(j!==i){const f=a[j][i];for(let k=i;k<n;k++)a[j][k]-=f*a[i][k];b[j]-=f*b[i]}}return b}
+function perspective(source,q){const lengths=(a,b)=>Math.hypot((a[0]-b[0])*source.width,(a[1]-b[1])*source.height);const ow=Math.max(100,Math.round((lengths(q[0],q[1])+lengths(q[3],q[2]))/2)),oh=Math.max(100,Math.round((lengths(q[0],q[3])+lengths(q[1],q[2]))/2));const out=document.createElement("canvas");out.width=Math.min(4000,ow);out.height=Math.min(5000,oh);const pts=[[q[0][0]*source.width,q[0][1]*source.height],[q[1][0]*source.width,q[1][1]*source.height],[q[2][0]*source.width,q[2][1]*source.height],[q[3][0]*source.width,q[3][1]*source.height]],dest=[[0,0],[out.width,0],[out.width,out.height],[0,out.height]],a=[],b=[];for(let i=0;i<4;i++){const [x,y]=dest[i],[u,v]=pts[i];a.push([x,y,1,0,0,0,-u*x,-u*y]);b.push(u);a.push([0,0,0,x,y,1,-v*x,-v*y]);b.push(v)}const h=solve(a,b),map=(x,y)=>{const z=h[6]*x+h[7]*y+1;return [(h[0]*x+h[1]*y+h[2])/z,(h[3]*x+h[4]*y+h[5])/z]};const c=out.getContext("2d"),n=18;function tri(s1,s2,s3,d1,d2,d3){const den=s1[0]*(s2[1]-s3[1])+s2[0]*(s3[1]-s1[1])+s3[0]*(s1[1]-s2[1]);if(Math.abs(den)<1e-7)return;const A=(d1[0]*(s2[1]-s3[1])+d2[0]*(s3[1]-s1[1])+d3[0]*(s1[1]-s2[1]))/den,B=(d1[0]*(s3[0]-s2[0])+d2[0]*(s1[0]-s3[0])+d3[0]*(s2[0]-s1[0]))/den,C=(d1[0]*(s2[0]*s3[1]-s3[0]*s2[1])+d2[0]*(s3[0]*s1[1]-s1[0]*s3[1])+d3[0]*(s1[0]*s2[1]-s2[0]*s1[1]))/den,D=(d1[1]*(s2[1]-s3[1])+d2[1]*(s3[1]-s1[1])+d3[1]*(s1[1]-s2[1]))/den,E=(d1[1]*(s3[0]-s2[0])+d2[1]*(s1[0]-s3[0])+d3[1]*(s2[0]-s1[0]))/den,F=(d1[1]*(s2[0]*s3[1]-s3[0]*s2[1])+d2[1]*(s3[0]*s1[1]-s1[0]*s3[1])+d3[1]*(s1[0]*s2[1]-s2[0]*s1[1]))/den;c.save();c.beginPath();c.moveTo(d1[0],d1[1]);c.lineTo(d2[0],d2[1]);c.lineTo(d3[0],d3[1]);c.closePath();c.clip();c.transform(A,D,B,E,C,F);c.drawImage(source,0,0);c.restore()}for(let y=0;y<n;y++)for(let x=0;x<n;x++){const x0=x*out.width/n,x1=(x+1)*out.width/n,y0=y*out.height/n,y1=(y+1)*out.height/n,p00=map(x0,y0),p10=map(x1,y0),p11=map(x1,y1),p01=map(x0,y1);tri(p00,p10,p11,[x0,y0],[x1,y0],[x1,y1]);tri(p00,p11,p01,[x0,y0],[x1,y1],[x0,y1])}return out}
+function applyCrop(){const p=current();if(!p)return;if(mode==="crop"){p.cropCanvas=perspective(p.image,p.quad);p.marks=p.marks||[];mode="edit"}else{p.image=p.cropCanvas;p.cropCanvas=null;mode="crop";p.quad=[[.05,.05],[.95,.05],[.95,.95],[.05,.95]]}selected=null;refresh()}
+$("applyCrop").onclick=applyCrop;$("resetCrop").onclick=()=>{if(current())current().quad=[[0,0],[1,0],[1,1],[0,1]];draw()};$("autoCrop").onclick=()=>{const p=current();if(!p)return;const w=p.image.width,h=p.image.height;let minX=w,minY=h,maxX=0,maxY=0;const tmp=document.createElement("canvas");tmp.width=Math.min(180,w);tmp.height=Math.max(1,Math.round(tmp.width*h/w));const tc=tmp.getContext("2d");tc.drawImage(p.image,0,0,tmp.width,tmp.height);const data=tc.getImageData(0,0,tmp.width,tmp.height).data;let count=0;for(let y=0;y<tmp.height;y+=2)for(let x=0;x<tmp.width;x+=2){const i=(y*tmp.width+x)*4,l=.299*data[i]+.587*data[i+1]+.114*data[i+2];if(l>110){minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y);count++}}if(count>tmp.width*tmp.height*.06){const pad=.015;p.quad=[[clamp(minX/tmp.width-pad,0,.2),clamp(minY/tmp.height-pad,0,.2)],[clamp(maxX/tmp.width+pad,.8,1),clamp(minY/tmp.height-pad,0,.2)],[clamp(maxX/tmp.width+pad,.8,1),clamp(maxY/tmp.height+pad,.8,1)],[clamp(minX/tmp.width-pad,0,.2),clamp(maxY/tmp.height+pad,.8,1)]]}draw()};
+function canvasPoint(e){const r=canvas.getBoundingClientRect(),size=pageSize(current());return [(e.clientX-r.left)/r.width*size.w,(e.clientY-r.top)/r.height*size.h]}
+function markBox(m){const s=pageSize(current());return {x:m.x*s.w,y:m.y*s.h,w:m.w*s.w,h:m.h*s.h}}
+canvas.addEventListener("pointerdown",e=>{
+  if(!current())return;
+  canvas.setPointerCapture(e.pointerId);
+  const [x,y]=canvasPoint(e),p=current();
+  if(mode==="crop"){
+    const w=p.image.width,h=p.image.height;let hit=-1,dist=Infinity;
+    p.quad.forEach((v,i)=>{const d=Math.hypot(x-v[0]*w,y-v[1]*h);if(d<dist){dist=d;hit=i}});
+    if(dist<Math.max(w/25,24))drag={kind:"corner",index:hit};
+    else{let nearest=-1,dd=Infinity;p.quad.forEach((v,i)=>{const d=Math.hypot(x-v[0]*w,y-v[1]*h);if(d<dd){dd=d;nearest=i}});if(dd<Math.max(w/12,65))drag={kind:"corner",index:nearest}}
+    return
+  }
+  if(selected!==null){
+    const m=p.marks[selected],b=markBox(m);
+    if(Math.abs(x-b.x)<=b.w/2+12&&Math.abs(y-b.y)<=b.h/2+12){
+      const handles=[[-1,-1],[0,-1],[1,-1],[1,0],[1,1],[0,1],[-1,1],[-1,0]];
+      let nearest=null,nearestDistance=Infinity;
+      for(const handle of handles){const d=Math.hypot(x-(b.x+handle[0]*b.w/2),y-(b.y+handle[1]*b.h/2));if(d<nearestDistance){nearest=handle;nearestDistance=d}}
+      drag={kind:nearestDistance<18?"resize":"move",x,y,handle:nearest,mark:m,orig:{...m}};
+      return
+    }
+  }
+  const hit=p.marks.findLastIndex(m=>{const b=markBox(m);return Math.abs(x-b.x)<=b.w/2&&Math.abs(y-b.y)<=b.h/2});
+  if(hit<0){selected=null;refresh();return}
+  selected=hit;
+  const m=p.marks[hit],b=markBox(m),handles=[[-1,-1],[0,-1],[1,-1],[1,0],[1,1],[0,1],[-1,1],[-1,0]];
+  let nearest=null,nearestDistance=Infinity;
+  for(const handle of handles){const d=Math.hypot(x-(b.x+handle[0]*b.w/2),y-(b.y+handle[1]*b.h/2));if(d<nearestDistance){nearest=handle;nearestDistance=d}}
+  drag={kind:nearestDistance<18?"resize":"move",x,y,handle:nearest,mark:m,orig:{...m}};
+  $("size").value=Math.round(m.w*100);refresh()
+});
+canvas.addEventListener("pointermove",e=>{
+  if(!drag||!current())return;
+  const [x,y]=canvasPoint(e),p=current();
+  if(drag.kind==="corner")p.quad[drag.index]=[clamp(x/p.image.width,0,1),clamp(y/p.image.height,0,1)];
+  else if(drag.kind==="move"){const s=pageSize(p),dx=(x-drag.x)/s.w,dy=(y-drag.y)/s.h;drag.mark.x=clamp(drag.orig.x+dx,0,1);drag.mark.y=clamp(drag.orig.y+dy,0,1)}
+  else if(drag.kind==="resize"){
+    const s=pageSize(p),dx=2*(x-drag.x)/s.w,dy=2*(y-drag.y)/s.h,[hx,hy]=drag.handle;
+    let w=drag.orig.w+(hx===0?0:hx*dx),h=drag.orig.h+(hy===0?0:hy*dy);
+    if(drag.mark.type==="signature"){if(hy===0)h=w*drag.orig.h/drag.orig.w;else w=h*drag.orig.w/drag.orig.h}
+    drag.mark.w=clamp(w,.03,.95);drag.mark.h=clamp(h,.02,.95);$("size").value=Math.round(drag.mark.w*100)
+  }
+  draw()
+});
+canvas.addEventListener("pointerup",()=>{drag=null});canvas.addEventListener("pointercancel",()=>drag=null);
+window.addEventListener("resize",draw);$("size").oninput=()=>{if(selected==null)return;const p=current(),m=p.marks[selected],old=m.w;m.w=Number($("size").value)/100;m.h*=m.w/old;draw()};$("sizeMinus").onclick=()=>{$("size").value=clamp(Number($("size").value)-2,3,95);$("size").oninput()};$("sizePlus").onclick=()=>{$("size").value=clamp(Number($("size").value)+2,3,95);$("size").oninput()};
+$("addShape").onclick=()=>{if(!current()||mode!=="edit")return;const type=$("shapeType").value,s=pageSize(current()),m={type,x:.5,y:.5,w:.36,h:.18,wPage:s.w,hPage:s.h,stroke:defaultStroke,rotation:0};current().marks.push(m);selected=current().marks.length-1;$("size").value=36;$("strokeSize").value=defaultStroke;refresh()};
+$("deleteSelected").onclick=()=>{if(selected==null)return;current().marks.splice(selected,1);selected=null;refresh()};
+function drawLibrary(){const host=$("library");host.replaceChildren();let saved=[];try{saved=JSON.parse(localStorage.getItem("nahlaSignatures")||"[]")}catch(e){console.error(tr("storageRead"),e)}saved.forEach((src,i)=>{const b=document.createElement("button");b.className="sig-item";b.title=tr("insert");b.setAttribute("aria-label",tr("insert"));const img=document.createElement("img");img.src=src;b.append(img);b.onclick=async()=>{if(!current()||mode!=="edit")return;const image=await loadImage(src),s=pageSize(current()),m={type:"signature",image,src,x:.5,y:.72,w:.32,h:.32*image.height/image.width,wPage:s.w,hPage:s.h,stroke:2,rotation:0};current().marks.push(m);selected=current().marks.length-1;$("size").value=32;refresh()};host.append(b)})}
+function signatureFromFile(file){const r=new FileReader();r.onload=async()=>{try{const im=await loadImage(r.result),c=document.createElement("canvas");const scale=Math.min(1,1200/Math.max(im.width,im.height));c.width=Math.round(im.width*scale);c.height=Math.round(im.height*scale);c.getContext("2d").drawImage(im,0,0,c.width,c.height);signatureDraftOriginal=c;signatureDraft=c.cloneNode();signatureDraft.getContext("2d").drawImage(c,0,0);prepareSignaturePreview();$("boldDialog").showModal()}catch(e){alert(e.message)}};r.readAsDataURL(file)}
+$("signaturePhoto").onclick=()=>{const i=document.createElement("input");i.type="file";i.accept="image/*";i.onchange=()=>i.files[0]&&signatureFromFile(i.files[0]);i.click()};
+function extractSignature(source,bold){const w=source.width,h=source.height,c=source.getContext("2d"),im=c.getImageData(0,0,w,h),d=im.data,gray=new Float32Array(w*h),integral=new Float64Array((w+1)*(h+1));for(let i=0,j=0;i<d.length;i+=4,j++){gray[j]=.299*d[i]+.587*d[i+1]+.114*d[i+2]}for(let y=1;y<=h;y++){let row=0;for(let x=1;x<=w;x++){row+=gray[(y-1)*w+x-1];integral[y*(w+1)+x]=integral[(y-1)*(w+1)+x]+row}}const radius=Math.max(5,Math.round(Math.min(w,h)*.025)),threshold=14+(100-bold)*.38,ramp=28+(100-bold)*.45;for(let y=0;y<h;y++)for(let x=0;x<w;x++){const x0=Math.max(0,x-radius),x1=Math.min(w,x+radius+1),y0=Math.max(0,y-radius),y1=Math.min(h,y+radius+1),sum=integral[y1*(w+1)+x1]-integral[y0*(w+1)+x1]-integral[y1*(w+1)+x0]+integral[y0*(w+1)+x0],bg=sum/((x1-x0)*(y1-y0)),dark=Math.max(0,bg-gray[y*w+x]),v=clamp((dark-threshold)/ramp,0,1),a=Math.round(v*v*(3-2*v)*255),i=(y*w+x)*4;d[i]=d[i+1]=d[i+2]=0;d[i+3]=a}c.putImageData(im,0,0);return source}
+function prepareSignaturePreview(){const c=signatureDraft;extractSignature(c,Number($("boldness").value));const out=$("signaturePreview");out.width=c.width;out.height=c.height;out.getContext("2d").clearRect(0,0,out.width,out.height);out.getContext("2d").drawImage(c,0,0)}
+let signatureDraftOriginal=null;
+function storeSignature(src){let list=[];try{list=JSON.parse(localStorage.getItem("nahlaSignatures")||"[]")}catch(e){throw Error(tr("storageRead"))}list.unshift(src);try{localStorage.setItem("nahlaSignatures",JSON.stringify(list.slice(0,24)))}catch(e){throw Error(tr("saveSpace"))}drawLibrary()}
+function trimmedSignature(c){const cc=c.getContext("2d"),im=cc.getImageData(0,0,c.width,c.height),d=im.data;let l=c.width,t=c.height,r=-1,b=-1;for(let y=0;y<c.height;y++)for(let x=0;x<c.width;x++)if(d[(y*c.width+x)*4+3]>16){l=Math.min(l,x);r=Math.max(r,x);t=Math.min(t,y);b=Math.max(b,y)}if(r<l)return null;const pad=5,box=document.createElement("canvas");box.width=r-l+1+pad*2;box.height=b-t+1+pad*2;box.getContext("2d").drawImage(c,l,t,r-l+1,b-t+1,pad,pad,r-l+1,b-t+1);return box}
+function usePhotoSignature(){const c=trimmedSignature(signatureDraft);if(!c){alert(tr("noInk"));return}const src=c.toDataURL("image/png");try{storeSignature(src);signatureDraftOriginal=null;signatureDraft=null;addSignature(src);$("boldDialog").close()}catch(e){alert(e.message)}}
+function addSignature(src){if(!current()||mode!=="edit"){alert(tr("addCropFirst"));return}loadImage(src).then(image=>{const s=pageSize(current());current().marks.push({type:"signature",image,src,x:.5,y:.72,w:.32,h:.32*image.height/image.width,wPage:s.w,hPage:s.h,stroke:2,rotation:0});selected=current().marks.length-1;$("size").value=32;refresh()})}
+$("signaturePhoto").addEventListener("click",()=>signatureDraftOriginal=null);$("boldness").oninput=()=>{if(signatureDraftOriginal){signatureDraft=document.createElement("canvas");signatureDraft.width=signatureDraftOriginal.width;signatureDraft.height=signatureDraftOriginal.height;signatureDraft.getContext("2d").drawImage(signatureDraftOriginal,0,0);prepareSignaturePreview()}};$("useExtracted").onclick=usePhotoSignature;$("closeBold").onclick=$("cancelBold").onclick=()=>{$("boldDialog").close();signatureDraft=null;signatureDraftOriginal=null};
+const pad=$("drawPad"),pc=pad.getContext("2d");pc.lineWidth=6;pc.lineCap="round";pc.lineJoin="round";pc.strokeStyle="#000";let drawing=false;function padPoint(e){const r=pad.getBoundingClientRect();return [(e.clientX-r.left)/r.width*pad.width,(e.clientY-r.top)/r.height*pad.height]}pad.onpointerdown=e=>{pad.setPointerCapture(e.pointerId);drawing=true;const [x,y]=padPoint(e);pc.beginPath();pc.moveTo(x,y)};pad.onpointermove=e=>{if(!drawing)return;const [x,y]=padPoint(e);pc.lineTo(x,y);pc.stroke()};pad.onpointerup=()=>drawing=false;$("drawSignature").onclick=()=>{if(!current()||mode!=="edit"){alert(tr("insertStage"));return}$("drawDialog").showModal()};$("closeDraw").onclick=()=>$("drawDialog").close();$("clearDraw").onclick=()=>pc.clearRect(0,0,pad.width,pad.height);$("useDraw").onclick=()=>{const trimmed=trimmedSignature(pad);if(!trimmed){alert(tr("drawFirst"));return}try{const src=trimmed.toDataURL("image/png");storeSignature(src);signatureDraft=trimmed;addSignature(src);$("drawDialog").close()}catch(e){alert(e.message)}};
+$("saveSignature").onclick=()=>{if(selected===null||current()?.marks[selected]?.type!=="signature"){alert(tr("selectSignature"));return}try{storeSignature(current().marks[selected].src)}catch(e){alert(e.message)}};
+async function exportPdf(){if(!pages.length)return alert(tr("importFirst"));const name=$("pdfName").value.trim().replace(/[\\/:*?"<>|]/g,"-")||"Nahla-Document";try{const pdf=makePdf(pages,name),blob=new Blob([pdf],{type:"application/pdf"});if(window.showSaveFilePicker){const handle=await window.showSaveFilePicker({suggestedName:name+".pdf",types:[{description:tr("pdfType"),accept:{"application/pdf":[".pdf"]}}]});const writable=await handle.createWritable();await writable.write(blob);await writable.close()}else{const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name+".pdf";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),3000)}setStatus(tr("pdfSaved"));if(confirm(tr("confirmClear")))clearPages()}catch(e){if(e.name!=="AbortError")alert(tr("exportFailed")+e.message)}}
+function finalPage(p){const src=p.cropCanvas||p.image,out=document.createElement("canvas");const scale=Math.min(1,1650/Math.max(src.width,src.height));out.width=Math.max(1,Math.round(src.width*scale));out.height=Math.max(1,Math.round(src.height*scale));const c=out.getContext("2d");c.drawImage(src,0,0,out.width,out.height);for(const m of p.marks||[]){const x=m.x*out.width,y=m.y*out.height,w=m.w*out.width,h=m.h*out.height;c.save();c.translate(x,y);c.rotate((m.rotation||0)*Math.PI/180);c.strokeStyle=m.color||"#000";c.fillStyle=m.type==="whiteout"?"#fff":"#000";c.lineWidth=Math.max(2,m.stroke||3);if(m.type==="outline")c.strokeRect(-w/2,-h/2,w,h);else if(m.type==="whiteout")c.fillRect(-w/2,-h/2,w,h);else if(m.type==="oval"){c.beginPath();c.ellipse(0,0,w/2,h/2,0,0,Math.PI*2);c.stroke()}else if(m.type==="arrow"){c.beginPath();c.moveTo(-w/2,0);c.lineTo(w/2,0);c.lineTo(w/2-w*.18,-h*.25);c.moveTo(w/2,0);c.lineTo(w/2-w*.18,h*.25);c.stroke()}else if(m.type==="signature")c.drawImage(m.image,-w/2,-h/2,w,h);c.restore()}return out}
+function makePdf(doc,name){const encoder=new TextEncoder(),chunks=[],offsets=[0];let length=0;const add=x=>{const b=typeof x==="string"?encoder.encode(x):x;chunks.push(b);length+=b.length},obj=(n,body)=>{offsets[n]=length;add(`${n} 0 obj\n`);if(Array.isArray(body)){for(const part of body)add(part)}else add(body);add("\nendobj\n")};add("%PDF-1.4\n%Nah\n");const pageObjs=[];doc.forEach((p,i)=>{const image=finalPage(p),jpegData=image.toDataURL("image/jpeg",.82),raw=atob(jpegData.split(",")[1]),bytes=new Uint8Array(raw.length);for(let j=0;j<raw.length;j++)bytes[j]=raw.charCodeAt(j);const imId=4+i*3,pageId=5+i*3,contentId=6+i*3,wPt=(image.width/180*72).toFixed(2),hPt=(image.height/180*72).toFixed(2),stream=`q\n${wPt} 0 0 ${hPt} 0 0 cm\n/Im0 Do\nQ\n`;obj(imId,[`<< /Type /XObject /Subtype /Image /Width ${image.width} /Height ${image.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${bytes.length} >>\nstream\n`,bytes,"\nendstream"]);obj(contentId,`<< /Length ${encoder.encode(stream).length} >>\nstream\n${stream}endstream`);obj(pageId,`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${wPt} ${hPt}] /Resources << /XObject << /Im0 ${imId} 0 R >> >> /Contents ${contentId} 0 R >>`);pageObjs.push(`${pageId} 0 R`)});obj(1,"<< /Type /Catalog /Pages 2 0 R >>");obj(2,`<< /Type /Pages /Count ${doc.length} /Kids [${pageObjs.join(" ")}] >>`);obj(3,`<< /Producer (Nahla Desktop) /Title (${name.replace(/[()\\]/g,"")}) >>`);const xref=length;add(`xref\n0 ${offsets.length}\n0000000000 65535 f \n`);for(let i=1;i<offsets.length;i++)add(`${String(offsets[i]).padStart(10,"0")} 00000 n \n`);add(`trailer\n<< /Size ${offsets.length} /Root 1 0 R /Info 3 0 R >>\nstartxref\n${xref}\n%%EOF`);return new Blob(chunks,{type:"application/pdf"})}
+$("exportPdf").onclick=exportPdf;function clearPages(){pages.splice(0);active=-1;mode="crop";selected=null;refresh()}$("clearPages").onclick=()=>{if(pages.length&&confirm(tr("confirmNew")))clearPages()};
+window.addEventListener("keydown",e=>{if(e.key==="Escape"&&selected!=null){selected=null;draw()}if((e.key==="Delete"||e.key==="Backspace")&&selected!=null){e.preventDefault();$("deleteSelected").click()}});
+changeLanguage(language);
+</script>
+</body>
+</html>

@@ -10,5 +10,9 @@
     {
         "merged": "C:\\Users\\user\\.gradle\\daemon\\9.1.0\\com.nahla.docscanner.app-mergeReleaseResources-30:\\layout\\item_page.xml",
         "source": "C:\\Users\\user\\.gradle\\daemon\\9.1.0\\com.nahla.docscanner.app-main-33:\\layout\\item_page.xml"
+    },
+    {
+        "merged": "com.nahla.docscanner.app-mergeReleaseResources-30:/layout/activity_edit.xml",
+        "source": "com.nahla.docscanner.app-main-33:/layout/activity_edit.xml"
     }
 ]

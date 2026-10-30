@@ -71,6 +71,53 @@
         </FrameLayout>
 
         <LinearLayout
+            android:id="@+id/annotationSizeControls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorSurface"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/annotationSizeDecrease"
+                android:layout_width="42dp"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="−" />
+
+            <SeekBar
+                android:id="@+id/annotationSizeSlider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="100"
+                android:progress="40" />
+
+            <Button
+                android:id="@+id/annotationSizeIncrease"
+                android:layout_width="42dp"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="+" />
+
+            <Button
+                android:id="@+id/annotationDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/delete" />
+
+            <Button
+                android:id="@+id/annotationDone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/done" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/cropActions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

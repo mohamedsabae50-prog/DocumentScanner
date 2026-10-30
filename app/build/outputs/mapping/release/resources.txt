@@ -4,41 +4,41 @@ Marking style:Widget_AppCompat_AutoCompleteTextView:2131755761 reachable: refere
 Marking layout:mtrl_auto_complete_simple_item:2131427402 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:mtrl_exposed_dropdown_menu_popup_elevation:2131100323 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:listPopupWindowStyle:2130903706 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:view_tree_lifecycle_owner:2131231188 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:view_tree_lifecycle_owner:2131231194 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:radioButtonStyle:2130903896 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking color:abc_decor_view_status_guard_light:2131034118 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking color:abc_decor_view_status_guard:2131034117 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:design_text_input_start_icon:2131427373 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:mtrl_min_touch_target_size:2131100354 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:textinput_prefix_text:2131231159 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:textinput_prefix_text:2131231165 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:material_input_text_to_prefix_suffix_padding:2131100224 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:m3_carousel_small_item_size_min:2131099890 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:m3_carousel_small_item_size_max:2131099889 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:save_overlay_view:2131231074 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:save_overlay_view:2131231080 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:tooltip_precise_anchor_threshold:2131100447 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:tooltip_precise_anchor_extra_offset:2131100446 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:tooltip_y_offset_touch:2131100450 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:tooltip_y_offset_non_touch:2131100449 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:abc_action_menu_layout:2131427331 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:abc_action_menu_item_layout:2131427330 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:cancel_button:2131230814 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:confirm_button:2131230832 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:cancel_button:2131230820 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:confirm_button:2131230838 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:nestedScrollable:2130903841 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:tag_unhandled_key_listeners:2131231142 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:month_title:2131230979 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:tag_accessibility_heading:2131231133 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:month_grid:2131230974 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_unhandled_key_listeners:2131231148 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:month_title:2131230985 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_accessibility_heading:2131231139 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:month_grid:2131230980 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking style:Widget_Material3_SideSheet:2131755978 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:side_sheet_accessibility_pane_title:2131689695 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:design_navigation_menu_item:2131427371 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:design_navigation_icon_size:2131099767 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:design_menu_item_text:2131230857 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:design_menu_item_text:2131230863 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:colorControlHighlight:2130903265 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:design_menu_item_action_area_stub:2131230856 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:design_menu_item_action_area_stub:2131230862 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking drawable:navigation_empty_icon:2131165408 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:actionBarWidgetTheme:2130903050 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking bool:abc_action_bar_embed_tabs:2130968576 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:decor_content_parent:2131230850 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:decor_content_parent:2131230856 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking id:action_bar:2131230768 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking id:action_context_bar:2131230776 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking id:action_bar_container:2131230770 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -47,15 +47,15 @@ Marking style:Widget_MaterialComponents_Toolbar:2131756129 reachable: referenced
 Marking attr:toolbarStyle:2130904140 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:materialClockStyle:2130903751 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:material_radial_view_group:2131427389 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:split_action_bar:2131231111 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:split_action_bar:2131231117 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:bottomSheetStyle:2130903158 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking style:Widget_Design_BottomSheet_Modal:2131755828 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:bottomsheet_action_expand_halfway:2131689507 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:design_bottom_sheet_peek_height_min:2131099757 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:tag_on_apply_window_listener:2131231135 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:tag_window_insets_animation_callback:2131231143 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_on_apply_window_listener:2131231141 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_window_insets_animation_callback:2131231149 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:mtrl_calendar_day:2131427403 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:visible_removing_fragment_view_tag:2131231193 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:visible_removing_fragment_view_tag:2131231199 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:motionDurationShort3:2130903809 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:motionEasingLinearInterpolator:2130903818 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:motionEasingEmphasizedInterpolator:2130903816 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -70,10 +70,10 @@ Marking attr:imageButtonStyle:2130903571 reachable: referenced from in_memory_r8
 Marking dimen:abc_config_prefDialogWidth:2131099671 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:abc_cascading_menu_item_layout:2131427339 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:abc_popup_menu_header_item_layout:2131427346 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:material_value_index:2131230969 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:tag_accessibility_actions:2131231131 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:material_value_index:2131230975 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_accessibility_actions:2131231137 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking id:accessibility_action_clickable_span:2131230735 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:tag_accessibility_clickable_spans:2131231132 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_accessibility_clickable_spans:2131231138 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:checkedTextViewStyle:2130903212 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking drawable:abc_cab_background_top_material:2131165240 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking drawable:abc_cab_background_internal_bg:2131165239 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -95,12 +95,12 @@ Marking attr:recyclerViewStyle:2130903901 reachable: referenced from in_memory_r
 Marking dimen:fastscroll_default_thickness:2131099792 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:fastscroll_minimum_range:2131099794 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:fastscroll_margin:2131099793 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:is_pooling_container_tag:2131230931 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:pooling_container_listener_holder_tag:2131231054 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:text_input_error_icon:2131231153 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:text_input_end_icon:2131231152 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:is_pooling_container_tag:2131230937 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:pooling_container_listener_holder_tag:2131231060 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:text_input_error_icon:2131231159 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:text_input_end_icon:2131231158 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:error_icon_content_description:2131689537 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:textinput_suffix_text:2131231160 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:textinput_suffix_text:2131231166 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:design_text_input_end_icon:2131427372 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:nestedScrollViewStyle:2130903840 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:state_indeterminate:2130903981 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -111,9 +111,9 @@ Marking drawable:mtrl_checkbox_button_checked_unchecked:2131165373 reachable: re
 Marking attr:isMaterial3Theme:2130903584 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking drawable:mtrl_checkbox_button:2131165372 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking drawable:mtrl_checkbox_button_icon:2131165374 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:checked:2131230823 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:unchecked:2131231182 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:indeterminate:2131230927 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:checked:2131230829 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:unchecked:2131231188 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:indeterminate:2131230933 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:mtrl_checkbox_state_description_checked:2131689609 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:mtrl_checkbox_state_description_unchecked:2131689611 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:mtrl_checkbox_state_description_indeterminate:2131689610 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -121,7 +121,7 @@ Marking attr:colorError:2130903267 reachable: referenced from in_memory_r8_base_
 Marking attr:colorSurface:2130903305 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:colorOnSurface:2130903283 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking style:Theme_AppCompat_Empty:2131755544 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:view_tree_view_model_store_owner:2131231191 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:view_tree_view_model_store_owner:2131231197 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking drawable:abc_textfield_default_mtrl_alpha:2131165298 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking drawable:abc_ab_share_pack_mtrl_alpha:2131165224 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking drawable:abc_textfield_search_default_mtrl_alpha:2131165300 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -168,43 +168,39 @@ Marking color:abc_tint_spinner:2131034135 reachable: referenced from in_memory_r
 Marking attr:motionEasingStandardDecelerateInterpolator:2130903821 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:motionDurationMedium2:2130903804 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:motionDurationShort2:2130903808 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:snackbar_text:2131231105 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:snackbar_action:2131231104 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:snackbar_text:2131231111 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:snackbar_action:2131231110 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:design_snackbar_padding_vertical_2lines:2131099783 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:design_snackbar_padding_vertical:2131099782 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:editTextStyle:2130903425 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking style:Widget_Design_TextInputEditText:2131755835 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:alertDialogTheme:2130903082 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:parentPanel:2131231043 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:topPanel:2131231169 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:contentPanel:2131230835 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:buttonPanel:2131230813 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:customPanel:2131230845 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:custom:2131230844 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:scrollView:2131231081 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:parentPanel:2131231049 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:topPanel:2131231175 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:contentPanel:2131230841 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:buttonPanel:2131230819 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:customPanel:2131230851 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:custom:2131230850 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:scrollView:2131231087 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:alertDialogCenterButtons:2130903080 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:title_template:2131231165 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:title_template:2131231171 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking id:alertTitle:2131230789 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:textSpacerNoButtons:2131231148 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:titleDividerNoCustom:2131231164 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:textSpacerNoTitle:2131231149 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:scrollIndicatorUp:2131231080 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:scrollIndicatorDown:2131231079 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:textSpacerNoButtons:2131231154 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:titleDividerNoCustom:2131231170 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:textSpacerNoTitle:2131231155 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:scrollIndicatorUp:2131231086 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:scrollIndicatorDown:2131231085 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:seekBarStyle:2130903919 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:transition_pause_alpha:2131231177 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:transition_pause_alpha:2131231183 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:exposed_dropdown_menu_content_description:2131689551 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking drawable:mtrl_dropdown_arrow:2131165383 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:androidx_startup:2131689500 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:report_drawn:2131231063 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:report_drawn:2131231069 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:alertDialogStyle:2130903081 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:alpha:2130903084 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:lStar:2130903619 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking style:Widget_MaterialComponents_CompoundButton_RadioButton:2131756054 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:textAppearanceLineHeightEnabled:2130904066 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking layout:item_page:2131427376 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:delete:2131230852 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:pageNumber:2131231040 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:thumb:2131231161 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:mtrl_picker_toggle_to_year_selection:2131689651 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:mtrl_picker_toggle_to_day_selection:2131689649 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:dropDownListViewStyle:2130903419 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -213,7 +209,7 @@ Marking attr:toolbarNavigationButtonStyle:2130904139 reachable: referenced from 
 Marking attr:actionOverflowButtonStyle:2130903071 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:mtrl_chip_close_icon_content_description:2131689612 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:abc_tooltip:2131427355 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:message:2131230971 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:message:2131230977 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking style:Animation_AppCompat_Tooltip:2131755012 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking drawable:design_password_eye:2131165319 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:password_toggle_content_description:2131689668 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -224,23 +220,23 @@ Marking dimen:mtrl_calendar_day_width:2131100283 reachable: referenced from in_m
 Marking dimen:mtrl_calendar_month_horizontal_padding:2131100297 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:mtrl_picker_fullscreen:2131427418 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:mtrl_picker_dialog:2131427417 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:mtrl_calendar_frame:2131230984 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:mtrl_calendar_main_pane:2131230985 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:mtrl_picker_header_selection_text:2131230996 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:mtrl_picker_header_toggle:2131230998 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:mtrl_picker_title_text:2131231002 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:mtrl_calendar_frame:2131230990 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:mtrl_calendar_main_pane:2131230991 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:mtrl_picker_header_selection_text:2131231002 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:mtrl_picker_header_toggle:2131231004 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:mtrl_picker_title_text:2131231008 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking drawable:material_ic_calendar_black_24dp:2131165362 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking drawable:material_ic_edit_black_24dp:2131165364 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:mtrl_picker_toggle_to_calendar_input_mode:2131689648 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:mtrl_picker_toggle_to_text_input_mode:2131689650 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:fullscreen_header:2131230907 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:fullscreen_header:2131230913 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:mtrl_calendar_dialog_background_inset:2131100285 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking style:Widget_MaterialComponents_Chip_Action:2131756043 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:chipStyle:2130903231 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:abc_popup_menu_item_layout:2131427347 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:view_tree_on_back_pressed_dispatcher_owner:2131231189 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:view_tree_saved_state_registry_owner:2131231190 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:tag_unhandled_key_event_manager:2131231141 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:view_tree_on_back_pressed_dispatcher_owner:2131231195 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:view_tree_saved_state_registry_owner:2131231196 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_unhandled_key_event_manager:2131231147 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:spinnerStyle:2130903964 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:elevationOverlayEnabled:2130903429 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:elevationOverlayColor:2130903428 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -249,10 +245,10 @@ Marking attr:bottomSheetDialogTheme:2130903156 reachable: referenced from in_mem
 Marking style:Theme_Design_Light_BottomSheetDialog:2131755556 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:enableEdgeToEdge:2130903431 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:design_bottom_sheet_dialog:2131427360 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:coordinator:2131230837 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:design_bottom_sheet:2131230854 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:touch_outside:2131231170 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:special_effects_controller_view_tag:2131231109 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:coordinator:2131230843 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:design_bottom_sheet:2131230860 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:touch_outside:2131231176 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:special_effects_controller_view_tag:2131231115 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:mtrl_calendar_day_of_week:2131427404 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:mtrl_picker_day_of_week_column_header:2131689625 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:abc_list_menu_item_layout:2131427344 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -269,11 +265,11 @@ Marking string:abc_menu_function_shortcut_label:2131689484 reachable: referenced
 Marking string:abc_menu_space_shortcut_label:2131689487 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:abc_menu_enter_shortcut_label:2131689483 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:abc_menu_delete_shortcut_label:2131689482 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:title:2131231163 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:shortcut:2131231096 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:submenuarrow:2131231128 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:group_divider:2131230913 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:content:2131230834 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:title:2131231169 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:shortcut:2131231102 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:submenuarrow:2131231134 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:group_divider:2131230919 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:content:2131230840 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:abc_list_menu_item_radio:2131427345 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:abc_list_menu_item_checkbox:2131427342 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:abc_list_menu_item_icon:2131427343 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -286,8 +282,8 @@ Marking dimen:material_helper_text_default_padding_top:2131100221 reachable: ref
 Marking dimen:material_helper_text_font_1_3_padding_top:2131100223 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:materialButtonStyle:2130903729 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking style:Widget_MaterialComponents_Button:2131756029 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:tag_screen_reader_focusable:2131231138 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:tag_state_description:2131231139 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_screen_reader_focusable:2131231144 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_state_description:2131231145 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:abc_cascading_menus_min_smallest_width:2131099670 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:abc_action_bar_up_description:2131689473 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking style:Widget_MaterialComponents_MaterialButtonToggleGroup:2131756061 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -324,9 +320,9 @@ Marking id:accessibility_custom_action_28:2131230757 reachable: referenced from 
 Marking id:accessibility_custom_action_29:2131230758 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking id:accessibility_custom_action_30:2131230760 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking id:accessibility_custom_action_31:2131230761 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:tag_accessibility_pane_title:2131231134 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:tag_on_receive_content_mime_types:2131231137 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:tag_on_receive_content_listener:2131231136 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_accessibility_pane_title:2131231140 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_on_receive_content_mime_types:2131231143 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:tag_on_receive_content_listener:2131231142 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:textInputStyle:2130904090 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking style:Widget_Design_TextInputLayout:2131755836 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:mtrl_textinput_box_label_cutout_padding:2131100414 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -350,11 +346,11 @@ Marking color:design_error:2131034193 reachable: referenced from in_memory_r8_ba
 Marking string:character_counter_overflowed_content_description:2131689519 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:character_counter_content_description:2131689518 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:character_counter_pattern:2131689520 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:textinput_counter:2131231155 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:textinput_counter:2131231161 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:mtrl_textinput_counter_margin_start:2131100417 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:textinput_error:2131231156 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:textinput_helper_text:2131231157 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:textinput_placeholder:2131231158 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:textinput_error:2131231162 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:textinput_helper_text:2131231163 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:textinput_placeholder:2131231164 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:error_signature_camera:2131689544 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:error_no_camera:2131689538 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:shapes_title:2131689694 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -380,19 +376,25 @@ Marking string:error_generic:2131689536 reachable: referenced from in_memory_r8_
 Marking layout:activity_edit:2131427356 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking id:addShape:2131230788 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking id:annotationContainer:2131230795 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:backToCrop:2131230803 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:busyLabel:2131230811 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:busyOverlay:2131230812 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:cropActions:2131230841 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:cropContent:2131230842 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:cropOverlay:2131230843 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:editorActions:2131230879 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:next:2131231013 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:photo:2131231051 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:rotate90:2131231069 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:savePage:2131231072 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:sign:2131231100 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:stageTitle:2131231118 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:annotationDelete:2131230796 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:annotationDone:2131230797 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:annotationSizeControls:2131230798 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:annotationSizeDecrease:2131230799 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:annotationSizeIncrease:2131230800 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:annotationSizeSlider:2131230801 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:backToCrop:2131230809 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:busyLabel:2131230817 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:busyOverlay:2131230818 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:cropActions:2131230847 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:cropContent:2131230848 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:cropOverlay:2131230849 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:editorActions:2131230885 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:next:2131231019 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:photo:2131231057 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:rotate90:2131231075 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:savePage:2131231078 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:sign:2131231106 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:stageTitle:2131231124 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:crop_stage:2131689525 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:saving:2131689682 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:extract_signature_photo:2131689552 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -412,30 +414,34 @@ Marking string:signature_clear:2131689698 reachable: referenced from in_memory_r
 Marking string:signature_empty:2131689700 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:signature_take_photo:2131689712 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:signature_pick_gallery:2131689707 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:fragment_container_view_tag:2131230906 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:fragment_container_view_tag:2131230912 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking style:Widget_MaterialComponents_TimePicker_Clock:2131756121 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:material_clock_hand_stroke_width:2131100201 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:material_clock_hand_center_dot_radius:2131100199 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:spacer:2131231108 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:spacer:2131231114 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:material_timepicker:2131427393 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:material_clock_face:2131230952 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:material_clock_period_toggle:2131230957 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:material_minute_tv:2131230962 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:material_hour_tv:2131230959 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:material_clock_hand:2131230953 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:selection_type:2131231095 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:material_clock_face:2131230958 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:material_clock_period_toggle:2131230963 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:material_minute_tv:2131230968 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:material_hour_tv:2131230965 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:material_clock_hand:2131230959 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:selection_type:2131231101 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:mtrl_snackbar_background_corner_radius:2131100401 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking style:Theme_AppCompat_Light:2131755545 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:material_time_chip:2131427391 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:material_time_input:2131427392 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:material_label:2131230960 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:material_label:2131230966 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:mtrl_calendar_day_height:2131100279 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:mtrl_calendar_month_labeled:2131427408 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:dialogTheme:2130903392 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:transition_current_scene:2131231174 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:transition_current_scene:2131231180 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:colorPrimary:2130903292 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:colorPrimaryVariant:2130903299 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:isMaterialTheme:2130903585 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking layout:item_page:2131427376 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:delete:2131230858 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:pageNumber:2131231046 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:thumb:2131231167 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:mtrl_calendar_vertical:2131427411 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:mtrl_calendar_horizontal:2131427406 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:mtrl_calendar_navigation_height:2131100300 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -444,14 +450,14 @@ Marking dimen:mtrl_calendar_navigation_bottom_padding:2131100299 reachable: refe
 Marking dimen:mtrl_calendar_days_of_week_height:2131100284 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:mtrl_calendar_month_vertical_padding:2131100298 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:mtrl_calendar_bottom_padding:2131100276 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:mtrl_calendar_days_of_week:2131230983 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:mtrl_calendar_months:2131230986 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:mtrl_calendar_days_of_week:2131230989 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:mtrl_calendar_months:2131230992 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking integer:mtrl_calendar_year_selector_span:2131296306 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:mtrl_calendar_year_selector_frame:2131230989 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:month_navigation_fragment_toggle:2131230976 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:month_navigation_previous:2131230978 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:month_navigation_next:2131230977 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:mtrl_calendar_day_selector_frame:2131230982 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:mtrl_calendar_year_selector_frame:2131230995 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:month_navigation_fragment_toggle:2131230982 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:month_navigation_previous:2131230984 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:month_navigation_next:2131230983 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:mtrl_calendar_day_selector_frame:2131230988 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:theme:2130904093 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking attr:materialThemeOverlay:2130903765 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:m3_back_progress_side_container_max_scale_x_distance_shrink:2131099825 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -462,12 +468,12 @@ Marking string:error_session_cleanup:2131689542 reachable: referenced from in_me
 Marking string:error_export:2131689535 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:importing:2131689557 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:activity_main:2131427357 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:emptyState:2131230882 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:exportPdf:2131230891 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:pageList:2131231039 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:pickImage:2131231052 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:takePhoto:2131231144 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:toolbar:2131231167 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:emptyState:2131230888 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:exportPdf:2131230897 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:pageList:2131231045 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:pickImage:2131231058 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:takePhoto:2131231150 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:toolbar:2131231173 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:error_no_viewer:2131689540 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:error_no_gallery:2131689539 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking string:error_permission:2131689541 reachable: referenced from in_memory_r8_base_classes0.dex
@@ -522,11 +528,11 @@ Marking layout:material_clockface_view:2131427388 reachable: referenced from in_
 Marking dimen:material_clock_hand_padding:2131100200 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking color:material_timepicker_clockface:2131034810 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking layout:material_clockface_textview:2131427387 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:material_clock_level:2131230954 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:material_clock_level:2131230960 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:material_time_picker_minimum_screen_height:2131100228 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:material_time_picker_minimum_screen_width:2131100229 reachable: referenced from in_memory_r8_base_classes0.dex
 Marking dimen:material_clock_size:2131100207 reachable: referenced from in_memory_r8_base_classes0.dex
-Marking id:circle_center:2131230825 reachable: referenced from in_memory_r8_base_classes0.dex
+Marking id:circle_center:2131230831 reachable: referenced from in_memory_r8_base_classes0.dex
 android.content.res.Resources#getIdentifier present: true
 Web content present: false
 Referenced Strings:
@@ -1205,8 +1211,8 @@ androidx.lifecycle.internal.SavedStat...
 Exif
 position
 SSHORT
-p0
 LambdaLast
+p0
 ComplexColorCompat
 keys
 SubjectDistance
@@ -1426,8 +1432,8 @@ InteroperabilityIFDPointer
 android.permission.ACCESS_COARSE_LOCA...
 GPSVersionID
 MultiAutoCompleteTextView
-TOGGLE_BUTTON_TAG
 pageFile
+TOGGLE_BUTTON_TAG
 POSITIVE_BUTTON_CONTENT_DESCRIPTION_R...
 android.permission.POST_NOTIFICATIONS
 NewSubfileType
@@ -1483,33 +1489,33 @@ Xmp
 BackgroundColor
 Marking attr:checkedIconVisible:2130903210 used because it matches string pool constant checkedIconVisible
 Marking attr:chipIconEnabled:2130903218 used because it matches string pool constant chipIconEnabled
-Marking id:standard:2131231119 used because it matches string pool constant standard
-Marking id:decelerate:2131230848 used because it matches string pool constant decelerate
-Marking id:decelerateAndComplete:2131230849 used because it matches string pool constant decelerate
+Marking id:standard:2131231125 used because it matches string pool constant standard
+Marking id:decelerate:2131230854 used because it matches string pool constant decelerate
+Marking id:decelerateAndComplete:2131230855 used because it matches string pool constant decelerate
 Marking attr:drawableLeftCompat:2130903408 used because it matches string pool constant drawableLeft
 Marking attr:addElevationShadow:2130903078 used because it matches string pool constant add
 Marking id:add:2131230787 used because it matches string pool constant add
 Marking id:addShape:2131230788 used because it matches string pool constant add
 Marking string:add_shape:2131689499 used because it matches string pool constant add
-Marking id:unchecked:2131231182 used because it matches string pool constant unchecked
+Marking id:unchecked:2131231188 used because it matches string pool constant unchecked
 Marking attr:maxLines:2130903775 used because it matches string pool constant maxLines
 Marking attr:layoutDescription:2130903627 used because it matches string pool constant layoutDescription
 Marking attr:strokeWidth:2130903989 used because it matches string pool constant strokeWidth
 Marking attr:labelBehavior:2130903620 used because it matches string pool constant label
 Marking attr:labelStyle:2130903621 used because it matches string pool constant label
 Marking attr:labelVisibilityMode:2130903622 used because it matches string pool constant label
-Marking id:labeled:2131230936 used because it matches string pool constant label
+Marking id:labeled:2131230942 used because it matches string pool constant label
 Marking attr:indeterminateAnimationType:2130903572 used because it matches string pool constant indeterminate
 Marking attr:indeterminateProgressStyle:2130903573 used because it matches string pool constant indeterminate
 Marking drawable:indeterminate_static:2131165349 used because it matches string pool constant indeterminate
-Marking id:indeterminate:2131230927 used because it matches string pool constant indeterminate
+Marking id:indeterminate:2131230933 used because it matches string pool constant indeterminate
 Marking attr:drawableEndCompat:2130903407 used because it matches string pool constant drawableEnd
 Marking anim:linear_indeterminate_line1_head_interpolator:2130771997 used because it matches string pool constant linear
 Marking anim:linear_indeterminate_line1_tail_interpolator:2130771998 used because it matches string pool constant linear
 Marking anim:linear_indeterminate_line2_head_interpolator:2130771999 used because it matches string pool constant linear
 Marking anim:linear_indeterminate_line2_tail_interpolator:2130772000 used because it matches string pool constant linear
 Marking attr:linearProgressIndicatorStyle:2130903698 used because it matches string pool constant linear
-Marking id:linear:2131230943 used because it matches string pool constant linear
+Marking id:linear:2131230949 used because it matches string pool constant linear
 Marking attr:drawableRightCompat:2130903409 used because it matches string pool constant drawableRight
 Marking style:Theme_MaterialComponents:2131755590 used because it matches string pool constant Theme.MaterialComponents
 Marking style:Theme_MaterialComponents_BottomSheetDialog:2131755591 used because it matches string pool constant Theme.MaterialComponents
@@ -1582,7 +1588,7 @@ Marking style:Theme_AppCompat_Light_Dialog_MinWidth:2131755549 used because it m
 Marking style:Theme_AppCompat_Light_DialogWhenLarge:2131755550 used because it matches string pool constant Theme.AppCompat
 Marking style:Theme_AppCompat_Light_NoActionBar:2131755551 used because it matches string pool constant Theme.AppCompat
 Marking style:Theme_AppCompat_NoActionBar:2131755552 used because it matches string pool constant Theme.AppCompat
-Marking id:rectangles:2131231062 used because it matches string pool constant rect
+Marking id:rectangles:2131231068 used because it matches string pool constant rect
 Marking id:accessibility_action_clickable_span:2131230735 used because it matches string pool constant accessibility
 Marking id:accessibility_custom_action_0:2131230736 used because it matches string pool constant accessibility
 Marking id:accessibility_custom_action_1:2131230737 used because it matches string pool constant accessibility
@@ -1633,14 +1639,14 @@ Marking attr:animate_relativeTo:2130903089 used because it matches string pool c
 Marking attr:animationMode:2130903090 used because it matches string pool constant anim
 Marking id:animateToEnd:2131230793 used because it matches string pool constant anim
 Marking id:animateToStart:2131230794 used because it matches string pool constant anim
-Marking id:dimensions:2131230860 used because it matches string pool constant dimen
+Marking id:dimensions:2131230866 used because it matches string pool constant dimen
 Marking attr:closeIconVisible:2130903246 used because it matches string pool constant closeIconVisible
 Marking attr:viewInflaterClass:2130904179 used because it matches string pool constant view
-Marking id:view_offset_helper:2131231187 used because it matches string pool constant view
-Marking id:view_tree_lifecycle_owner:2131231188 used because it matches string pool constant view
-Marking id:view_tree_on_back_pressed_dispatcher_owner:2131231189 used because it matches string pool constant view
-Marking id:view_tree_saved_state_registry_owner:2131231190 used because it matches string pool constant view
-Marking id:view_tree_view_model_store_owner:2131231191 used because it matches string pool constant view
+Marking id:view_offset_helper:2131231193 used because it matches string pool constant view
+Marking id:view_tree_lifecycle_owner:2131231194 used because it matches string pool constant view
+Marking id:view_tree_on_back_pressed_dispatcher_owner:2131231195 used because it matches string pool constant view
+Marking id:view_tree_saved_state_registry_owner:2131231196 used because it matches string pool constant view
+Marking id:view_tree_view_model_store_owner:2131231197 used because it matches string pool constant view
 Marking color:androidx_core_ripple_material_light:2131034139 used because it matches string pool constant android
 Marking color:androidx_core_secondary_text_default_material_light:2131034140 used because it matches string pool constant android
 Marking string:androidx_startup:2131689500 used because it matches string pool constant android
@@ -1652,7 +1658,7 @@ Marking id:SHOW_PATH:2131230729 used because it matches string pool constant SHO
 Marking id:SHOW_PROGRESS:2131230730 used because it matches string pool constant SHOW
 Marking attr:targetId:2130904038 used because it matches string pool constant target
 Marking attr:shortcutMatchRequired:2130903935 used because it matches string pool constant short
-Marking id:shortcut:2131231096 used because it matches string pool constant short
+Marking id:shortcut:2131231102 used because it matches string pool constant short
 Marking attr:windowActionBar:2130904188 used because it matches string pool constant window
 Marking attr:windowActionBarOverlay:2130904189 used because it matches string pool constant window
 Marking attr:windowActionModeOverlay:2130904190 used because it matches string pool constant window
@@ -1699,7 +1705,7 @@ Marking attr:itemVerticalPadding:2130903615 used because it matches string pool 
 Marking dimen:item_touch_helper_max_drag_scroll_per_frame:2131099802 used because it matches string pool constant item
 Marking dimen:item_touch_helper_swipe_escape_max_velocity:2131099803 used because it matches string pool constant item
 Marking dimen:item_touch_helper_swipe_escape_velocity:2131099804 used because it matches string pool constant item
-Marking id:item_touch_helper_previous_elevation:2131230933 used because it matches string pool constant item
+Marking id:item_touch_helper_previous_elevation:2131230939 used because it matches string pool constant item
 Marking layout:item_page:2131427376 used because it matches string pool constant item
 Marking string:item_view_role_description:2131689558 used because it matches string pool constant item
 Marking string:character_counter_content_description:2131689518 used because it matches string pool constant char
@@ -1734,9 +1740,9 @@ Marking drawable:notification_oversize_large_icon_bg:2131165417 used because it 
 Marking drawable:notification_template_icon_bg:2131165418 used because it matches string pool constant notification
 Marking drawable:notification_template_icon_low_bg:2131165419 used because it matches string pool constant notification
 Marking drawable:notification_tile_bg:2131165420 used because it matches string pool constant notification
-Marking id:notification_background:2131231017 used because it matches string pool constant notification
-Marking id:notification_main_column:2131231018 used because it matches string pool constant notification
-Marking id:notification_main_column_container:2131231019 used because it matches string pool constant notification
+Marking id:notification_background:2131231023 used because it matches string pool constant notification
+Marking id:notification_main_column:2131231024 used because it matches string pool constant notification
+Marking id:notification_main_column_container:2131231025 used because it matches string pool constant notification
 Marking layout:notification_action:2131427428 used because it matches string pool constant notification
 Marking layout:notification_action_tombstone:2131427429 used because it matches string pool constant notification
 Marking layout:notification_template_custom_big:2131427430 used because it matches string pool constant notification
@@ -1754,14 +1760,14 @@ Marking attr:checkedIconTint:2130903209 used because it matches string pool cons
 Marking attr:checkedIconVisible:2130903210 used because it matches string pool constant checked
 Marking attr:checkedState:2130903211 used because it matches string pool constant checked
 Marking attr:checkedTextViewStyle:2130903212 used because it matches string pool constant checked
-Marking id:checked:2131230823 used because it matches string pool constant checked
-Marking id:group_divider:2131230913 used because it matches string pool constant group
-Marking id:groups:2131230914 used because it matches string pool constant group
+Marking id:checked:2131230829 used because it matches string pool constant checked
+Marking id:group_divider:2131230919 used because it matches string pool constant group
+Marking id:groups:2131230920 used because it matches string pool constant group
 Marking attr:values:2130904176 used because it matches string pool constant values
 Marking attr:pathMotionArc:2130903870 used because it matches string pool constant path
 Marking attr:path_percent:2130903871 used because it matches string pool constant path
-Marking id:path:2131231047 used because it matches string pool constant path
-Marking id:pathRelative:2131231048 used because it matches string pool constant path
+Marking id:path:2131231053 used because it matches string pool constant path
+Marking id:pathRelative:2131231054 used because it matches string pool constant path
 Marking string:path_password_eye:2131689669 used because it matches string pool constant path
 Marking string:path_password_eye_mask_strike_through:2131689670 used because it matches string pool constant path
 Marking string:path_password_eye_mask_visible:2131689671 used because it matches string pool constant path
@@ -1769,7 +1775,7 @@ Marking string:path_password_strike_through:2131689672 used because it matches s
 Marking attr:arcMode:2130903093 used because it matches string pool constant ar
 Marking attr:arrowHeadLength:2130903094 used because it matches string pool constant ar
 Marking attr:arrowShaftLength:2130903095 used because it matches string pool constant ar
-Marking id:arc:2131230796 used because it matches string pool constant ar
+Marking id:arc:2131230802 used because it matches string pool constant ar
 Marking attr:font:2130903521 used because it matches string pool constant font
 Marking attr:fontFamily:2130903522 used because it matches string pool constant font
 Marking attr:fontProviderAuthority:2130903523 used because it matches string pool constant font
@@ -1794,10 +1800,10 @@ Marking attr:endIconTintMode:2130903439 used because it matches string pool cons
 Marking attr:enforceMaterialTheme:2130903440 used because it matches string pool constant en
 Marking attr:enforceTextAppearance:2130903441 used because it matches string pool constant en
 Marking attr:ensureMinTouchTargetSize:2130903442 used because it matches string pool constant en
-Marking id:end:2131230883 used because it matches string pool constant en
-Marking id:endToStart:2131230884 used because it matches string pool constant en
-Marking id:enterAlways:2131230885 used because it matches string pool constant en
-Marking id:enterAlwaysCollapsed:2131230886 used because it matches string pool constant en
+Marking id:end:2131230889 used because it matches string pool constant en
+Marking id:endToStart:2131230890 used because it matches string pool constant en
+Marking id:enterAlways:2131230891 used because it matches string pool constant en
+Marking id:enterAlwaysCollapsed:2131230892 used because it matches string pool constant en
 Marking attr:content:2130903327 used because it matches string pool constant content
 Marking attr:contentDescription:2130903328 used because it matches string pool constant content
 Marking attr:contentInsetEnd:2130903329 used because it matches string pool constant content
@@ -1814,15 +1820,15 @@ Marking attr:contentPaddingRight:2130903339 used because it matches string pool 
 Marking attr:contentPaddingStart:2130903340 used because it matches string pool constant content
 Marking attr:contentPaddingTop:2130903341 used because it matches string pool constant content
 Marking attr:contentScrim:2130903342 used because it matches string pool constant content
-Marking id:content:2131230834 used because it matches string pool constant content
-Marking id:contentPanel:2131230835 used because it matches string pool constant content
+Marking id:content:2131230840 used because it matches string pool constant content
+Marking id:contentPanel:2131230841 used because it matches string pool constant content
 Marking attr:alpha:2130903084 used because it matches string pool constant alpha
 Marking attr:alphabeticModifiers:2130903085 used because it matches string pool constant alpha
 Marking attr:selectorSize:2130903923 used because it matches string pool constant selector
 Marking attr:closeIconEnabled:2130903241 used because it matches string pool constant closeIconEnabled
 Marking id:TOP_END:2131230732 used because it matches string pool constant TOP
 Marking id:TOP_START:2131230733 used because it matches string pool constant TOP
-Marking id:skipCollapsed:2131231102 used because it matches string pool constant skip
+Marking id:skipCollapsed:2131231108 used because it matches string pool constant skip
 Marking xml:file_paths:2131886080 used because it matches string pool constant file
 Marking attr:menu:2130903780 used because it matches string pool constant menu
 Marking attr:menuAlignmentMode:2130903781 used because it matches string pool constant menu
@@ -1845,11 +1851,11 @@ Marking color:background_floating_material_dark:2131034143 used because it match
 Marking color:background_floating_material_light:2131034144 used because it matches string pool constant background
 Marking color:background_material_dark:2131034145 used because it matches string pool constant background
 Marking color:background_material_light:2131034146 used because it matches string pool constant background
-Marking id:position:2131231055 used because it matches string pool constant position
+Marking id:position:2131231061 used because it matches string pool constant position
 Marking attr:srcCompat:2130903966 used because it matches string pool constant src
-Marking id:src_atop:2131231115 used because it matches string pool constant src
-Marking id:src_in:2131231116 used because it matches string pool constant src
-Marking id:src_over:2131231117 used because it matches string pool constant src
+Marking id:src_atop:2131231121 used because it matches string pool constant src
+Marking id:src_in:2131231122 used because it matches string pool constant src
+Marking id:src_over:2131231123 used because it matches string pool constant src
 Marking attr:drawableBottomCompat:2130903406 used because it matches string pool constant drawable
 Marking attr:drawableEndCompat:2130903407 used because it matches string pool constant drawable
 Marking attr:drawableLeftCompat:2130903408 used because it matches string pool constant drawable
@@ -1866,7 +1872,7 @@ Marking layout:activity_main:2131427357 used because it matches string pool cons
 Marking attr:keyPositionType:2130903616 used because it matches string pool constant key
 Marking attr:keyboardIcon:2130903617 used because it matches string pool constant key
 Marking attr:keylines:2130903618 used because it matches string pool constant key
-Marking id:up:2131231185 used because it matches string pool constant up
+Marking id:up:2131231191 used because it matches string pool constant up
 Marking anim:fragment_fast_out_extra_slow_in:2130771996 used because it matches string pool constant fragment_
 Marking animator:fragment_close_enter:2130837507 used because it matches string pool constant fragment_
 Marking animator:fragment_close_exit:2130837508 used because it matches string pool constant fragment_
@@ -1874,7 +1880,7 @@ Marking animator:fragment_fade_enter:2130837509 used because it matches string p
 Marking animator:fragment_fade_exit:2130837510 used because it matches string pool constant fragment_
 Marking animator:fragment_open_enter:2130837511 used because it matches string pool constant fragment_
 Marking animator:fragment_open_exit:2130837512 used because it matches string pool constant fragment_
-Marking id:fragment_container_view_tag:2131230906 used because it matches string pool constant fragment_
+Marking id:fragment_container_view_tag:2131230912 used because it matches string pool constant fragment_
 Marking attr:warmth:2130904182 used because it matches string pool constant wa
 Marking attr:waveDecay:2130904183 used because it matches string pool constant wa
 Marking attr:waveOffset:2130904184 used because it matches string pool constant wa
@@ -2068,9 +2074,9 @@ Marking attr:layout_optimizationLevel:2130903688 used because it matches string 
 Marking attr:layout_scrollEffect:2130903689 used because it matches string pool constant layout
 Marking attr:layout_scrollFlags:2130903690 used because it matches string pool constant layout
 Marking attr:layout_scrollInterpolator:2130903691 used because it matches string pool constant layout
-Marking id:layout:2131230937 used because it matches string pool constant layout
+Marking id:layout:2131230943 used because it matches string pool constant layout
 Marking string:scan_signature_photo:2131689683 used because it matches string pool constant scan_
-Marking id:none:2131231015 used because it matches string pool constant none
+Marking id:none:2131231021 used because it matches string pool constant none
 Marking string:signature_clear:2131689698 used because it matches string pool constant signature
 Marking string:signature_done_save:2131689699 used because it matches string pool constant signature
 Marking string:signature_empty:2131689700 used because it matches string pool constant signature
@@ -2102,7 +2108,7 @@ Marking attr:floatingActionButtonSmallTertiaryStyle:2130903498 used because it m
 Marking attr:floatingActionButtonStyle:2130903499 used because it matches string pool constant float
 Marking attr:floatingActionButtonSurfaceStyle:2130903500 used because it matches string pool constant float
 Marking attr:floatingActionButtonTertiaryStyle:2130903501 used because it matches string pool constant float
-Marking id:floating:2131230904 used because it matches string pool constant float
+Marking id:floating:2131230910 used because it matches string pool constant float
 Marking anim:fragment_fast_out_extra_slow_in:2130771996 used because it matches string pool constant fragment
 Marking animator:fragment_close_enter:2130837507 used because it matches string pool constant fragment
 Marking animator:fragment_close_exit:2130837508 used because it matches string pool constant fragment
@@ -2110,7 +2116,7 @@ Marking animator:fragment_fade_enter:2130837509 used because it matches string p
 Marking animator:fragment_fade_exit:2130837510 used because it matches string pool constant fragment
 Marking animator:fragment_open_enter:2130837511 used because it matches string pool constant fragment
 Marking animator:fragment_open_exit:2130837512 used because it matches string pool constant fragment
-Marking id:fragment_container_view_tag:2131230906 used because it matches string pool constant fragment
+Marking id:fragment_container_view_tag:2131230912 used because it matches string pool constant fragment
 @com.nahla.docscanner:anim/abc_fade_in : reachable=false
 @com.nahla.docscanner:anim/abc_fade_out : reachable=false
 @com.nahla.docscanner:anim/abc_grow_fade_in_from_bottom : reachable=false
@@ -6695,6 +6701,12 @@ Marking id:fragment_container_view_tag:2131230906 used because it matches string
 @com.nahla.docscanner:id/animateToEnd : reachable=true
 @com.nahla.docscanner:id/animateToStart : reachable=true
 @com.nahla.docscanner:id/annotationContainer : reachable=true
+@com.nahla.docscanner:id/annotationDelete : reachable=true
+@com.nahla.docscanner:id/annotationDone : reachable=true
+@com.nahla.docscanner:id/annotationSizeControls : reachable=true
+@com.nahla.docscanner:id/annotationSizeDecrease : reachable=true
+@com.nahla.docscanner:id/annotationSizeIncrease : reachable=true
+@com.nahla.docscanner:id/annotationSizeSlider : reachable=true
 @com.nahla.docscanner:id/arc : reachable=true
 @com.nahla.docscanner:id/asConfigured : reachable=false
 @com.nahla.docscanner:id/async : reachable=false
@@ -7341,6 +7353,8 @@ Marking id:fragment_container_view_tag:2131230906 used because it matches string
     @com.nahla.docscanner:string/crop_stage
     @com.nahla.docscanner:string/back_to_crop
     @com.nahla.docscanner:string/photo_preview
+    @com.nahla.docscanner:string/delete
+    @com.nahla.docscanner:string/done
     @com.nahla.docscanner:string/rotate_90
     @com.nahla.docscanner:string/next_stage
     @com.nahla.docscanner:string/sign_document
@@ -17356,150 +17370,156 @@ The root reachable resources are:
  id:animateToEnd:2131230793
  id:animateToStart:2131230794
  id:annotationContainer:2131230795
- id:arc:2131230796
- id:backToCrop:2131230803
- id:busyLabel:2131230811
- id:busyOverlay:2131230812
- id:buttonPanel:2131230813
- id:cancel_button:2131230814
- id:checked:2131230823
- id:circle_center:2131230825
- id:confirm_button:2131230832
- id:content:2131230834
- id:contentPanel:2131230835
- id:coordinator:2131230837
- id:cropActions:2131230841
- id:cropContent:2131230842
- id:cropOverlay:2131230843
- id:custom:2131230844
- id:customPanel:2131230845
- id:decelerate:2131230848
- id:decelerateAndComplete:2131230849
- id:decor_content_parent:2131230850
- id:delete:2131230852
- id:design_bottom_sheet:2131230854
- id:design_menu_item_action_area_stub:2131230856
- id:design_menu_item_text:2131230857
- id:dimensions:2131230860
- id:editorActions:2131230879
- id:emptyState:2131230882
- id:end:2131230883
- id:endToStart:2131230884
- id:enterAlways:2131230885
- id:enterAlwaysCollapsed:2131230886
- id:exportPdf:2131230891
- id:floating:2131230904
- id:fragment_container_view_tag:2131230906
- id:fullscreen_header:2131230907
- id:group_divider:2131230913
- id:groups:2131230914
- id:indeterminate:2131230927
- id:is_pooling_container_tag:2131230931
- id:item_touch_helper_previous_elevation:2131230933
- id:labeled:2131230936
- id:layout:2131230937
- id:linear:2131230943
- id:material_clock_display:2131230950
- id:material_clock_face:2131230952
- id:material_clock_hand:2131230953
- id:material_clock_level:2131230954
- id:material_clock_period_toggle:2131230957
- id:material_hour_tv:2131230959
- id:material_label:2131230960
- id:material_minute_tv:2131230962
- id:material_value_index:2131230969
- id:message:2131230971
- id:month_grid:2131230974
- id:month_navigation_fragment_toggle:2131230976
- id:month_navigation_next:2131230977
- id:month_navigation_previous:2131230978
- id:month_title:2131230979
- id:mtrl_calendar_day_selector_frame:2131230982
- id:mtrl_calendar_days_of_week:2131230983
- id:mtrl_calendar_frame:2131230984
- id:mtrl_calendar_main_pane:2131230985
- id:mtrl_calendar_months:2131230986
- id:mtrl_calendar_year_selector_frame:2131230989
- id:mtrl_picker_header_selection_text:2131230996
- id:mtrl_picker_header_toggle:2131230998
- id:mtrl_picker_title_text:2131231002
- id:next:2131231013
- id:none:2131231015
- id:notification_background:2131231017
- id:notification_main_column:2131231018
- id:notification_main_column_container:2131231019
- id:pageList:2131231039
- id:pageNumber:2131231040
- id:parentPanel:2131231043
- id:path:2131231047
- id:pathRelative:2131231048
- id:photo:2131231051
- id:pickImage:2131231052
- id:pooling_container_listener_holder_tag:2131231054
- id:position:2131231055
- id:rectangles:2131231062
- id:report_drawn:2131231063
- id:rotate90:2131231069
- id:savePage:2131231072
- id:save_overlay_view:2131231074
- id:scrollIndicatorDown:2131231079
- id:scrollIndicatorUp:2131231080
- id:scrollView:2131231081
- id:selection_type:2131231095
- id:shortcut:2131231096
- id:sign:2131231100
- id:skipCollapsed:2131231102
- id:snackbar_action:2131231104
- id:snackbar_text:2131231105
- id:spacer:2131231108
- id:special_effects_controller_view_tag:2131231109
- id:split_action_bar:2131231111
- id:src_atop:2131231115
- id:src_in:2131231116
- id:src_over:2131231117
- id:stageTitle:2131231118
- id:standard:2131231119
- id:submenuarrow:2131231128
- id:tag_accessibility_actions:2131231131
- id:tag_accessibility_clickable_spans:2131231132
- id:tag_accessibility_heading:2131231133
- id:tag_accessibility_pane_title:2131231134
- id:tag_on_apply_window_listener:2131231135
- id:tag_on_receive_content_listener:2131231136
- id:tag_on_receive_content_mime_types:2131231137
- id:tag_screen_reader_focusable:2131231138
- id:tag_state_description:2131231139
- id:tag_unhandled_key_event_manager:2131231141
- id:tag_unhandled_key_listeners:2131231142
- id:tag_window_insets_animation_callback:2131231143
- id:takePhoto:2131231144
- id:textSpacerNoButtons:2131231148
- id:textSpacerNoTitle:2131231149
- id:text_input_end_icon:2131231152
- id:text_input_error_icon:2131231153
- id:textinput_counter:2131231155
- id:textinput_error:2131231156
- id:textinput_helper_text:2131231157
- id:textinput_placeholder:2131231158
- id:textinput_prefix_text:2131231159
- id:textinput_suffix_text:2131231160
- id:thumb:2131231161
- id:title:2131231163
- id:titleDividerNoCustom:2131231164
- id:title_template:2131231165
- id:toolbar:2131231167
- id:topPanel:2131231169
- id:touch_outside:2131231170
- id:transition_current_scene:2131231174
- id:transition_pause_alpha:2131231177
- id:unchecked:2131231182
- id:up:2131231185
- id:view_offset_helper:2131231187
- id:view_tree_lifecycle_owner:2131231188
- id:view_tree_on_back_pressed_dispatcher_owner:2131231189
- id:view_tree_saved_state_registry_owner:2131231190
- id:view_tree_view_model_store_owner:2131231191
- id:visible_removing_fragment_view_tag:2131231193
+ id:annotationDelete:2131230796
+ id:annotationDone:2131230797
+ id:annotationSizeControls:2131230798
+ id:annotationSizeDecrease:2131230799
+ id:annotationSizeIncrease:2131230800
+ id:annotationSizeSlider:2131230801
+ id:arc:2131230802
+ id:backToCrop:2131230809
+ id:busyLabel:2131230817
+ id:busyOverlay:2131230818
+ id:buttonPanel:2131230819
+ id:cancel_button:2131230820
+ id:checked:2131230829
+ id:circle_center:2131230831
+ id:confirm_button:2131230838
+ id:content:2131230840
+ id:contentPanel:2131230841
+ id:coordinator:2131230843
+ id:cropActions:2131230847
+ id:cropContent:2131230848
+ id:cropOverlay:2131230849
+ id:custom:2131230850
+ id:customPanel:2131230851
+ id:decelerate:2131230854
+ id:decelerateAndComplete:2131230855
+ id:decor_content_parent:2131230856
+ id:delete:2131230858
+ id:design_bottom_sheet:2131230860
+ id:design_menu_item_action_area_stub:2131230862
+ id:design_menu_item_text:2131230863
+ id:dimensions:2131230866
+ id:editorActions:2131230885
+ id:emptyState:2131230888
+ id:end:2131230889
+ id:endToStart:2131230890
+ id:enterAlways:2131230891
+ id:enterAlwaysCollapsed:2131230892
+ id:exportPdf:2131230897
+ id:floating:2131230910
+ id:fragment_container_view_tag:2131230912
+ id:fullscreen_header:2131230913
+ id:group_divider:2131230919
+ id:groups:2131230920
+ id:indeterminate:2131230933
+ id:is_pooling_container_tag:2131230937
+ id:item_touch_helper_previous_elevation:2131230939
+ id:labeled:2131230942
+ id:layout:2131230943
+ id:linear:2131230949
+ id:material_clock_display:2131230956
+ id:material_clock_face:2131230958
+ id:material_clock_hand:2131230959
+ id:material_clock_level:2131230960
+ id:material_clock_period_toggle:2131230963
+ id:material_hour_tv:2131230965
+ id:material_label:2131230966
+ id:material_minute_tv:2131230968
+ id:material_value_index:2131230975
+ id:message:2131230977
+ id:month_grid:2131230980
+ id:month_navigation_fragment_toggle:2131230982
+ id:month_navigation_next:2131230983
+ id:month_navigation_previous:2131230984
+ id:month_title:2131230985
+ id:mtrl_calendar_day_selector_frame:2131230988
+ id:mtrl_calendar_days_of_week:2131230989
+ id:mtrl_calendar_frame:2131230990
+ id:mtrl_calendar_main_pane:2131230991
+ id:mtrl_calendar_months:2131230992
+ id:mtrl_calendar_year_selector_frame:2131230995
+ id:mtrl_picker_header_selection_text:2131231002
+ id:mtrl_picker_header_toggle:2131231004
+ id:mtrl_picker_title_text:2131231008
+ id:next:2131231019
+ id:none:2131231021
+ id:notification_background:2131231023
+ id:notification_main_column:2131231024
+ id:notification_main_column_container:2131231025
+ id:pageList:2131231045
+ id:pageNumber:2131231046
+ id:parentPanel:2131231049
+ id:path:2131231053
+ id:pathRelative:2131231054
+ id:photo:2131231057
+ id:pickImage:2131231058
+ id:pooling_container_listener_holder_tag:2131231060
+ id:position:2131231061
+ id:rectangles:2131231068
+ id:report_drawn:2131231069
+ id:rotate90:2131231075
+ id:savePage:2131231078
+ id:save_overlay_view:2131231080
+ id:scrollIndicatorDown:2131231085
+ id:scrollIndicatorUp:2131231086
+ id:scrollView:2131231087
+ id:selection_type:2131231101
+ id:shortcut:2131231102
+ id:sign:2131231106
+ id:skipCollapsed:2131231108
+ id:snackbar_action:2131231110
+ id:snackbar_text:2131231111
+ id:spacer:2131231114
+ id:special_effects_controller_view_tag:2131231115
+ id:split_action_bar:2131231117
+ id:src_atop:2131231121
+ id:src_in:2131231122
+ id:src_over:2131231123
+ id:stageTitle:2131231124
+ id:standard:2131231125
+ id:submenuarrow:2131231134
+ id:tag_accessibility_actions:2131231137
+ id:tag_accessibility_clickable_spans:2131231138
+ id:tag_accessibility_heading:2131231139
+ id:tag_accessibility_pane_title:2131231140
+ id:tag_on_apply_window_listener:2131231141
+ id:tag_on_receive_content_listener:2131231142
+ id:tag_on_receive_content_mime_types:2131231143
+ id:tag_screen_reader_focusable:2131231144
+ id:tag_state_description:2131231145
+ id:tag_unhandled_key_event_manager:2131231147
+ id:tag_unhandled_key_listeners:2131231148
+ id:tag_window_insets_animation_callback:2131231149
+ id:takePhoto:2131231150
+ id:textSpacerNoButtons:2131231154
+ id:textSpacerNoTitle:2131231155
+ id:text_input_end_icon:2131231158
+ id:text_input_error_icon:2131231159
+ id:textinput_counter:2131231161
+ id:textinput_error:2131231162
+ id:textinput_helper_text:2131231163
+ id:textinput_placeholder:2131231164
+ id:textinput_prefix_text:2131231165
+ id:textinput_suffix_text:2131231166
+ id:thumb:2131231167
+ id:title:2131231169
+ id:titleDividerNoCustom:2131231170
+ id:title_template:2131231171
+ id:toolbar:2131231173
+ id:topPanel:2131231175
+ id:touch_outside:2131231176
+ id:transition_current_scene:2131231180
+ id:transition_pause_alpha:2131231183
+ id:unchecked:2131231188
+ id:up:2131231191
+ id:view_offset_helper:2131231193
+ id:view_tree_lifecycle_owner:2131231194
+ id:view_tree_on_back_pressed_dispatcher_owner:2131231195
+ id:view_tree_saved_state_registry_owner:2131231196
+ id:view_tree_view_model_store_owner:2131231197
+ id:visible_removing_fragment_view_tag:2131231199
  integer:mtrl_calendar_year_selector_span:2131296306
  layout:abc_action_bar_title_item:2131427328
  layout:abc_action_menu_item_layout:2131427330
@@ -18365,265 +18385,265 @@ Unused resources are:
  id:aligned:2131230790
  id:all:2131230791
  id:always:2131230792
- id:asConfigured:2131230797
- id:async:2131230798
- id:auto:2131230799
- id:autoComplete:2131230800
- id:autoCompleteToEnd:2131230801
- id:autoCompleteToStart:2131230802
- id:barrier:2131230804
- id:baseline:2131230805
- id:beginOnFirstDraw:2131230806
- id:beginning:2131230807
- id:blocking:2131230808
- id:bottom:2131230809
- id:bounce:2131230810
- id:center:2131230815
- id:centerCrop:2131230816
- id:centerInside:2131230817
- id:center_horizontal:2131230818
- id:center_vertical:2131230819
- id:chain:2131230820
- id:chains:2131230821
- id:checkbox:2131230822
- id:chronometer:2131230824
- id:clear_text:2131230826
- id:clip_horizontal:2131230827
- id:clip_vertical:2131230828
- id:clockwise:2131230829
- id:collapseActionView:2131230830
- id:compress:2131230831
- id:container:2131230833
- id:contiguous:2131230836
- id:cos:2131230838
- id:counterclockwise:2131230839
- id:cradle:2131230840
- id:cut:2131230846
- id:date_picker_actions:2131230847
- id:default_activity_button:2131230851
- id:deltaRelative:2131230853
- id:design_menu_item_action_area:2131230855
- id:design_navigation_view:2131230858
- id:dialog_button:2131230859
- id:direct:2131230861
- id:disableHome:2131230862
- id:disablePostScroll:2131230863
- id:disableScroll:2131230864
- id:disjoint:2131230865
- id:dragDown:2131230866
- id:dragEnd:2131230867
- id:dragLeft:2131230868
- id:dragRight:2131230869
- id:dragStart:2131230870
- id:dragUp:2131230871
- id:dropdown_menu:2131230872
- id:easeIn:2131230873
- id:easeInOut:2131230874
- id:easeOut:2131230875
- id:edge:2131230876
- id:edit_query:2131230877
- id:edit_text_id:2131230878
- id:elastic:2131230880
- id:embed:2131230881
- id:escape:2131230887
- id:exitUntilCollapsed:2131230888
- id:expand_activities_button:2131230889
- id:expanded_menu:2131230890
- id:fade:2131230892
- id:fill:2131230893
- id:fill_horizontal:2131230894
- id:fill_vertical:2131230895
- id:filled:2131230896
- id:fitCenter:2131230897
- id:fitEnd:2131230898
- id:fitStart:2131230899
- id:fitToContents:2131230900
- id:fitXY:2131230901
- id:fixed:2131230902
- id:flip:2131230903
- id:forever:2131230905
- id:ghost_view:2131230908
- id:ghost_view_holder:2131230909
- id:gone:2131230910
- id:graph:2131230911
- id:graph_wrap:2131230912
- id:header_title:2131230915
- id:hide_ime_id:2131230916
- id:hideable:2131230917
- id:home:2131230918
- id:homeAsUp:2131230919
- id:honorRequest:2131230920
- id:icon:2131230921
- id:icon_group:2131230922
- id:ifRoom:2131230923
- id:ignore:2131230924
- id:ignoreRequest:2131230925
- id:image:2131230926
- id:info:2131230928
- id:invisible:2131230929
- id:inward:2131230930
- id:italic:2131230932
- id:jumpToEnd:2131230934
- id:jumpToStart:2131230935
- id:left:2131230938
- id:leftToRight:2131230939
- id:legacy:2131230940
- id:line1:2131230941
- id:line3:2131230942
- id:listMode:2131230944
- id:list_item:2131230945
- id:m3_side_sheet:2131230946
- id:marquee:2131230947
- id:masked:2131230948
- id:match_parent:2131230949
- id:material_clock_display_and_toggle:2131230951
- id:material_clock_period_am_button:2131230955
- id:material_clock_period_pm_button:2131230956
- id:material_hour_text_input:2131230958
- id:material_minute_text_input:2131230961
- id:material_textinput_timepicker:2131230963
- id:material_timepicker_cancel_button:2131230964
- id:material_timepicker_container:2131230965
- id:material_timepicker_mode_button:2131230966
- id:material_timepicker_ok_button:2131230967
- id:material_timepicker_view:2131230968
- id:matrix:2131230970
- id:middle:2131230972
- id:mini:2131230973
- id:month_navigation_bar:2131230975
- id:motion_base:2131230980
- id:mtrl_anchor_parent:2131230981
- id:mtrl_calendar_selection_frame:2131230987
- id:mtrl_calendar_text_input_frame:2131230988
- id:mtrl_card_checked_layer_id:2131230990
- id:mtrl_child_content_container:2131230991
- id:mtrl_internal_children_alpha_tag:2131230992
- id:mtrl_motion_snapshot_view:2131230993
- id:mtrl_picker_fullscreen:2131230994
- id:mtrl_picker_header:2131230995
- id:mtrl_picker_header_title_and_selection:2131230997
- id:mtrl_picker_text_input_date:2131230999
- id:mtrl_picker_text_input_range_end:2131231000
- id:mtrl_picker_text_input_range_start:2131231001
- id:mtrl_view_tag_bottom_padding:2131231003
- id:multiply:2131231004
- id:navigation_bar_item_active_indicator_view:2131231005
- id:navigation_bar_item_icon_container:2131231006
- id:navigation_bar_item_icon_view:2131231007
- id:navigation_bar_item_labels_group:2131231008
- id:navigation_bar_item_large_label_view:2131231009
- id:navigation_bar_item_small_label_view:2131231010
- id:navigation_header_container:2131231011
- id:never:2131231012
- id:noScroll:2131231014
- id:normal:2131231016
- id:off:2131231020
- id:on:2131231021
- id:open_search_bar_text_view:2131231022
- id:open_search_view_background:2131231023
- id:open_search_view_clear_button:2131231024
- id:open_search_view_content_container:2131231025
- id:open_search_view_divider:2131231026
- id:open_search_view_dummy_toolbar:2131231027
- id:open_search_view_edit_text:2131231028
- id:open_search_view_header_container:2131231029
- id:open_search_view_root:2131231030
- id:open_search_view_scrim:2131231031
- id:open_search_view_search_prefix:2131231032
- id:open_search_view_status_bar_spacer:2131231033
- id:open_search_view_toolbar:2131231034
- id:open_search_view_toolbar_container:2131231035
- id:outline:2131231036
- id:outward:2131231037
- id:packed:2131231038
- id:parallax:2131231041
- id:parent:2131231042
- id:parentRelative:2131231044
- id:parent_matrix:2131231045
- id:password_toggle:2131231046
- id:peekHeight:2131231049
- id:percent:2131231050
- id:pin:2131231053
- id:postLayout:2131231056
- id:pressed:2131231057
- id:progress_circular:2131231058
- id:progress_horizontal:2131231059
- id:radio:2131231060
- id:ratio:2131231061
- id:reverseSawtooth:2131231064
- id:right:2131231065
- id:rightToLeft:2131231066
- id:right_icon:2131231067
- id:right_side:2131231068
- id:rounded:2131231070
- id:row_index_key:2131231071
- id:save_non_transition_alpha:2131231073
- id:sawtooth:2131231075
- id:scale:2131231076
- id:screen:2131231077
- id:scroll:2131231078
- id:scrollable:2131231082
- id:search_badge:2131231083
- id:search_bar:2131231084
- id:search_button:2131231085
- id:search_close_btn:2131231086
- id:search_edit_frame:2131231087
- id:search_go_btn:2131231088
- id:search_mag_icon:2131231089
- id:search_plate:2131231090
- id:search_src_text:2131231091
- id:search_voice_btn:2131231092
- id:select_dialog_listview:2131231093
- id:selected:2131231094
- id:showCustom:2131231097
- id:showHome:2131231098
- id:showTitle:2131231099
- id:sin:2131231101
- id:slide:2131231103
- id:snap:2131231106
- id:snapMargins:2131231107
- id:spline:2131231110
- id:spread:2131231112
- id:spread_inside:2131231113
- id:square:2131231114
- id:start:2131231120
- id:startHorizontal:2131231121
- id:startToEnd:2131231122
- id:startVertical:2131231123
- id:staticLayout:2131231124
- id:staticPostLayout:2131231125
- id:stop:2131231126
- id:stretch:2131231127
- id:submit_area:2131231129
- id:tabMode:2131231130
- id:tag_transition_group:2131231140
- id:text:2131231145
- id:text2:2131231146
- id:textEnd:2131231147
- id:textStart:2131231150
- id:textTop:2131231151
- id:text_input_start_icon:2131231154
- id:time:2131231162
- id:toggle:2131231166
- id:top:2131231168
- id:transitionToEnd:2131231171
- id:transitionToStart:2131231172
- id:transition_clip:2131231173
- id:transition_image_transform:2131231175
- id:transition_layout_save:2131231176
- id:transition_position:2131231178
- id:transition_scene_layoutid_cache:2131231179
- id:transition_transform:2131231180
- id:triangle:2131231181
- id:uniform:2131231183
- id:unlabeled:2131231184
- id:useLogo:2131231186
- id:visible:2131231192
- id:withText:2131231194
- id:with_icon:2131231195
- id:withinBounds:2131231196
- id:wrap:2131231197
- id:wrap_content:2131231198
+ id:asConfigured:2131230803
+ id:async:2131230804
+ id:auto:2131230805
+ id:autoComplete:2131230806
+ id:autoCompleteToEnd:2131230807
+ id:autoCompleteToStart:2131230808
+ id:barrier:2131230810
+ id:baseline:2131230811
+ id:beginOnFirstDraw:2131230812
+ id:beginning:2131230813
+ id:blocking:2131230814
+ id:bottom:2131230815
+ id:bounce:2131230816
+ id:center:2131230821
+ id:centerCrop:2131230822
+ id:centerInside:2131230823
+ id:center_horizontal:2131230824
+ id:center_vertical:2131230825
+ id:chain:2131230826
+ id:chains:2131230827
+ id:checkbox:2131230828
+ id:chronometer:2131230830
+ id:clear_text:2131230832
+ id:clip_horizontal:2131230833
+ id:clip_vertical:2131230834
+ id:clockwise:2131230835
+ id:collapseActionView:2131230836
+ id:compress:2131230837
+ id:container:2131230839
+ id:contiguous:2131230842
+ id:cos:2131230844
+ id:counterclockwise:2131230845
+ id:cradle:2131230846
+ id:cut:2131230852
+ id:date_picker_actions:2131230853
+ id:default_activity_button:2131230857
+ id:deltaRelative:2131230859
+ id:design_menu_item_action_area:2131230861
+ id:design_navigation_view:2131230864
+ id:dialog_button:2131230865
+ id:direct:2131230867
+ id:disableHome:2131230868
+ id:disablePostScroll:2131230869
+ id:disableScroll:2131230870
+ id:disjoint:2131230871
+ id:dragDown:2131230872
+ id:dragEnd:2131230873
+ id:dragLeft:2131230874
+ id:dragRight:2131230875
+ id:dragStart:2131230876
+ id:dragUp:2131230877
+ id:dropdown_menu:2131230878
+ id:easeIn:2131230879
+ id:easeInOut:2131230880
+ id:easeOut:2131230881
+ id:edge:2131230882
+ id:edit_query:2131230883
+ id:edit_text_id:2131230884
+ id:elastic:2131230886
+ id:embed:2131230887
+ id:escape:2131230893
+ id:exitUntilCollapsed:2131230894
+ id:expand_activities_button:2131230895
+ id:expanded_menu:2131230896
+ id:fade:2131230898
+ id:fill:2131230899
+ id:fill_horizontal:2131230900
+ id:fill_vertical:2131230901
+ id:filled:2131230902
+ id:fitCenter:2131230903
+ id:fitEnd:2131230904
+ id:fitStart:2131230905
+ id:fitToContents:2131230906
+ id:fitXY:2131230907
+ id:fixed:2131230908
+ id:flip:2131230909
+ id:forever:2131230911
+ id:ghost_view:2131230914
+ id:ghost_view_holder:2131230915
+ id:gone:2131230916
+ id:graph:2131230917
+ id:graph_wrap:2131230918
+ id:header_title:2131230921
+ id:hide_ime_id:2131230922
+ id:hideable:2131230923
+ id:home:2131230924
+ id:homeAsUp:2131230925
+ id:honorRequest:2131230926
+ id:icon:2131230927
+ id:icon_group:2131230928
+ id:ifRoom:2131230929
+ id:ignore:2131230930
+ id:ignoreRequest:2131230931
+ id:image:2131230932
+ id:info:2131230934
+ id:invisible:2131230935
+ id:inward:2131230936
+ id:italic:2131230938
+ id:jumpToEnd:2131230940
+ id:jumpToStart:2131230941
+ id:left:2131230944
+ id:leftToRight:2131230945
+ id:legacy:2131230946
+ id:line1:2131230947
+ id:line3:2131230948
+ id:listMode:2131230950
+ id:list_item:2131230951
+ id:m3_side_sheet:2131230952
+ id:marquee:2131230953
+ id:masked:2131230954
+ id:match_parent:2131230955
+ id:material_clock_display_and_toggle:2131230957
+ id:material_clock_period_am_button:2131230961
+ id:material_clock_period_pm_button:2131230962
+ id:material_hour_text_input:2131230964
+ id:material_minute_text_input:2131230967
+ id:material_textinput_timepicker:2131230969
+ id:material_timepicker_cancel_button:2131230970
+ id:material_timepicker_container:2131230971
+ id:material_timepicker_mode_button:2131230972
+ id:material_timepicker_ok_button:2131230973
+ id:material_timepicker_view:2131230974
+ id:matrix:2131230976
+ id:middle:2131230978
+ id:mini:2131230979
+ id:month_navigation_bar:2131230981
+ id:motion_base:2131230986
+ id:mtrl_anchor_parent:2131230987
+ id:mtrl_calendar_selection_frame:2131230993
+ id:mtrl_calendar_text_input_frame:2131230994
+ id:mtrl_card_checked_layer_id:2131230996
+ id:mtrl_child_content_container:2131230997
+ id:mtrl_internal_children_alpha_tag:2131230998
+ id:mtrl_motion_snapshot_view:2131230999
+ id:mtrl_picker_fullscreen:2131231000
+ id:mtrl_picker_header:2131231001
+ id:mtrl_picker_header_title_and_selection:2131231003
+ id:mtrl_picker_text_input_date:2131231005
+ id:mtrl_picker_text_input_range_end:2131231006
+ id:mtrl_picker_text_input_range_start:2131231007
+ id:mtrl_view_tag_bottom_padding:2131231009
+ id:multiply:2131231010
+ id:navigation_bar_item_active_indicator_view:2131231011
+ id:navigation_bar_item_icon_container:2131231012
+ id:navigation_bar_item_icon_view:2131231013
+ id:navigation_bar_item_labels_group:2131231014
+ id:navigation_bar_item_large_label_view:2131231015
+ id:navigation_bar_item_small_label_view:2131231016
+ id:navigation_header_container:2131231017
+ id:never:2131231018
+ id:noScroll:2131231020
+ id:normal:2131231022
+ id:off:2131231026
+ id:on:2131231027
+ id:open_search_bar_text_view:2131231028
+ id:open_search_view_background:2131231029
+ id:open_search_view_clear_button:2131231030
+ id:open_search_view_content_container:2131231031
+ id:open_search_view_divider:2131231032
+ id:open_search_view_dummy_toolbar:2131231033
+ id:open_search_view_edit_text:2131231034
+ id:open_search_view_header_container:2131231035
+ id:open_search_view_root:2131231036
+ id:open_search_view_scrim:2131231037
+ id:open_search_view_search_prefix:2131231038
+ id:open_search_view_status_bar_spacer:2131231039
+ id:open_search_view_toolbar:2131231040
+ id:open_search_view_toolbar_container:2131231041
+ id:outline:2131231042
+ id:outward:2131231043
+ id:packed:2131231044
+ id:parallax:2131231047
+ id:parent:2131231048
+ id:parentRelative:2131231050
+ id:parent_matrix:2131231051
+ id:password_toggle:2131231052
+ id:peekHeight:2131231055
+ id:percent:2131231056
+ id:pin:2131231059
+ id:postLayout:2131231062
+ id:pressed:2131231063
+ id:progress_circular:2131231064
+ id:progress_horizontal:2131231065
+ id:radio:2131231066
+ id:ratio:2131231067
+ id:reverseSawtooth:2131231070
+ id:right:2131231071
+ id:rightToLeft:2131231072
+ id:right_icon:2131231073
+ id:right_side:2131231074
+ id:rounded:2131231076
+ id:row_index_key:2131231077
+ id:save_non_transition_alpha:2131231079
+ id:sawtooth:2131231081
+ id:scale:2131231082
+ id:screen:2131231083
+ id:scroll:2131231084
+ id:scrollable:2131231088
+ id:search_badge:2131231089
+ id:search_bar:2131231090
+ id:search_button:2131231091
+ id:search_close_btn:2131231092
+ id:search_edit_frame:2131231093
+ id:search_go_btn:2131231094
+ id:search_mag_icon:2131231095
+ id:search_plate:2131231096
+ id:search_src_text:2131231097
+ id:search_voice_btn:2131231098
+ id:select_dialog_listview:2131231099
+ id:selected:2131231100
+ id:showCustom:2131231103
+ id:showHome:2131231104
+ id:showTitle:2131231105
+ id:sin:2131231107
+ id:slide:2131231109
+ id:snap:2131231112
+ id:snapMargins:2131231113
+ id:spline:2131231116
+ id:spread:2131231118
+ id:spread_inside:2131231119
+ id:square:2131231120
+ id:start:2131231126
+ id:startHorizontal:2131231127
+ id:startToEnd:2131231128
+ id:startVertical:2131231129
+ id:staticLayout:2131231130
+ id:staticPostLayout:2131231131
+ id:stop:2131231132
+ id:stretch:2131231133
+ id:submit_area:2131231135
+ id:tabMode:2131231136
+ id:tag_transition_group:2131231146
+ id:text:2131231151
+ id:text2:2131231152
+ id:textEnd:2131231153
+ id:textStart:2131231156
+ id:textTop:2131231157
+ id:text_input_start_icon:2131231160
+ id:time:2131231168
+ id:toggle:2131231172
+ id:top:2131231174
+ id:transitionToEnd:2131231177
+ id:transitionToStart:2131231178
+ id:transition_clip:2131231179
+ id:transition_image_transform:2131231181
+ id:transition_layout_save:2131231182
+ id:transition_position:2131231184
+ id:transition_scene_layoutid_cache:2131231185
+ id:transition_transform:2131231186
+ id:triangle:2131231187
+ id:uniform:2131231189
+ id:unlabeled:2131231190
+ id:useLogo:2131231192
+ id:visible:2131231198
+ id:withText:2131231200
+ id:with_icon:2131231201
+ id:withinBounds:2131231202
+ id:wrap:2131231203
+ id:wrap_content:2131231204
  integer:cancel_button_image_alpha:2131296260
  integer:m3_card_anim_delay_ms:2131296268
  integer:m3_card_anim_duration_ms:2131296269

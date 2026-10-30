@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +29,24 @@ public final class ActivityEditBinding implements ViewBinding {
 
   @NonNull
   public final FrameLayout annotationContainer;
+
+  @NonNull
+  public final Button annotationDelete;
+
+  @NonNull
+  public final Button annotationDone;
+
+  @NonNull
+  public final LinearLayout annotationSizeControls;
+
+  @NonNull
+  public final Button annotationSizeDecrease;
+
+  @NonNull
+  public final Button annotationSizeIncrease;
+
+  @NonNull
+  public final SeekBar annotationSizeSlider;
 
   @NonNull
   public final Button backToCrop;
@@ -69,7 +88,10 @@ public final class ActivityEditBinding implements ViewBinding {
   public final TextView stageTitle;
 
   private ActivityEditBinding(@NonNull FrameLayout rootView, @NonNull Button addShape,
-      @NonNull FrameLayout annotationContainer, @NonNull Button backToCrop,
+      @NonNull FrameLayout annotationContainer, @NonNull Button annotationDelete,
+      @NonNull Button annotationDone, @NonNull LinearLayout annotationSizeControls,
+      @NonNull Button annotationSizeDecrease, @NonNull Button annotationSizeIncrease,
+      @NonNull SeekBar annotationSizeSlider, @NonNull Button backToCrop,
       @NonNull TextView busyLabel, @NonNull FrameLayout busyOverlay,
       @NonNull LinearLayout cropActions, @NonNull FrameLayout cropContent,
       @NonNull CropOverlayView cropOverlay, @NonNull LinearLayout editorActions,
@@ -78,6 +100,12 @@ public final class ActivityEditBinding implements ViewBinding {
     this.rootView = rootView;
     this.addShape = addShape;
     this.annotationContainer = annotationContainer;
+    this.annotationDelete = annotationDelete;
+    this.annotationDone = annotationDone;
+    this.annotationSizeControls = annotationSizeControls;
+    this.annotationSizeDecrease = annotationSizeDecrease;
+    this.annotationSizeIncrease = annotationSizeIncrease;
+    this.annotationSizeSlider = annotationSizeSlider;
     this.backToCrop = backToCrop;
     this.busyLabel = busyLabel;
     this.busyOverlay = busyOverlay;
@@ -129,6 +157,42 @@ public final class ActivityEditBinding implements ViewBinding {
       id = R.id.annotationContainer;
       FrameLayout annotationContainer = ViewBindings.findChildViewById(rootView, id);
       if (annotationContainer == null) {
+        break missingId;
+      }
+
+      id = R.id.annotationDelete;
+      Button annotationDelete = ViewBindings.findChildViewById(rootView, id);
+      if (annotationDelete == null) {
+        break missingId;
+      }
+
+      id = R.id.annotationDone;
+      Button annotationDone = ViewBindings.findChildViewById(rootView, id);
+      if (annotationDone == null) {
+        break missingId;
+      }
+
+      id = R.id.annotationSizeControls;
+      LinearLayout annotationSizeControls = ViewBindings.findChildViewById(rootView, id);
+      if (annotationSizeControls == null) {
+        break missingId;
+      }
+
+      id = R.id.annotationSizeDecrease;
+      Button annotationSizeDecrease = ViewBindings.findChildViewById(rootView, id);
+      if (annotationSizeDecrease == null) {
+        break missingId;
+      }
+
+      id = R.id.annotationSizeIncrease;
+      Button annotationSizeIncrease = ViewBindings.findChildViewById(rootView, id);
+      if (annotationSizeIncrease == null) {
+        break missingId;
+      }
+
+      id = R.id.annotationSizeSlider;
+      SeekBar annotationSizeSlider = ViewBindings.findChildViewById(rootView, id);
+      if (annotationSizeSlider == null) {
         break missingId;
       }
 
@@ -211,8 +275,10 @@ public final class ActivityEditBinding implements ViewBinding {
       }
 
       return new ActivityEditBinding((FrameLayout) rootView, addShape, annotationContainer,
-          backToCrop, busyLabel, busyOverlay, cropActions, cropContent, cropOverlay, editorActions,
-          next, photo, rotate90, savePage, sign, stageTitle);
+          annotationDelete, annotationDone, annotationSizeControls, annotationSizeDecrease,
+          annotationSizeIncrease, annotationSizeSlider, backToCrop, busyLabel, busyOverlay,
+          cropActions, cropContent, cropOverlay, editorActions, next, photo, rotate90, savePage,
+          sign, stageTitle);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

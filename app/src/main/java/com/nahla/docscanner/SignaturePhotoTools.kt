@@ -403,6 +403,7 @@ object SignatureExtractionEngine {
             }
         }
         return Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888).apply {
+            setHasAlpha(true)
             setPixels(output, 0, width, 0, 0, width, height)
         }
     }

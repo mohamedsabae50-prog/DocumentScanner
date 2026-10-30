@@ -83,11 +83,8 @@ class PageAnnotationView(
     }
 
     private data class Selection(val signature: Boolean, val index: Int)
-    private var selected: Selection? = if (signatures.isNotEmpty()) {
-        Selection(true, signatures.lastIndex)
-    } else if (shapes.isNotEmpty()) {
-        Selection(false, shapes.lastIndex)
-    } else null
+    private var selected: Selection? = null
+    var onSelectionChanged: ((Boolean, Int) -> Unit)? = null
 
     private var activeHandle = -1
     private var downX = 0f
@@ -105,6 +102,7 @@ class PageAnnotationView(
     private var resizing = false
     private var pinching = false
     private var pinchStartDistance = 1f
+    private var lastPinchDistance = 1f
 
     init {
         setLayerType(View.LAYER_TYPE_HARDWARE, null)
@@ -119,8 +117,7 @@ class PageAnnotationView(
             SignaturePlacement(centerX = 0.5f, centerY = 0.5f, width = 0.38f)
         )
         signatures.add(layer)
-        selected = Selection(true, signatures.lastIndex)
-        invalidate()
+        setSelection(Selection(true, signatures.lastIndex))
     }
 
     fun addShape(type: PageShapeType, strokeWidth: Float) {
@@ -132,8 +129,40 @@ class PageAnnotationView(
             color = if (type == PageShapeType.FILLED_BOX) Color.WHITE else Color.BLACK,
             strokeWidth = strokeWidth
         )))
-        selected = Selection(false, shapes.lastIndex)
+        setSelection(Selection(false, shapes.lastIndex))
+    }
+
+    fun deselect() = setSelection(null)
+
+    fun deleteSelection() = deleteSelected()
+
+    fun resizeSelectedTo(progress: Int) {
+        pageRect.set(fitRect())
+        val rect = selectedRect() ?: return
+        val minWidth = pageRect.width() * 0.03f
+        val maxWidth = pageRect.width() * 0.95f
+        val width = minWidth + (maxWidth - minWidth) * progress.coerceIn(0, 100) / 100f
+        val ratio = width / rect.width().coerceAtLeast(1f)
+        updateSelected(rect.centerX(), rect.centerY(), width, rect.height() * ratio,
+            selectedRotation())
+        notifySelection()
         invalidate()
+    }
+
+    private fun setSelection(selection: Selection?) {
+        selected = selection
+        notifySelection()
+        invalidate()
+    }
+
+    private fun notifySelection() {
+        pageRect.set(fitRect())
+        val progress = selectedRect()?.width()?.let { width ->
+            val minWidth = pageRect.width() * 0.03f
+            val maxWidth = pageRect.width() * 0.95f
+            (((width - minWidth) / (maxWidth - minWidth)) * 100f).toInt().coerceIn(0, 100)
+        } ?: 0
+        onSelectionChanged?.invoke(selected != null, progress)
     }
 
     fun releasePreview() {
@@ -317,7 +346,20 @@ class PageAnnotationView(
                 val hit = (shapes.indices.reversed().map { Selection(false, it) } +
                     signatures.indices.reversed().map { Selection(true, it) })
                     .firstOrNull { contains(it, downX, downY) }
-                if (hit != null) selected = hit
+                val current = selected
+                if (hit != null && hit != current) {
+                    setSelection(hit)
+                } else if (hit == null && current != null) {
+                    val currentRect = selectedRect()
+                    val inHandleArea = currentRect?.let {
+                        downX >= it.left - dp(36f) && downX <= it.right + dp(36f) &&
+                            downY >= it.top - dp(36f) && downY <= it.bottom + dp(36f)
+                    } == true
+                    if (!inHandleArea) {
+                        deselect()
+                        return true
+                    }
+                }
                 val rect = selectedRect() ?: return true
                 val local = localPoint(downX, downY, rect, selectedRotation())
                 downLocalX = local.first
@@ -354,15 +396,19 @@ class PageAnnotationView(
                     startHeight = rect.height()
                     startRotation = selectedRotation()
                     pinchStartDistance = pointerDistance(event).coerceAtLeast(1f)
+                    lastPinchDistance = pinchStartDistance
                 }
                 return true
             }
             MotionEvent.ACTION_MOVE -> {
                 val rect = selectedRect() ?: return true
                 if (pinching && event.pointerCount >= 2) {
-                    val scale = pointerDistance(event) / pinchStartDistance
-                    updateSelected(startCenterX, startCenterY,
-                        startWidth * scale, startHeight * scale, startRotation)
+                    val distance = pointerDistance(event).coerceAtLeast(1f)
+                    val scale = (1f + (distance / lastPinchDistance - 1f) * 0.45f)
+                        .coerceIn(0.92f, 1.08f)
+                    updateSelected(rect.centerX(), rect.centerY(),
+                        rect.width() * scale, rect.height() * scale, selectedRotation())
+                    lastPinchDistance = distance
                 } else if (rotating) {
                     val delta = angle(event.x, event.y, startCenterX, startCenterY) - startAngle
                     updateSelected(startCenterX, startCenterY, startWidth, startHeight,
@@ -397,6 +443,7 @@ class PageAnnotationView(
                     updateSelected(startCenterX + event.x - downX, startCenterY + event.y - downY,
                         startWidth, startHeight, startRotation)
                 }
+                notifySelection()
                 invalidate()
                 return true
             }
@@ -432,12 +479,7 @@ class PageAnnotationView(
         } else {
             shapes.removeAt(item.index)
         }
-        selected = when {
-            signatures.isNotEmpty() -> Selection(true, signatures.lastIndex)
-            shapes.isNotEmpty() -> Selection(false, shapes.lastIndex)
-            else -> null
-        }
-        invalidate()
+        setSelection(null)
     }
 
     private fun selectedRotation(): Float = selected?.let {

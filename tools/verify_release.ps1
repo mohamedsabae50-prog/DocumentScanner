@@ -34,6 +34,12 @@ function Assert-Contains([string]$Text, [string]$Pattern, [string]$Message) {
     }
 }
 
+function Assert-NotContains([string]$Text, [string]$Pattern, [string]$Message) {
+    if ($Text -match $Pattern) {
+        throw "Regression check failed: $Message"
+    }
+}
+
 Assert-Contains $pdfSource 'File\(context\.cacheDir,\s*"exports"\)' "PDF is written under cacheDir/exports"
 Assert-Contains $pdfSource 'build\(pages,\s*cachePdfFile,\s*onProgress\)' "PDF is generated directly to its share cache file"
 Assert-Contains $pdfSource 'cachePdfFile\.length\(\)\s*<=\s*0L' "empty generated PDFs are rejected"
@@ -81,6 +87,12 @@ Assert-Contains $annotationSource 'View\.LAYER_TYPE_HARDWARE' "annotation previe
 Assert-Contains $annotationSource 'dp\(36f\)' "annotation touch handles have 36dp hit radii"
 Assert-Contains $annotationSource 'pointerDistance\(event\)' "annotations support pinch-to-scale"
 Assert-Contains $editSource 'PageShapeType\.FILLED_BOX to R\.string\.shape_whiteout' "shape choices include the whiteout eraser"
+Assert-Contains $editSource 'val a = pixels\[index\] ushr 24\s*pixels\[index\] = if \(a <= 8\) 0x00000000 else \(a shl 24\)' "signature pixels preserve transparent alpha while blackening"
+Assert-Contains $editSource 'setHasAlpha\(true\)' "normalized signatures retain an alpha channel"
+Assert-Contains $storeSource 'opaqueBlackBorder\.toFloat\(\)\s*/\s*borderCount\s*<=\s*0\.85f' "legacy opaque-black signatures are detected"
+foreach ($source in @($editSource, $signatureSource, $annotationSource)) {
+    Assert-NotContains $source 'or\s+Color\.BLACK' "Color.BLACK is never bitwise-ORed into signature pixels"
+}
 
 $apk = Join-Path $project "app\build\outputs\apk\release\app-release.apk"
 if (!(Test-Path -LiteralPath $apk) -or (Get-Item -LiteralPath $apk).Length -le 0) {

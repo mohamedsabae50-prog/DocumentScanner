@@ -21976,7 +21976,6 @@ kotlin.comparisons.ComparisonsKt___ComparisonsJvmKt:
     public static final varargs float maxOf(float,float[])
     private static final int maxOf(int,int)
     private static final int maxOf(int,int,int)
-    public static final varargs int maxOf(int,int[])
     private static final long maxOf(long,long)
     private static final long maxOf(long,long,long)
     public static final varargs long maxOf(long,long[])
@@ -28105,9 +28104,7 @@ androidx.core.view.ViewGroupKt$special$$inlined$Sequence$1
 androidx.core.view.ViewGroupKt
 androidx.core.view.ViewKt$allViews$1:
     public final int arity
-    public final kotlin.coroutines.Continuation create(java.lang.Object,kotlin.coroutines.Continuation)
     public final int getArity()
-    public final java.lang.Object invoke(java.lang.Object,java.lang.Object)
     public static java.lang.Object invoke$1()
 androidx.core.view.ViewKt
 androidx.core.view.ViewParentCompat
@@ -32252,9 +32249,9 @@ com.nahla.docscanner.PageAnnotationView$Selection:
     public static boolean getSignature()
 com.nahla.docscanner.PageAnnotationView$WhenMappings
 com.nahla.docscanner.PageAnnotationView:
-    public static void addShape()
-    public static void addSignature()
+    public float pinchStartDistance
     public static float angle(float,float,float,float)
+    public static void deleteSelection()
     public static float pointerDistance(android.view.MotionEvent)
     public final void releasePreview()
 com.nahla.docscanner.PageShapeType:
@@ -32302,6 +32299,7 @@ com.nahla.docscanner.ScanStore:
     public static void delete()
     public static java.util.List listSavedSignatures()
     public static java.io.File pageSignaturesDir(android.content.Context,java.lang.String)
+    public static java.io.File savedSignaturesDir(android.content.Context)
     public static java.io.File sourceFile(android.content.Context,java.lang.String)
 com.nahla.docscanner.ShapeLayer:
     public static com.nahla.docscanner.ShapeLayer copy()
@@ -32513,8 +32511,6 @@ kotlin.io.FileWalkDirection:
     public static final synthetic kotlin.enums.EnumEntries $ENTRIES
     public static final enum kotlin.io.FileWalkDirection TOP_DOWN
 kotlin.io.FilesKt__UtilsKt
-kotlin.jvm.functions.Function2:
-    public abstract java.lang.Object invoke(java.lang.Object,java.lang.Object)
 kotlin.jvm.internal.ArrayIteratorKt
 kotlin.jvm.internal.CallableReference$NoReceiver
 kotlin.jvm.internal.CallableReference:

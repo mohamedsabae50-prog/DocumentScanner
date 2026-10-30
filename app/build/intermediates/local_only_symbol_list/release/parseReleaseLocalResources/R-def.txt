@@ -22,6 +22,12 @@ drawable ic_rotate_left
 drawable ic_rotate_right
 id addShape
 id annotationContainer
+id annotationDelete
+id annotationDone
+id annotationSizeControls
+id annotationSizeDecrease
+id annotationSizeIncrease
+id annotationSizeSlider
 id backToCrop
 id busyLabel
 id busyOverlay

@@ -1,6 +1,9 @@
 package com.nahla.docscanner
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.util.Log
 import java.io.File
@@ -49,8 +52,67 @@ object ScanStore {
     fun listSavedSignatures(context: Context): List<File> =
         savedSignaturesDir(context).listFiles()
             ?.filter { it.isFile && it.extension.equals("png", ignoreCase = true) }
+            ?.filter(::sanitizeSavedSignature)
             ?.sortedByDescending { it.lastModified() }
             .orEmpty()
+
+    fun sanitizeSavedSignature(file: File): Boolean {
+        val bitmap = BitmapFactory.decodeFile(
+            file.absolutePath,
+            BitmapFactory.Options().apply { inPreferredConfig = Bitmap.Config.ARGB_8888 }
+        ) ?: run {
+            Log.w("ScanStore", "Could not decode saved signature: ${file.absolutePath}")
+            return false
+        }
+        try {
+            val pixels = IntArray(bitmap.width * bitmap.height)
+            bitmap.getPixels(pixels, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
+            var borderCount = 0
+            var opaqueBlackBorder = 0
+            var brightest = 0
+            for (y in 0 until bitmap.height) {
+                for (x in 0 until bitmap.width) {
+                    val pixel = pixels[y * bitmap.width + x]
+                    val red = Color.red(pixel)
+                    val green = Color.green(pixel)
+                    val blue = Color.blue(pixel)
+                    brightest = maxOf(brightest, red, green, blue)
+                    if (x == 0 || y == 0 || x == bitmap.width - 1 || y == bitmap.height - 1) {
+                        borderCount++
+                        if (pixel ushr 24 >= 248 && red <= 8 && green <= 8 && blue <= 8) {
+                            opaqueBlackBorder++
+                        }
+                    }
+                }
+            }
+            if (borderCount == 0 || opaqueBlackBorder.toFloat() / borderCount <= 0.85f) {
+                return true
+            }
+            if (brightest <= 8) {
+                if (!file.delete()) {
+                    Log.w("ScanStore", "Could not remove corrupted saved signature: ${file.absolutePath}")
+                    return false
+                }
+                return false
+            }
+            for (index in pixels.indices) {
+                val pixel = pixels[index]
+                val luminance = (Color.red(pixel) * 0.299f +
+                    Color.green(pixel) * 0.587f + Color.blue(pixel) * 0.114f).toInt()
+                val alpha = 255 - luminance
+                pixels[index] = if (alpha <= 8) Color.TRANSPARENT else alpha shl 24
+            }
+            bitmap.setHasAlpha(true)
+            bitmap.setPixels(pixels, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
+            ImageProcessor.writePng(bitmap, file)
+            return true
+        } catch (e: IOException) {
+            Log.w("ScanStore", "Could not repair saved signature: ${file.absolutePath}", e)
+            return false
+        } finally {
+            bitmap.recycle()
+        }
+    }
 
     fun pageSignaturesDir(context: Context, id: String): File =
         File(pageDir(context, id), SIGNATURES_DIR)
@@ -67,7 +129,7 @@ object ScanStore {
                         input.readFloat(), input.readFloat(), input.readFloat(), input.readFloat()
                     )
                     val file = File(directory, "sig_$index.png")
-                    if (file.isFile) file to placement else null
+                    if (file.isFile && sanitizeSavedSignature(file)) file to placement else null
                 }
             }
         } catch (e: IOException) {

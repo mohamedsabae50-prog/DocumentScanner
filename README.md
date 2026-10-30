@@ -61,7 +61,8 @@ than emitting a black page.
   no placement popup is used. The optional manual crop is available from the extraction
   preview.
 - Add outlined or filled rectangles, ovals, and arrows with color and stroke controls.
-  Annotation handles support moving, resizing, rotating, and deleting marks.
+  Tap empty page space to deselect and lock marks; tap a mark to edit it again. The
+  selected mark has a fine size slider, delete/lock controls, and touch handles.
 - Auto document-edge detection snaps the corners to the paper the moment the crop screen
   opens and insets the detected boundary by 1.5 % to trim table edges and outer shadows.
 - A 2.5x loupe follows the corner being dragged so the handle can land on the pixel.

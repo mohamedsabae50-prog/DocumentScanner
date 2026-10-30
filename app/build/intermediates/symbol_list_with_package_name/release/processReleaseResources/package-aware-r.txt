@@ -3101,6 +3101,12 @@ id always
 id animateToEnd
 id animateToStart
 id annotationContainer
+id annotationDelete
+id annotationDone
+id annotationSizeControls
+id annotationSizeDecrease
+id annotationSizeIncrease
+id annotationSizeSlider
 id arc
 id asConfigured
 id async

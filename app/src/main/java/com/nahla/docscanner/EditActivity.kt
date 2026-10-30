@@ -93,6 +93,24 @@ class EditActivity : AppCompatActivity() {
         binding.sign.setOnClickListener { chooseSignature() }
         binding.addShape.setOnClickListener { chooseShape() }
         binding.savePage.setOnClickListener { savePage() }
+        binding.annotationSizeSlider.setOnSeekBarChangeListener(
+            object : SeekBar.OnSeekBarChangeListener {
+                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                    if (fromUser) pageEditor?.resizeSelectedTo(progress)
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
+                override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
+            }
+        )
+        binding.annotationSizeDecrease.setOnClickListener {
+            pageEditor?.resizeSelectedTo((binding.annotationSizeSlider.progress - 2).coerceAtLeast(0))
+        }
+        binding.annotationSizeIncrease.setOnClickListener {
+            pageEditor?.resizeSelectedTo((binding.annotationSizeSlider.progress + 2).coerceAtMost(100))
+        }
+        binding.annotationDelete.setOnClickListener { pageEditor?.deleteSelection() }
+        binding.annotationDone.setOnClickListener { pageEditor?.deselect() }
 
         loadSource()
     }
@@ -137,7 +155,7 @@ class EditActivity : AppCompatActivity() {
                     }
                 } else {
                     val signatureFile = ScanStore.pageSignatureFile(this, pageId)
-                    if (signatureFile.exists()) {
+                    if (signatureFile.exists() && ScanStore.sanitizeSavedSignature(signatureFile)) {
                         val bitmap = BitmapFactory.decodeFile(
                             signatureFile.absolutePath,
                             BitmapFactory.Options().apply { inPreferredConfig = Bitmap.Config.ARGB_8888 }
@@ -306,6 +324,13 @@ class EditActivity : AppCompatActivity() {
                 pageBitmap?.let { if (!it.isRecycled) it.recycle() }
                 pageBitmap = cropped
                 pageEditor = PageAnnotationView(this, cropped, pageSignatures, pageShapes)
+                pageEditor?.onSelectionChanged = { selected, progress ->
+                    binding.annotationSizeControls.visibility =
+                        if (selected) View.VISIBLE else View.GONE
+                    if (binding.annotationSizeSlider.progress != progress) {
+                        binding.annotationSizeSlider.progress = progress
+                    }
+                }
                 binding.annotationContainer.removeAllViews()
                 binding.annotationContainer.addView(
                     pageEditor,
@@ -335,6 +360,7 @@ class EditActivity : AppCompatActivity() {
         pageBitmap = null
         binding.annotationContainer.visibility = View.GONE
         binding.editorActions.visibility = View.GONE
+        binding.annotationSizeControls.visibility = View.GONE
         binding.cropContent.visibility = View.VISIBLE
         binding.cropActions.visibility = View.VISIBLE
         binding.backToCrop.visibility = View.GONE
@@ -885,9 +911,11 @@ class EditActivity : AppCompatActivity() {
             val pixels = IntArray(source.width * source.height)
             source.getPixels(pixels, 0, source.width, 0, 0, source.width, source.height)
             for (index in pixels.indices) {
-                pixels[index] = ((pixels[index] ushr 24) shl 24) or Color.BLACK
+                val a = pixels[index] ushr 24
+                pixels[index] = if (a <= 8) 0x00000000 else (a shl 24)
             }
             return Bitmap.createBitmap(source.width, source.height, Bitmap.Config.ARGB_8888).apply {
+                setHasAlpha(true)
                 setPixels(pixels, 0, width, 0, 0, width, height)
             }
         } finally {

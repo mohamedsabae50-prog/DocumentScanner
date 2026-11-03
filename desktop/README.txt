@@ -17,7 +17,10 @@ Features
   at 2x resolution, and selectable PDF text lines can be replaced, deleted, or
   edited in place. Text on scanned pages can also be selected by dragging.
 - Replacements use ink-only paper-texture inpainting rather than a solid cover
-  box. Add new text with adjustable size and bold styling.
+  box. A live text editor supports integer font sizes, bold, alignment, apply,
+  erase, and cancel. Add new text with adjustable styling.
+- Zoom from 50% to 400%, fit the page or width, and pan with Space-drag, the
+  middle mouse button, or the hand toggle. Ctrl+wheel zooms around the pointer.
 - Reorder, rotate, select, and delete pages.
 - Adjust four crop corners, use the automatic edge estimate, and perspective
   rectify a page with natural camera colors.

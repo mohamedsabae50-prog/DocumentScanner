@@ -12,7 +12,12 @@ index.html in a modern browser.
 
 Features
 --------
-- Import multiple JPG, PNG, WEBP, and BMP pages; drag image files onto the app.
+- Import multiple JPG, PNG, WEBP, BMP, and PDF pages; drag files onto the app.
+- Open local PDFs with the bundled offline PDF.js renderer. Pages are rendered
+  at 2x resolution, and selectable PDF text lines can be replaced, deleted, or
+  edited in place. Text on scanned pages can also be selected by dragging.
+- Replacements use ink-only paper-texture inpainting rather than a solid cover
+  box. Add new text with adjustable size and bold styling.
 - Reorder, rotate, select, and delete pages.
 - Adjust four crop corners, use the automatic edge estimate, and perspective
   rectify a page with natural camera colors.
@@ -28,3 +33,7 @@ Features
 
 Signatures are stored in the browser's local storage on this Windows account.
 Pages remain in memory until the app is closed or the document is cleared.
+PDF.js and its worker are bundled in `vendor/`; PDF processing runs in the main
+thread so the app works from `file://` without network access or worker CORS.
+Imported and exported pages are rasterized; edited text is visually embedded
+in the exported page image and is not retained as selectable PDF text.

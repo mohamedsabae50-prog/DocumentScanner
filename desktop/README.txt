@@ -8,8 +8,12 @@ required; optional Google Fonts use local system fallbacks when offline. The
 complete interface is available in Arabic (default, right-to-left) and English;
 use the bright language button in the header to switch languages.
 
-Start the app by double-clicking ..\Nahla-Desktop-Launcher.bat or opening
-index.html in a modern browser.
+Start the app by double-clicking `Nahla-Desktop.exe`. Keep the executable,
+`index.html`, `nahla.ico`, and the `vendor` folder together when copying the
+standalone NahlaDesktop folder to another Windows PC. The launcher opens a
+standalone Edge, Chrome, or Brave app window when available, with the system
+browser as a fallback. Run `Nahla-Desktop.exe --create-shortcut` to create a
+Desktop shortcut, or use `--shortcut` to create it if missing and launch.
 
 Features
 --------

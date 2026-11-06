@@ -17,6 +17,11 @@
 .text-layer{position:absolute;pointer-events:none;z-index:2}.pdf-text-hit{position:absolute;padding:0;border:1px solid transparent;border-radius:2px;background:transparent;color:transparent;white-space:pre;overflow:hidden;text-align:start;pointer-events:auto;cursor:text}.pdf-text-hit:hover,.pdf-text-hit:focus-visible{border-color:#087f68;background:#087f6814;outline:none}.text-select-box{position:absolute;border:1px dashed #087f68;background:#087f6818;pointer-events:none;z-index:4}.text-active{border-color:var(--green)!important;background:#e8f6f1!important}
 .board{display:block;overflow:auto;overscroll-behavior:contain;touch-action:pan-x pan-y;direction:ltr}.board canvas{max-width:none;max-height:none;flex:none;margin:21px auto;touch-action:none}.board.panning,.board.panning *{cursor:grab!important;user-select:none}.board.panning:active,.board.panning:active *{cursor:grabbing!important}.zoom-controls{display:flex;align-items:center;gap:6px;flex:none}.zoom-controls button{white-space:nowrap}.zoom-controls input[type=range]{width:120px}.zoom-percent{min-width:48px;text-align:center;font-weight:700;color:var(--deep);font-variant-numeric:tabular-nums}.text-editor-bar{display:none;align-items:center;gap:5px;flex-wrap:wrap;z-index:5}.text-editor-bar.show{display:flex}.text-editor-bar label{font-size:12px;white-space:nowrap}.text-editor-bar input[type=number]{width:54px;padding:6px;border:1px solid var(--line);border-radius:7px;text-align:center;font-variant-numeric:tabular-nums}.text-editor-bar select{max-width:185px;padding:6px;border:1px solid var(--line);border-radius:7px}.text-editor-bar button{padding:6px 9px}.text-editor-bar #textBold[aria-pressed=true],.text-editor-bar #eraseMode[aria-pressed=true]{background:#e8f6f1;border-color:var(--green)}.text-editing{position:absolute;z-index:6;box-sizing:border-box;padding:0;margin:0;border:0;border-radius:2px;background:transparent;color:#222;outline:1px dashed #087f68;outline-offset:0;line-height:1;white-space:pre-wrap;min-height:1em;overflow:visible;pointer-events:auto;caret-color:#087f68}.text-drag-handle{position:absolute;z-index:7;display:grid;place-items:center;width:20px;height:20px;padding:0;border:1px solid #087f68;border-radius:4px;background:#fff;color:#087f68;font-size:13px;line-height:1;cursor:move;pointer-events:auto}.sig-thickness-controls{display:none;align-items:center;gap:5px}.sig-thickness-controls.show{display:flex}.sig-thickness-controls input{width:min(130px,12vw)}.draw-thickness{display:flex;align-items:center;gap:9px}.draw-thickness input{flex:1;accent-color:var(--green)}.empty{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:max-content;max-width:90%;pointer-events:none}.zoom-controls input[type=range]{accent-color:var(--green)}
 </style>
+<style>
+.text-editing{border:1px dashed #087f68;padding:2px;touch-action:none}
+.text-drag-handle{width:32px;height:32px;font-size:19px}
+.text-resize-grip{position:absolute;z-index:8;width:18px;height:18px;padding:0;border:1px solid #087f68;border-radius:3px;background:linear-gradient(135deg,transparent 45%,#087f68 46%,#087f68 54%,transparent 55%);cursor:nwse-resize;touch-action:none}
+</style>
 </head>
 <body>
 <header class="top">
@@ -53,7 +58,7 @@
       <div class="sizebar" id="sizeBar"><span id="sizeLabel">حجم العنصر</span><button id="sizeMinus" aria-label="تصغير">−</button><input id="size" type="range" min="3" max="95" value="38" aria-label="حجم العنصر"><button id="sizePlus" aria-label="تكبير">＋</button><div class="sig-thickness-controls" id="sigThicknessControls"><label id="sigThicknessLabel" for="sigThickness">سُمك الإمضاء</label><button id="sigThicknessMinus" aria-label="تقليل سُمك الإمضاء">−</button><input id="sigThickness" type="range" min="-3" max="8" step="1" value="0" aria-label="سُمك الإمضاء"><button id="sigThicknessPlus" aria-label="زيادة سُمك الإمضاء">＋</button></div><label id="strokeLabel" for="strokeSize">سُمك الخط</label><input id="strokeSize" type="range" min="1" max="16" value="3" aria-label="سُمك الخط"><button id="lockSelected" class="primary" aria-label="قفل التعديل">✓ قفل التعديل (تم)</button></div>
       <div class="library-wrap"><span id="libraryLabel">مكتبة الإمضاءات المحفوظة</span><div class="library" id="library"></div></div>
       <input id="pdfName" class="filename" value="Nahla-Document" aria-label="اسم ملف الـ PDF" title="اسم ملف الـ PDF">
-      <button class="primary" id="exportPdf">حفظ كملف PDF</button><button id="clearPages">مسح الكل / ملف جديد</button>
+      <button class="primary" id="exportPdf">حفظ كملف PDF</button><button id="printDoc">🖨️ طباعة</button><button id="clearPages">مسح الكل / ملف جديد</button>
     </div>
   </main>
 </div>
@@ -131,7 +136,7 @@ function changeLanguage(next){
   $("languageToggle").setAttribute("aria-label",tr("languageTitle"));
   $("brand").childNodes[0].textContent=tr("brand");
   $("brandSubtitle").textContent=tr("subtitle");
-  const labels={openFiles:"import",openPdf:"openPdf",editPdfText:"editPdfText",addText:"addText",fitWidth:"fitWidth",fitPage:"fitPage",panToggle:"pan",textSizeLabel:"fontSize",fontFamilyLabel:"fontFamily",textBold:"boldText",sigThicknessLabel:"signatureThickness",penThicknessText:"penThickness",signaturePhoto:"scan",drawSignature:"draw",saveSignature:"saveSignature",pagesLabel:"pages",addMore:"addPhotos",autoCrop:"auto",resetCrop:"reset",rotatePage:"rotate",shapeLabel:"shapeLabel",addShape:"addShape",deleteSelected:"delete",sizeLabel:"size",sizeMinus:"minus",sizePlus:"plus",strokeLabel:"stroke",lockSelected:"locked",libraryLabel:"library",exportPdf:"export",clearPages:"clear",drawTitle:"drawTitle",closeDraw:"close",drawHelp:"drawHelp",clearDraw:"clearDraw",useDraw:"useDraw",boldTitle:"boldTitle",boldLabel:"boldness",boldHelp:"boldHelp",closeBold:"close",cancelBold:"cancel",useExtracted:"useSignature"};
+  const labels={openFiles:"import",openPdf:"openPdf",editPdfText:"editPdfText",addText:"addText",fitWidth:"fitWidth",fitPage:"fitPage",panToggle:"pan",textSizeLabel:"fontSize",fontFamilyLabel:"fontFamily",textBold:"boldText",sigThicknessLabel:"signatureThickness",penThicknessText:"penThickness",signaturePhoto:"scan",drawSignature:"draw",saveSignature:"saveSignature",pagesLabel:"pages",addMore:"addPhotos",autoCrop:"auto",resetCrop:"reset",rotatePage:"rotate",shapeLabel:"shapeLabel",addShape:"addShape",deleteSelected:"delete",sizeLabel:"size",sizeMinus:"minus",sizePlus:"plus",strokeLabel:"stroke",lockSelected:"locked",libraryLabel:"library",exportPdf:"export",printDoc:"printDoc",clearPages:"clear",drawTitle:"drawTitle",closeDraw:"close",drawHelp:"drawHelp",clearDraw:"clearDraw",useDraw:"useDraw",boldTitle:"boldTitle",boldLabel:"boldness",boldHelp:"boldHelp",closeBold:"close",cancelBold:"cancel",useExtracted:"useSignature"};
   for(const [id,key] of Object.entries(labels))$(id).textContent=tr(key);
   $("shapeType").title=tr("shapeLabel");
   [...$("shapeType").options].forEach((option,index)=>option.textContent=tr(["outline","whiteout","oval","arrow"][index]));
@@ -303,21 +308,24 @@ async function extractPdfLines(page,viewport){
     });
   }).filter(span=>span.w>0&&span.h>0&&span.text);
 }
+let pdfThumbnailQueue=[],pdfThumbnailRunning=false,pdfThumbnailTotal=0,pdfThumbnailDone=0;
 async function importPdf(file){
   setStatus(tr("pdfLoading"));
   const start=pages.length;
   try{
     const bytes=new Uint8Array(await file.arrayBuffer());
     const pdf=await pdfjsLib.getDocument({data:bytes,disableWorker:true,useSystemFonts:true}).promise;
+    const placeholder=document.createElement("canvas");
+    placeholder.width=600;placeholder.height=800;placeholder.getContext("2d").fillStyle="#fff";placeholder.getContext("2d").fillRect(0,0,600,800);
     for(let n=1;n<=pdf.numPages;n++){
-        const page=await pdf.getPage(n),viewport=page.getViewport({scale:2}),rendered=document.createElement("canvas");
-      rendered.width=Math.ceil(viewport.width);rendered.height=Math.ceil(viewport.height);
-        await page.render({canvasContext:rendered.getContext("2d",{willReadFrequently:true}),viewport}).promise;
-      const textSpans=await extractPdfLines(page,viewport);
-      pages.push({image:rendered,cropCanvas:rendered,name:`${file.name} - ${n}`,marks:[],textSpans,quad:[[0,0],[1,0],[1,1],[0,1]]});
-      active=pages.length-1;mode="edit";selected=null;refresh();
+      pages.push({image:placeholder,cropCanvas:placeholder,name:`${file.name} - ${n}`,marks:[],textSpans:[],quad:[[0,0],[1,0],[1,1],[0,1]],pdfDoc:pdf,pdfPageNumber:n,loadedFull:false,thumbCanvas:null,pdfPagePromise:null,loadingFull:null});
     }
-    setStatus(tr("editStage"));fitWidth();
+    active=start;mode="edit";selected=null;refresh();
+    await ensurePageLoaded(pages[start]);
+    refresh();fitWidth();
+    pdfThumbnailQueue.push(...pages.slice(start).filter(page=>!page.thumbCanvas));
+    pdfThumbnailTotal+=pages.slice(start).filter(page=>!page.thumbCanvas).length;
+    processPdfThumbnailQueue();
   }catch(error){
     pages.splice(start);
     try{
@@ -327,6 +335,53 @@ async function importPdf(file){
       refresh();setStatus(tr("editStage"));fitWidth();
     }catch(fallbackError){pages.splice(start);active=pages.length-1;refresh();throw new Error(`${error.message}; ${fallbackError.message}`)}
   }
+}
+async function ensurePageLoaded(page){
+  if(!page?.pdfDoc||page.loadedFull)return page;
+  if(page.loadingFull)return page.loadingFull;
+  page.loadingFull=(async()=>{
+    const pdfPage=page.pdfPagePromise||(page.pdfPagePromise=page.pdfDoc.getPage(page.pdfPageNumber));
+    const resolvedPage=await pdfPage,viewport=resolvedPage.getViewport({scale:2}),rendered=document.createElement("canvas");
+    rendered.width=Math.ceil(viewport.width);rendered.height=Math.ceil(viewport.height);
+    await resolvedPage.render({canvasContext:rendered.getContext("2d",{willReadFrequently:true}),viewport}).promise;
+    page.image=rendered;page.cropCanvas=rendered;page.textSpans=await extractPdfLines(resolvedPage,viewport);page.loadedFull=true;
+    return page;
+  })();
+  try{return await page.loadingFull}finally{page.loadingFull=null}
+}
+function prefetchNextPdfPage(index){
+  const next=pages[index+1];
+  if(!next?.pdfDoc||next.loadedFull)return;
+  requestAnimationFrame(()=>setTimeout(()=>ensurePageLoaded(next).catch(error=>console.error("PDF page pre-render failed",error)),0));
+}
+function makePdfThumbnail(source){
+  const thumb=document.createElement("canvas");thumb.width=180;thumb.height=124;
+  const context=thumb.getContext("2d");context.fillStyle="#eef2f0";context.fillRect(0,0,thumb.width,thumb.height);
+  const scale=Math.min(170/source.width,116/source.height),width=source.width*scale,height=source.height*scale;
+  context.drawImage(source,(thumb.width-width)/2,(thumb.height-height)/2,width,height);return thumb;
+}
+async function renderPdfThumbnail(page){
+  if(page.loadedFull){page.thumbCanvas=makePdfThumbnail(page.image);return}
+  const pdfPage=page.pdfPagePromise||(page.pdfPagePromise=page.pdfDoc.getPage(page.pdfPageNumber)),resolvedPage=await pdfPage,viewport=resolvedPage.getViewport({scale:.25}),rendered=document.createElement("canvas");
+  rendered.width=Math.ceil(viewport.width);rendered.height=Math.ceil(viewport.height);
+  await resolvedPage.render({canvasContext:rendered.getContext("2d"),viewport}).promise;
+  page.thumbCanvas=makePdfThumbnail(rendered);
+}
+function processPdfThumbnailQueue(){
+  if(pdfThumbnailRunning||!pdfThumbnailQueue.length)return;
+  pdfThumbnailRunning=true;
+  const step=async()=>{
+    const page=pdfThumbnailQueue.shift();
+    if(!page){pdfThumbnailRunning=false;pdfThumbnailTotal=0;pdfThumbnailDone=0;setStatus(tr("editStage"));return}
+    try{
+      await renderPdfThumbnail(page);pdfThumbnailDone++;
+      const card=$("pageList").querySelector(`[data-page-index="${pages.indexOf(page)}"]`),thumb=card?.querySelector("canvas");
+      if(thumb){const context=thumb.getContext("2d");context.clearRect(0,0,thumb.width,thumb.height);context.drawImage(page.thumbCanvas,0,0)}
+    }catch(error){pdfThumbnailDone++;console.error("PDF thumbnail rendering failed",error)}
+    setStatus(`${tr("pdfLoading")} ${pdfThumbnailDone} / ${pdfThumbnailTotal}`);
+    requestAnimationFrame(()=>setTimeout(step,0));
+  };
+  requestAnimationFrame(()=>setTimeout(step,0));
 }
 async function nativeDctFallback(file){
   const bytes=new Uint8Array(await file.arrayBuffer());let binary="";
@@ -413,10 +468,11 @@ function drawMark(m,isSelected){
   if(m.type==="signature")ctx.drawImage(morphSignature(m),-w/2,-h/2,w,h);
   if(m.type==="text"){const page=current(),scale=page?pageSize(page).w/m.wPage:1;ctx.fillStyle=m.color||"#222";ctx.direction=m.dir||"ltr";ctx.textAlign=m.align|| (m.dir==="rtl"?"right":"left");ctx.textBaseline=m.topLeft?"top":"middle";ctx.font=`${m.bold?"700":"400"} ${m.fontSize*scale}px ${m.fontFamily||"Arial"}`;const x=ctx.textAlign==="center"?0:ctx.textAlign==="right"?w/2:-w/2;ctx.fillText(m.text,x,m.topLeft?-h/2:0,w)}
   if(isSelected){
-    ctx.setLineDash([8,5]);ctx.strokeStyle="#00a875";ctx.lineWidth=2;ctx.strokeRect(-w/2,-h/2,w,h);ctx.setLineDash([]);
+    const handleRadius=10*pageSize(current()).w/canvas.getBoundingClientRect().width;
+    ctx.setLineDash([8,5]);ctx.strokeStyle="#00a875";ctx.lineWidth=2*pageSize(current()).w/canvas.getBoundingClientRect().width;ctx.strokeRect(-w/2,-h/2,w,h);ctx.setLineDash([]);
     ctx.fillStyle="#fff";ctx.strokeStyle="#087f68";
     for(const [hx,hy] of [[-1,-1],[0,-1],[1,-1],[1,0],[1,1],[0,1],[-1,1],[-1,0]]){
-      ctx.beginPath();ctx.arc(hx*w/2,hy*h/2,7,0,Math.PI*2);ctx.fill();ctx.stroke()
+      ctx.beginPath();ctx.arc(hx*w/2,hy*h/2,handleRadius,0,Math.PI*2);ctx.fill();ctx.stroke()
     }
   }
   ctx.restore()
@@ -537,6 +593,238 @@ function makePdf(doc,name){const encoder=new TextEncoder(),chunks=[],offsets=[0]
 const finalPageBase=finalPage;finalPage=function(page){const out=finalPageBase(page),source=page.cropCanvas||page.image,scale=out.width/source.width,context=out.getContext("2d");for(const mark of page.marks||[]){if(mark.type!=="text")continue;context.save();context.fillStyle=mark.color||"#222";context.direction=mark.dir||"ltr";context.textAlign=mark.align||(mark.dir==="rtl"?"right":"left");context.textBaseline=mark.topLeft?"top":"middle";context.font=`${mark.bold?"700":"400"} ${mark.fontSize*scale}px ${mark.fontFamily||"Arial"}`;const x=mark.align==="center"?mark.x:mark.align==="right"||(!mark.align&&mark.dir==="rtl")?mark.x+mark.w/2:mark.x-mark.w/2,y=mark.topLeft?(mark.y-mark.h/2)*out.height:mark.y*out.height;context.fillText(mark.text,x*out.width,y,mark.w*out.width);context.restore()}return out};
 $("exportPdf").onclick=exportPdf;function clearPages(){pages.splice(0);active=-1;mode="crop";selected=null;textMode=false;newTextMode=false;textEditor=null;refresh()}$("clearPages").onclick=()=>{if(pages.length&&confirm(tr("confirmNew")))clearPages()};
 window.addEventListener("keydown",e=>{if(textEditor||e.target?.isContentEditable||["INPUT","TEXTAREA","SELECT"].includes(e.target?.tagName))return;if(e.key==="Escape"&&selected!=null){selected=null;draw()}if((e.key==="Delete"||e.key==="Backspace")&&selected!=null){e.preventDefault();$("deleteSelected").click()}});
+translations.ar.printDoc="🖨️ طباعة";translations.en.printDoc="🖨️ Print";
+translations.ar.pdfLoading="جاري فتح صفحات الـ PDF...";translations.en.pdfLoading="Opening PDF pages...";
+async function exportPdf(){
+  if(!pages.length)return alert(tr("importFirst"));
+  if(textEditor)finishTextEdit("apply");
+  const name=$("pdfName").value.trim().replace(/[\\/:*?"<>|]/g,"-")||"Nahla-Document";
+  try{
+    for(let i=0;i<pages.length;i++){setStatus(`${tr("pdfLoading")} ${i+1} / ${pages.length}`);await ensurePageLoaded(pages[i])}
+    const pdf=makePdf(pages,name),blob=new Blob([pdf],{type:"application/pdf"});
+    if(window.showSaveFilePicker){
+      const handle=await window.showSaveFilePicker({suggestedName:name+".pdf",types:[{description:tr("pdfType"),accept:{"application/pdf":[".pdf"]}}]});
+      const writable=await handle.createWritable();await writable.write(blob);await writable.close();
+    }else{
+      const link=document.createElement("a");link.href=URL.createObjectURL(blob);link.download=name+".pdf";link.click();setTimeout(()=>URL.revokeObjectURL(link.href),3000);
+    }
+    setStatus(tr("pdfSaved"));if(confirm(tr("confirmClear")))clearPages();
+  }catch(error){if(error.name!=="AbortError")alert(tr("exportFailed")+error.message)}
+}
+function drawPages(){
+  const host=$("pageList");host.replaceChildren();const number=new Intl.NumberFormat(language==="ar"?"ar":"en");
+  pages.forEach((page,index)=>{
+    const card=document.createElement("div");card.className="page-card"+(index===active?" active":"");card.dataset.pageIndex=String(index);
+    const thumb=document.createElement("canvas");thumb.width=180;thumb.height=124;const context=thumb.getContext("2d");
+    if(page.thumbCanvas)context.drawImage(page.thumbCanvas,0,0);
+    else if(!page.pdfDoc){context.fillStyle="#eef2f0";context.fillRect(0,0,180,124);const source=page.cropCanvas||page.image,scale=Math.min(170/source.width,116/source.height);context.drawImage(source,(180-source.width*scale)/2,(124-source.height*scale)/2,source.width*scale,source.height*scale)}
+    else{context.fillStyle="#eef2f0";context.fillRect(0,0,180,124)}
+    const meta=document.createElement("div");meta.className="page-meta";const title=document.createElement("span");title.textContent=`${number.format(index+1)}. ${page.name.slice(0,16)}`;
+    const actions=document.createElement("span");actions.className="page-actions";
+    for(const [icon,key,action] of [["↑","up",()=>movePage(index,-1)],["↓","down",()=>movePage(index,1)],["↻","rotatePage",()=>rotatePage(index)],["×","deletePage",()=>deletePage(index)]]){
+      const button=document.createElement("button");button.textContent=icon;button.title=tr(key);button.setAttribute("aria-label",tr(key));button.onclick=event=>{event.stopPropagation();action()};actions.append(button);
+    }
+    meta.append(title,actions);card.append(thumb,meta);
+    card.onclick=async()=>{
+      if(active===index&&page.loadedFull!==false)return;
+      active=index;selected=null;textMode=false;newTextMode=false;
+      if(page.pdfDoc&&!page.loadedFull){setStatus(`${tr("pdfLoading")} ${index+1} / ${pages.length}`);try{await ensurePageLoaded(page)}catch(error){alert(tr("pdfImportFailed")+error.message);return}}
+      mode=page.cropCanvas?"edit":"crop";refresh();
+      prefetchNextPdfPage(index);
+      if(!pdfThumbnailRunning)setStatus(tr(mode==="edit"?"editStage":"cropStage"));
+    };
+    host.append(card);
+  });
+}
+async function preparePrintFrame(){
+  const imageUrls=[];
+  for(let i=0;i<pages.length;i++){setStatus(`${tr("pdfLoading")} ${i+1} / ${pages.length}`);await ensurePageLoaded(pages[i]);imageUrls.push(finalPage(pages[i]).toDataURL("image/png"))}
+  const frame=document.createElement("iframe");frame.title="Nahla print document";frame.setAttribute("aria-hidden","true");
+  Object.assign(frame.style,{position:"fixed",right:"0",bottom:"0",width:"0",height:"0",border:"0"});
+  document.body.append(frame);
+  const printDocument=frame.contentDocument,html=`<!doctype html><html><head><meta charset="utf-8"><style>@page{margin:0;size:auto}html,body{margin:0;padding:0}.print-page{page-break-after:always;break-after:page;width:100%;height:100vh;display:flex;align-items:center;justify-content:center}.print-page:last-child{page-break-after:auto;break-after:auto}.print-page img{max-width:100%;max-height:100vh;object-fit:contain;display:block}</style></head><body>${imageUrls.map(source=>`<section class="print-page"><img src="${source}"></section>`).join("")}</body></html>`;
+  printDocument.open();printDocument.write(html);printDocument.close();
+  await Promise.all([...printDocument.images].map(image=>image.decode()));
+  return frame;
+}
+async function printDocument(){
+  if(!pages.length)return alert(tr("importFirst"));
+  if(textEditor)finishTextEdit("apply");
+  let frame;
+  try{
+    frame=await preparePrintFrame();
+    const printWindow=frame.contentWindow;
+    printWindow.addEventListener("afterprint",()=>frame.remove(),{once:true});
+    printWindow.focus();printWindow.print();setStatus(tr("editStage"));
+    setTimeout(()=>frame?.isConnected&&frame.remove(),60000);
+  }catch(error){frame?.remove();alert(tr("exportFailed")+error.message)}
+}
+$("printDoc").onclick=printDocument;
+window.addEventListener("keydown",event=>{
+  if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==="p"){
+    event.preventDefault();event.stopPropagation();printDocument();
+  }
+});
+const beginTextEditBase=beginTextEdit;
+beginTextEdit=function(span,clickRatio){
+  beginTextEditBase(span,clickRatio);
+  if(!textEditor||textEditor.grip)return;
+  const grip=document.createElement("button");grip.type="button";grip.className="text-resize-grip";grip.title=language==="ar"?"اسحب لتغيير حجم النص":"Drag to resize text";
+  textEditor.grip=grip;textLayer.append(grip);refreshTextEditorPosition();
+};
+const finishTextEditBase=finishTextEdit;
+finishTextEdit=function(action){const editor=textEditor;finishTextEditBase(action);editor?.grip?.remove()};
+const refreshTextEditorPositionBase=refreshTextEditorPosition;
+refreshTextEditorPosition=function(){
+  refreshTextEditorPositionBase();
+  if(!textEditor?.grip)return;
+  const element=textEditor.element;
+  Object.assign(textEditor.grip.style,{left:`${element.offsetLeft+element.offsetWidth-18}px`,top:`${element.offsetTop+element.offsetHeight-18}px`});
+};
+const renderTextLayerBase=renderTextLayer;
+renderTextLayer=function(){renderTextLayerBase();if(textEditor?.grip)textLayer.append(textEditor.grip)};
+textLayer.addEventListener("pointerdown",event=>{
+  if(!textEditor)return;
+  const editor=textEditor,element=editor.element,rect=element.getBoundingClientRect(),isGrip=event.target===editor.grip,isHandle=event.target===editor.handle;
+  const nearBorder=event.target===element&&(event.clientX-rect.left<10||rect.right-event.clientX<10||event.clientY-rect.top<10||rect.bottom-event.clientY<10);
+  if(!isGrip&&!isHandle&&!nearBorder)return;
+  event.preventDefault();event.stopImmediatePropagation();
+  const size=pageSize(current());
+  editor.dragOrigin={kind:isGrip?"resize":"move",pointerId:event.pointerId,x:event.clientX,y:event.clientY,left:editor.span.x,top:editor.span.y,width:editor.span.w,height:editor.span.h,fontSize:Number($("textSize").value)||editor.span.fontSize||24};
+  textLayer.setPointerCapture(event.pointerId);
+  if(isGrip)editor.grip.setPointerCapture(event.pointerId);
+},{capture:true});
+textLayer.addEventListener("pointermove",event=>{
+  const editor=textEditor,origin=editor?.dragOrigin;if(!origin)return;
+  event.preventDefault();event.stopImmediatePropagation();
+  const rect=canvas.getBoundingClientRect(),dx=(event.clientX-origin.x)/rect.width,dy=(event.clientY-origin.y)/rect.height;
+  if(origin.kind==="move"){editor.span.x=clamp(origin.left+dx,0,1-editor.span.w);editor.span.y=clamp(origin.top+dy,0,1-editor.span.h)}
+  else{
+    editor.span.w=clamp(origin.width+dx,.03,.95);editor.span.h=clamp(origin.height+dy,.02,.95);
+    const scale=Math.max(editor.span.w/origin.width,editor.span.h/origin.height),fontSize=clamp(Math.round(origin.fontSize*scale),8,72);
+    $("textSize").value=String(fontSize);
+  }
+  updateTextPreview();refreshTextEditorPosition();
+},{capture:true});
+function endTextEditorPointer(event){
+  if(!textEditor?.dragOrigin)return;
+  event.stopImmediatePropagation();
+  try{if(textLayer.hasPointerCapture(event.pointerId))textLayer.releasePointerCapture(event.pointerId)}catch(error){console.error("Could not release text editor pointer capture",error)}
+  textEditor.dragOrigin=null;
+}
+textLayer.addEventListener("pointerup",endTextEditorPointer,{capture:true});
+textLayer.addEventListener("pointercancel",endTextEditorPointer,{capture:true});
+function normalizedMarkHit(mark,x,y,size){return Math.abs(x/size.w-mark.x)<=mark.w/2&&Math.abs(y/size.h-mark.y)<=mark.h/2}
+function markHandleAt(mark,x,y,size,rect){
+  const handles=[[-1,-1],[0,-1],[1,-1],[1,0],[1,1],[0,1],[-1,1],[-1,0]],screenX=x/size.w*rect.width,screenY=y/size.h*rect.height;
+  let nearest=null,distance=Infinity;
+  for(const handle of handles){const dx=(mark.x+handle[0]*mark.w/2)*rect.width-screenX,dy=(mark.y+handle[1]*mark.h/2)*rect.height-screenY,d=Math.hypot(dx,dy);if(d<distance){nearest=handle;distance=d}}
+  return distance<=16?{handle:nearest,distance}:null;
+}
+function markCursor(mark,handle){
+  if(!handle)return"move";
+  if(handle[0]&&handle[1])return handle[0]===handle[1]?"nwse-resize":"nesw-resize";
+  return handle[0]?"ew-resize":"ns-resize";
+}
+canvas.addEventListener("pointerdown",event=>{
+  if((textMode||newTextMode)||!current())return;
+  event.preventDefault();event.stopImmediatePropagation();
+  try{canvas.setPointerCapture(event.pointerId)}catch(error){console.error("Could not capture canvas pointer",error)}
+  const [x,y]=canvasPoint(event),page=current(),size=pageSize(page),rect=canvas.getBoundingClientRect();
+  if(mode==="crop"){
+    const width=page.image.width,height=page.image.height;let nearest=-1,distance=Infinity;
+    page.quad.forEach((point,index)=>{const d=Math.hypot((x-point[0]*width)/size.w*rect.width,(y-point[1]*height)/size.h*rect.height);if(d<distance){nearest=index;distance=d}});
+    if(distance<=16)drag={kind:"corner",index:nearest};return;
+  }
+  if(selected!==null){
+    const mark=page.marks[selected],handle=markHandleAt(mark,x,y,size,rect);
+    if(handle){drag={kind:"resize",x,y,handle:handle.handle,mark,orig:{...mark}};canvas.style.cursor=markCursor(mark,handle.handle);return}
+  }
+  const hit=page.marks.findLastIndex(mark=>normalizedMarkHit(mark,x,y,size));
+  if(hit<0){selected=null;refresh();canvas.style.cursor="default";return}
+  selected=hit;const mark=page.marks[hit],handle=markHandleAt(mark,x,y,size,rect);
+  drag=handle?{kind:"resize",x,y,handle:handle.handle,mark,orig:{...mark}}:{kind:"move",x,y,mark,orig:{...mark}};
+  $("size").value=Math.round(mark.w*100);refresh();canvas.style.cursor=handle?markCursor(mark,handle.handle):"grabbing";
+});
+canvas.addEventListener("pointermove",event=>{
+  if((textMode||newTextMode)||!current())return;
+  if(!drag){
+    if(mode==="edit"){
+      const [x,y]=canvasPoint(event),page=current(),size=pageSize(page),rect=canvas.getBoundingClientRect();
+      const selectedMark=selected===null?null:page.marks[selected],handle=selectedMark&&markHandleAt(selectedMark,x,y,size,rect);
+      if(handle)canvas.style.cursor=markCursor(selectedMark,handle.handle);
+      else canvas.style.cursor=page.marks.some(mark=>normalizedMarkHit(mark,x,y,size))?"move":"default";
+    }
+    return;
+  }
+  event.preventDefault();event.stopImmediatePropagation();
+  const [x,y]=canvasPoint(event),page=current(),size=pageSize(page),operation=drag;
+  if(operation.kind==="corner"){
+    page.quad[operation.index]=[clamp(x/page.image.width,0,1),clamp(y/page.image.height,0,1)];
+  }else if(operation.kind==="move"){
+    operation.mark.x=clamp(operation.orig.x+(x-operation.x)/size.w,0,1);
+    operation.mark.y=clamp(operation.orig.y+(y-operation.y)/size.h,0,1);
+  }else if(operation.kind==="resize"){
+    const [hx,hy]=operation.handle;let width=operation.orig.w+(hx?hx*2*(x-operation.x)/size.w:0),height=operation.orig.h+(hy?hy*2*(y-operation.y)/size.h:0);
+    if(operation.mark.type==="signature"&&hx&&hy){
+      const scaleX=width/operation.orig.w,scaleY=height/operation.orig.h;
+      const scale=clamp(Math.abs(scaleX-1)>=Math.abs(scaleY-1)?scaleX:scaleY,Math.max(.03/operation.orig.w,.02/operation.orig.h),Math.min(.95/operation.orig.w,.95/operation.orig.h));
+      width=operation.orig.w*scale;height=operation.orig.h*scale;
+    }else if(operation.mark.type==="text"&&hx&&hy){
+      const scaleX=width/operation.orig.w,scaleY=height/operation.orig.h;
+      const scale=clamp(Math.abs(scaleX-1)>=Math.abs(scaleY-1)?scaleX:scaleY,Math.max(.03/operation.orig.w,.02/operation.orig.h),Math.min(.95/operation.orig.w,.95/operation.orig.h));
+      width=operation.orig.w*scale;height=operation.orig.h*scale;operation.mark.fontSize=Math.max(8,operation.orig.fontSize*scale);
+    }
+    operation.mark.w=clamp(width,.03,.95);operation.mark.h=clamp(height,.02,.95);$("size").value=Math.round(operation.mark.w*100);
+  }
+  canvas.style.cursor="grabbing";draw();
+});
+function endCanvasPointer(event){
+  if(canvas.hasPointerCapture(event.pointerId)){try{canvas.releasePointerCapture(event.pointerId)}catch(error){console.error("Could not release canvas pointer capture",error)}}
+  drag=null;
+  if(event.type==="pointercancel")canvas.style.cursor="default";
+}
+canvas.addEventListener("pointerup",endCanvasPointer);
+canvas.addEventListener("pointercancel",endCanvasPointer);
+canvas.addEventListener("dblclick",event=>{
+  if(mode!=="edit"||!current())return;
+  const [x,y]=canvasPoint(event),page=current(),index=page.marks.findLastIndex(mark=>mark.type==="text"&&normalizedMarkHit(mark,x,y,pageSize(page)));
+  if(index<0)return;
+  event.preventDefault();selected=index;const mark=page.marks[index];
+  const span={x:mark.x-mark.w/2,y:mark.y-mark.h/2,w:mark.w,h:mark.h,text:mark.text,fontSize:mark.fontSize,dir:mark.dir,fontFamily:mark.fontFamily,inkColor:mark.color,erase:false,replaced:true,mark};
+  beginTextEdit(span);
+});
+async function loadActivePdfPage(index){
+  const page=pages[index];
+  if(page?.pdfDoc&&!page.loadedFull){
+    setStatus(`${tr("pdfLoading")} ${index+1} / ${pages.length}`);
+    try{await ensurePageLoaded(page)}catch(error){alert(tr("pdfImportFailed")+error.message);return false}
+  }
+  return true;
+}
+async function movePage(index,direction){
+  const next=index+direction;if(next<0||next>=pages.length)return;
+  [pages[index],pages[next]]=[pages[next],pages[index]];active=next;selected=null;
+  if(!await loadActivePdfPage(active)){refresh();return}
+  mode=current().cropCanvas?"edit":"crop";refresh();prefetchNextPdfPage(active);
+}
+async function rotatePage(index){
+  if(!await loadActivePdfPage(index))return;
+  const page=pages[index],source=page.cropCanvas||page.image,rotated=document.createElement("canvas");
+  rotated.width=source.height;rotated.height=source.width;
+  const context=rotated.getContext("2d");context.translate(rotated.width/2,rotated.height/2);context.rotate(Math.PI/2);context.drawImage(source,-source.width/2,-source.height/2);
+  if(page.cropCanvas)page.cropCanvas=rotated;
+  else{page.image=rotated;page.quad=[[.05,.05],[.95,.05],[.95,.95],[.05,.95]]}
+  for(const span of page.textSpans||[]){const {x,y,w,h}=span;span.x=1-y-h;span.y=x;span.w=h;span.h=w}
+  active=index;refresh();prefetchNextPdfPage(index);
+}
+async function deletePage(index){
+  pages.splice(index,1);
+  if(active===index)active=pages.length?Math.min(index,pages.length-1):-1;else if(active>index)active--;
+  selected=null;mode=active>=0&&current().cropCanvas?"edit":"crop";
+  if(active>=0&&!await loadActivePdfPage(active)){refresh();return}
+  refresh();if(active>=0)prefetchNextPdfPage(active);
+}
 changeLanguage(language);
 </script>
 </body>

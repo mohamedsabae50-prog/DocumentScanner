@@ -18,9 +18,10 @@ Desktop shortcut, or use `--shortcut` to create it if missing and launch.
 Features
 --------
 - Import multiple JPG, PNG, WEBP, BMP, and PDF pages; drag files onto the app.
-- Open local PDFs with the bundled offline PDF.js renderer. Pages are rendered
-  at 2x resolution, and selectable PDF text lines can be replaced, deleted, or
-  edited in place. Text on scanned pages can also be selected by dragging.
+- Open local PDFs with bundled PDF.js. Page 1 renders at 2x immediately;
+  remaining pages render at 2x with selectable text on demand, while lightweight
+  thumbnails fill in asynchronously. Print and PDF export load all pages first.
+  Selectable PDF text lines can be replaced, deleted, or edited in place.
 - Click selectable text to edit it directly on the page, or drag over scanned
   text to replace it. The on-page cursor follows the original text position;
   font family, integer size, bold, alignment, and paper-color/texture erasure
@@ -35,11 +36,11 @@ Features
   control, draw signatures with adjustable pen thickness, save them in a local
   browser library, and insert them onto pages. Selected signatures can be
   thickened or thinned live without adding a background.
-- Add outline, whiteout, oval, and arrow annotations. Click empty page space
-  to deselect and lock; select a mark to move or resize it with handles or the
-  bottom size and line-thickness sliders.
-- Export a named, JPEG-compressed, full-bleed PDF at approximately 180 DPI.
-  The browser prompts for a save location where supported.
+- Add outline, whiteout, oval, and arrow annotations. Drag marks smoothly with
+  screen-sized handles; signature corner resizing preserves its aspect ratio.
+- Export a named, JPEG-compressed, full-bleed PDF at approximately 180 DPI, or
+  print the composited pages directly with the native Windows print dialog.
+  The browser prompts for an export save location where supported.
 - Clear the current document to start a new one.
 
 Signatures are stored in the browser's local storage on this Windows account.

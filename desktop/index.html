@@ -21,6 +21,18 @@
 .text-editing{border:1px dashed #087f68;padding:2px;touch-action:none}
 .text-drag-handle{width:32px;height:32px;font-size:19px}
 .text-resize-grip{position:absolute;z-index:8;width:18px;height:18px;padding:0;border:1px solid #087f68;border-radius:3px;background:linear-gradient(135deg,transparent 45%,#087f68 46%,#087f68 54%,transparent 55%);cursor:nwse-resize;touch-action:none}
+#printContainer{display:none}
+@media print{
+  @page{size:auto;margin:0mm!important}
+  html,body{margin:0!important;padding:0!important;width:100%!important;height:auto!important;overflow:visible!important;background:#fff!important}
+  body{display:block!important}
+  body>*:not(#printContainer){display:none!important}
+  .top,.toolbar,.sidebar,.bottom{display:none!important}
+  #printContainer{display:block!important;width:100%!important;margin:0!important;padding:0!important}
+  .print-page{width:100vw;height:100vh;page-break-after:always;break-after:page;page-break-inside:avoid;break-inside:avoid;display:flex;align-items:center;justify-content:center;margin:0;padding:0;box-sizing:border-box}
+  .print-page:last-child{page-break-after:auto;break-after:auto}
+  .print-page img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block}
+}
 </style>
 </head>
 <body>
@@ -31,6 +43,7 @@
   <button id="signaturePhoto">+ استخراج إمضاء من صورة</button><button id="drawSignature">+ رسم إمضاء بالماوس</button>
   <button id="saveSignature">حفظ الإمضاء</button>
   <button id="openPdf">📄 فتح / تعديل ملف PDF</button><input id="pdfFiles" type="file" accept="application/pdf,.pdf" hidden>
+  <button id="printDocTop" class="primary">🖨️ طباعة المستند</button>
 </header>
 <div class="workspace">
   <aside class="sidebar"><div class="side-head"><span><span id="pagesLabel">الصفحات</span> <span id="pageCount">0</span></span><button id="addMore" aria-label="إضافة صور">＋</button></div><div class="page-list" id="pageList"></div></aside>
@@ -58,7 +71,7 @@
       <div class="sizebar" id="sizeBar"><span id="sizeLabel">حجم العنصر</span><button id="sizeMinus" aria-label="تصغير">−</button><input id="size" type="range" min="3" max="95" value="38" aria-label="حجم العنصر"><button id="sizePlus" aria-label="تكبير">＋</button><div class="sig-thickness-controls" id="sigThicknessControls"><label id="sigThicknessLabel" for="sigThickness">سُمك الإمضاء</label><button id="sigThicknessMinus" aria-label="تقليل سُمك الإمضاء">−</button><input id="sigThickness" type="range" min="-3" max="8" step="1" value="0" aria-label="سُمك الإمضاء"><button id="sigThicknessPlus" aria-label="زيادة سُمك الإمضاء">＋</button></div><label id="strokeLabel" for="strokeSize">سُمك الخط</label><input id="strokeSize" type="range" min="1" max="16" value="3" aria-label="سُمك الخط"><button id="lockSelected" class="primary" aria-label="قفل التعديل">✓ قفل التعديل (تم)</button></div>
       <div class="library-wrap"><span id="libraryLabel">مكتبة الإمضاءات المحفوظة</span><div class="library" id="library"></div></div>
       <input id="pdfName" class="filename" value="Nahla-Document" aria-label="اسم ملف الـ PDF" title="اسم ملف الـ PDF">
-      <button class="primary" id="exportPdf">حفظ كملف PDF</button><button id="printDoc">🖨️ طباعة</button><button id="clearPages">مسح الكل / ملف جديد</button>
+      <button class="primary" id="exportPdf">حفظ كملف PDF</button><button id="printDoc">🖨️ طباعة المستند</button><button id="clearPages">مسح الكل / ملف جديد</button>
     </div>
   </main>
 </div>
@@ -72,6 +85,7 @@
   <div class="dialog-body"><label><span id="boldLabel">سُمك الحبر</span> <input id="boldness" type="range" min="0" max="100" value="50" aria-label="سُمك الحبر"></label><canvas id="signaturePreview" style="max-width:100%;max-height:350px;justify-self:center"></canvas><div class="help" id="boldHelp">تُزال خلفية الورق والإضاءة غير المتساوية محلياً. النتيجة حبر أسود بخلفية شفافة.</div></div>
   <div class="dialog-foot"><button id="cancelBold">إلغاء</button><button class="primary" id="useExtracted">استخدام الإمضاء</button></div>
 </dialog>
+<div id="printContainer" aria-hidden="true"></div>
 <script src="./vendor/pdf.min.js"></script>
 <script>
 "use strict";
@@ -124,7 +138,7 @@ const translations={
     storageRead:"Could not read the saved signature library.",pdfType:"PDF document"
   }
 };
-let language="ar",active=-1,mode="crop",selected=null,drag=null,quad=[],signatureDraft=null,defaultStroke=3,textMode=false,newTextMode=false,textEditor=null,textSelection=null,zoomPercent=100,zoomFitMode="page",panEnabled=false,spacePressed=false;
+let language="ar",active=-1,mode="crop",selected=null,drag=null,quad=[],signatureDraft=null,defaultStroke=3,textMode=false,newTextMode=false,textEditor=null,textSelection=null,zoomPercent=100,zoomFitMode="page",panEnabled=false,spacePressed=false,smoothPointerHandling=true;
 function tr(key){return translations[language][key]}
 function changeLanguage(next){
   language=next==="en"?"en":"ar";
@@ -136,7 +150,7 @@ function changeLanguage(next){
   $("languageToggle").setAttribute("aria-label",tr("languageTitle"));
   $("brand").childNodes[0].textContent=tr("brand");
   $("brandSubtitle").textContent=tr("subtitle");
-  const labels={openFiles:"import",openPdf:"openPdf",editPdfText:"editPdfText",addText:"addText",fitWidth:"fitWidth",fitPage:"fitPage",panToggle:"pan",textSizeLabel:"fontSize",fontFamilyLabel:"fontFamily",textBold:"boldText",sigThicknessLabel:"signatureThickness",penThicknessText:"penThickness",signaturePhoto:"scan",drawSignature:"draw",saveSignature:"saveSignature",pagesLabel:"pages",addMore:"addPhotos",autoCrop:"auto",resetCrop:"reset",rotatePage:"rotate",shapeLabel:"shapeLabel",addShape:"addShape",deleteSelected:"delete",sizeLabel:"size",sizeMinus:"minus",sizePlus:"plus",strokeLabel:"stroke",lockSelected:"locked",libraryLabel:"library",exportPdf:"export",printDoc:"printDoc",clearPages:"clear",drawTitle:"drawTitle",closeDraw:"close",drawHelp:"drawHelp",clearDraw:"clearDraw",useDraw:"useDraw",boldTitle:"boldTitle",boldLabel:"boldness",boldHelp:"boldHelp",closeBold:"close",cancelBold:"cancel",useExtracted:"useSignature"};
+  const labels={openFiles:"import",openPdf:"openPdf",editPdfText:"editPdfText",addText:"addText",fitWidth:"fitWidth",fitPage:"fitPage",panToggle:"pan",textSizeLabel:"fontSize",fontFamilyLabel:"fontFamily",textBold:"boldText",sigThicknessLabel:"signatureThickness",penThicknessText:"penThickness",signaturePhoto:"scan",drawSignature:"draw",saveSignature:"saveSignature",pagesLabel:"pages",addMore:"addPhotos",autoCrop:"auto",resetCrop:"reset",rotatePage:"rotate",shapeLabel:"shapeLabel",addShape:"addShape",deleteSelected:"delete",sizeLabel:"size",sizeMinus:"minus",sizePlus:"plus",strokeLabel:"stroke",lockSelected:"locked",libraryLabel:"library",exportPdf:"export",printDoc:"printDoc",printDocTop:"printDocTop",clearPages:"clear",drawTitle:"drawTitle",closeDraw:"close",drawHelp:"drawHelp",clearDraw:"clearDraw",useDraw:"useDraw",boldTitle:"boldTitle",boldLabel:"boldness",boldHelp:"boldHelp",closeBold:"close",cancelBold:"cancel",useExtracted:"useSignature"};
   for(const [id,key] of Object.entries(labels))$(id).textContent=tr(key);
   $("shapeType").title=tr("shapeLabel");
   [...$("shapeType").options].forEach((option,index)=>option.textContent=tr(["outline","whiteout","oval","arrow"][index]));
@@ -318,11 +332,12 @@ async function importPdf(file){
     const placeholder=document.createElement("canvas");
     placeholder.width=600;placeholder.height=800;placeholder.getContext("2d").fillStyle="#fff";placeholder.getContext("2d").fillRect(0,0,600,800);
     for(let n=1;n<=pdf.numPages;n++){
-      pages.push({image:placeholder,cropCanvas:placeholder,name:`${file.name} - ${n}`,marks:[],textSpans:[],quad:[[0,0],[1,0],[1,1],[0,1]],pdfDoc:pdf,pdfPageNumber:n,loadedFull:false,thumbCanvas:null,pdfPagePromise:null,loadingFull:null});
+      pages.push({image:placeholder,cropCanvas:placeholder,name:`${file.name} - ${n}`,marks:[],textSpans:[],quad:[[0,0],[1,0],[1,1],[0,1]],pdfDoc:pdf,pdfPageNumber:n,loadedFull:false,thumbCanvas:null,pdfPagePromise:null,loadingFull:null,thumbnailLoading:null});
     }
     active=start;mode="edit";selected=null;refresh();
     await ensurePageLoaded(pages[start]);
     refresh();fitWidth();
+    prefetchNextPdfPage(start);
     pdfThumbnailQueue.push(...pages.slice(start).filter(page=>!page.thumbCanvas));
     pdfThumbnailTotal+=pages.slice(start).filter(page=>!page.thumbCanvas).length;
     processPdfThumbnailQueue();
@@ -338,6 +353,12 @@ async function importPdf(file){
 }
 async function ensurePageLoaded(page){
   if(!page?.pdfDoc||page.loadedFull)return page;
+  if(page.loadingFull)return page.loadingFull;
+  if(page.thumbnailLoading){
+    await page.thumbnailLoading;
+    if(page.loadedFull)return page;
+    if(page.loadingFull)return page.loadingFull;
+  }
   if(page.loadingFull)return page.loadingFull;
   page.loadingFull=(async()=>{
     const pdfPage=page.pdfPagePromise||(page.pdfPagePromise=page.pdfDoc.getPage(page.pdfPageNumber));
@@ -361,11 +382,17 @@ function makePdfThumbnail(source){
   context.drawImage(source,(thumb.width-width)/2,(thumb.height-height)/2,width,height);return thumb;
 }
 async function renderPdfThumbnail(page){
+  if(page.thumbCanvas)return;
   if(page.loadedFull){page.thumbCanvas=makePdfThumbnail(page.image);return}
-  const pdfPage=page.pdfPagePromise||(page.pdfPagePromise=page.pdfDoc.getPage(page.pdfPageNumber)),resolvedPage=await pdfPage,viewport=resolvedPage.getViewport({scale:.25}),rendered=document.createElement("canvas");
-  rendered.width=Math.ceil(viewport.width);rendered.height=Math.ceil(viewport.height);
-  await resolvedPage.render({canvasContext:rendered.getContext("2d"),viewport}).promise;
-  page.thumbCanvas=makePdfThumbnail(rendered);
+  if(page.loadingFull){await page.loadingFull;page.thumbCanvas=makePdfThumbnail(page.image);return}
+  if(page.thumbnailLoading){await page.thumbnailLoading;return}
+  page.thumbnailLoading=(async()=>{
+    const pdfPage=page.pdfPagePromise||(page.pdfPagePromise=page.pdfDoc.getPage(page.pdfPageNumber)),resolvedPage=await pdfPage,viewport=resolvedPage.getViewport({scale:.25}),rendered=document.createElement("canvas");
+    rendered.width=Math.ceil(viewport.width);rendered.height=Math.ceil(viewport.height);
+    await resolvedPage.render({canvasContext:rendered.getContext("2d"),viewport}).promise;
+    page.thumbCanvas=makePdfThumbnail(rendered);
+  })();
+  try{await page.thumbnailLoading}finally{page.thumbnailLoading=null}
 }
 function processPdfThumbnailQueue(){
   if(pdfThumbnailRunning||!pdfThumbnailQueue.length)return;
@@ -525,6 +552,7 @@ canvas.addEventListener("pointerup",event=>{
   const page=current();page.textSpans=page.textSpans||[];page.textSpans.push(span);drag=null;textSelection=null;newTextMode=false;renderTextLayer();beginTextEdit(span);event.stopImmediatePropagation();
 },true);
 canvas.addEventListener("pointerdown",e=>{
+  if(smoothPointerHandling)return;
   if(!current())return;
   canvas.setPointerCapture(e.pointerId);
   const [x,y]=canvasPoint(e),p=current();
@@ -555,6 +583,7 @@ canvas.addEventListener("pointerdown",e=>{
   $("size").value=Math.round(m.w*100);refresh()
 });
 canvas.addEventListener("pointermove",e=>{
+  if(smoothPointerHandling)return;
   if(!drag||!current())return;
   const [x,y]=canvasPoint(e),p=current();
   if(drag.kind==="corner")p.quad[drag.index]=[clamp(x/p.image.width,0,1),clamp(y/p.image.height,0,1)];
@@ -567,7 +596,7 @@ canvas.addEventListener("pointermove",e=>{
   }
   draw()
 });
-canvas.addEventListener("pointerup",()=>{drag=null});canvas.addEventListener("pointercancel",()=>drag=null);
+canvas.addEventListener("pointerup",()=>{if(!smoothPointerHandling)drag=null});canvas.addEventListener("pointercancel",()=>{if(!smoothPointerHandling)drag=null});
 window.addEventListener("resize",draw);$("size").oninput=()=>{if(selected==null)return;const p=current(),m=p.marks[selected],old=m.w;m.w=Number($("size").value)/100;m.h*=m.w/old;draw()};$("sizeMinus").onclick=()=>{$("size").value=clamp(Number($("size").value)-2,3,95);$("size").oninput()};$("sizePlus").onclick=()=>{$("size").value=clamp(Number($("size").value)+2,3,95);$("size").oninput()};
 $("sigThickness").oninput=()=>{if(selected===null)return;const mark=current()?.marks[selected];if(mark?.type!=="signature")return;mark.thickness=Number($("sigThickness").value);mark.renderedImage=null;mark.renderedThickness=undefined;draw()};
 $("sigThicknessMinus").onclick=()=>{$("sigThickness").value=clamp(Number($("sigThickness").value)-1,-3,8);$("sigThickness").oninput()};
@@ -593,7 +622,8 @@ function makePdf(doc,name){const encoder=new TextEncoder(),chunks=[],offsets=[0]
 const finalPageBase=finalPage;finalPage=function(page){const out=finalPageBase(page),source=page.cropCanvas||page.image,scale=out.width/source.width,context=out.getContext("2d");for(const mark of page.marks||[]){if(mark.type!=="text")continue;context.save();context.fillStyle=mark.color||"#222";context.direction=mark.dir||"ltr";context.textAlign=mark.align||(mark.dir==="rtl"?"right":"left");context.textBaseline=mark.topLeft?"top":"middle";context.font=`${mark.bold?"700":"400"} ${mark.fontSize*scale}px ${mark.fontFamily||"Arial"}`;const x=mark.align==="center"?mark.x:mark.align==="right"||(!mark.align&&mark.dir==="rtl")?mark.x+mark.w/2:mark.x-mark.w/2,y=mark.topLeft?(mark.y-mark.h/2)*out.height:mark.y*out.height;context.fillText(mark.text,x*out.width,y,mark.w*out.width);context.restore()}return out};
 $("exportPdf").onclick=exportPdf;function clearPages(){pages.splice(0);active=-1;mode="crop";selected=null;textMode=false;newTextMode=false;textEditor=null;refresh()}$("clearPages").onclick=()=>{if(pages.length&&confirm(tr("confirmNew")))clearPages()};
 window.addEventListener("keydown",e=>{if(textEditor||e.target?.isContentEditable||["INPUT","TEXTAREA","SELECT"].includes(e.target?.tagName))return;if(e.key==="Escape"&&selected!=null){selected=null;draw()}if((e.key==="Delete"||e.key==="Backspace")&&selected!=null){e.preventDefault();$("deleteSelected").click()}});
-translations.ar.printDoc="🖨️ طباعة";translations.en.printDoc="🖨️ Print";
+translations.ar.printDoc="🖨️ طباعة المستند";translations.en.printDoc="🖨️ Print Document";
+translations.ar.printDocTop=translations.ar.printDoc;translations.en.printDocTop=translations.en.printDoc;
 translations.ar.pdfLoading="جاري فتح صفحات الـ PDF...";translations.en.pdfLoading="Opening PDF pages...";
 async function exportPdf(){
   if(!pages.length)return alert(tr("importFirst"));
@@ -636,30 +666,32 @@ function drawPages(){
     host.append(card);
   });
 }
-async function preparePrintFrame(){
-  const imageUrls=[];
-  for(let i=0;i<pages.length;i++){setStatus(`${tr("pdfLoading")} ${i+1} / ${pages.length}`);await ensurePageLoaded(pages[i]);imageUrls.push(finalPage(pages[i]).toDataURL("image/png"))}
-  const frame=document.createElement("iframe");frame.title="Nahla print document";frame.setAttribute("aria-hidden","true");
-  Object.assign(frame.style,{position:"fixed",right:"0",bottom:"0",width:"0",height:"0",border:"0"});
-  document.body.append(frame);
-  const printDocument=frame.contentDocument,html=`<!doctype html><html><head><meta charset="utf-8"><style>@page{margin:0;size:auto}html,body{margin:0;padding:0}.print-page{page-break-after:always;break-after:page;width:100%;height:100vh;display:flex;align-items:center;justify-content:center}.print-page:last-child{page-break-after:auto;break-after:auto}.print-page img{max-width:100%;max-height:100vh;object-fit:contain;display:block}</style></head><body>${imageUrls.map(source=>`<section class="print-page"><img src="${source}"></section>`).join("")}</body></html>`;
-  printDocument.open();printDocument.write(html);printDocument.close();
-  await Promise.all([...printDocument.images].map(image=>image.decode()));
-  return frame;
+function populatePrintContainer(sourcePages){
+  const container=$("printContainer"),fragment=document.createDocumentFragment();
+  for(const page of sourcePages){
+    const section=document.createElement("div"),image=document.createElement("img");
+    section.className="print-page";image.alt=page.name||"";
+    image.src=finalPage(page).toDataURL("image/jpeg",.96);
+    section.append(image);fragment.append(section);
+  }
+  container.replaceChildren(fragment);
 }
 async function printDocument(){
   if(!pages.length)return alert(tr("importFirst"));
   if(textEditor)finishTextEdit("apply");
-  let frame;
   try{
-    frame=await preparePrintFrame();
-    const printWindow=frame.contentWindow;
-    printWindow.addEventListener("afterprint",()=>frame.remove(),{once:true});
-    printWindow.focus();printWindow.print();setStatus(tr("editStage"));
-    setTimeout(()=>frame?.isConnected&&frame.remove(),60000);
-  }catch(error){frame?.remove();alert(tr("exportFailed")+error.message)}
+    for(let i=0;i<pages.length;i++){setStatus(`${tr("pdfLoading")} ${i+1} / ${pages.length}`);await ensurePageLoaded(pages[i])}
+    populatePrintContainer(pages);
+    await Promise.all([...$("printContainer").querySelectorAll("img")].map(image=>image.decode()));
+    window.addEventListener("afterprint",()=>{$("printContainer").replaceChildren()},{once:true});
+    window.print();setStatus(tr("editStage"));
+  }catch(error){$("printContainer").replaceChildren();alert(tr("exportFailed")+error.message)}
 }
-$("printDoc").onclick=printDocument;
+$("printDoc").onclick=printDocument;$("printDocTop").onclick=printDocument;
+window.addEventListener("beforeprint",()=>{
+  if(textEditor)finishTextEdit("apply");
+  populatePrintContainer(pages.filter(page=>!page.pdfDoc||page.loadedFull));
+});
 window.addEventListener("keydown",event=>{
   if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==="p"){
     event.preventDefault();event.stopPropagation();printDocument();
